@@ -48,7 +48,7 @@ namespace Proyecto
             this.ControlBox = false;
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
             this.Resize += new EventHandler(Form1_Resize); // Agrega el manejador de eventos para el cambio de tamaño
-            btnMenu.Enabled = true;
+            btnMenu.Enabled = false;
         }
 
         private void InitializeTimer()
