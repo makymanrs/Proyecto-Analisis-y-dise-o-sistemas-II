@@ -11,9 +11,9 @@ using System.Windows.Forms;
 
 namespace Proyecto.Editar
 {
-    public partial class FormEditarCliente : Form
+    public partial class FormEditarBodega : Form
     {
-        public FormEditarCliente()
+        public FormEditarBodega()
         {
             InitializeComponent();
             this.ControlBox = false;
@@ -37,28 +37,32 @@ namespace Proyecto.Editar
 
         [DllImport("user32.dll", EntryPoint = "SendMessage")]
         private extern static void SendMessage(IntPtr hWnd, int wMsg, int wParam, int lParam);
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Mysql.Cbodega objetoBodega = new Mysql.Cbodega();
+            objetoBodega.modificarBodegas(textBox1, textBox2, dateTimePicker1, dateTimePicker2, numericUpDown1, numericUpDown2, numericUpDown3);
+        }
         private void button2_Click(object sender, EventArgs e)
         {
             if (int.TryParse(textBox1.Text, out int searchValue))
             {
-                Mysql.CCliente objetoCliente = new Mysql.CCliente();
-                DataRow cliente = objetoCliente.buscarCliente(searchValue);
+                Mysql.Cbodega objetoBodega = new Mysql.Cbodega();
+                DataRow bodega = objetoBodega.buscarBodega(searchValue);
 
-                if (cliente != null)
+                if (bodega != null)
                 {
                     // Asignar valores a los controles
-                    textBox2.Text = cliente["cli_iden"].ToString();
-                    textBox3.Text = cliente["cli_pnom"].ToString();   
-                    textBox4.Text = cliente["cli_snom"].ToString();
-                    textBox5.Text = cliente["cli_pape"].ToString();
-                    textBox6.Text = cliente["cli_sape"].ToString();
-                    textBox7.Text = cliente["cli_edad"].ToString();
-                    richTextBox1.Text = cliente["cli_dir"].ToString();
-                    textBox8.Text = cliente["cli_tel"].ToString();
+                    textBox2.Text = bodega["pro_nom"].ToString();
+                    dateTimePicker1.Value = Convert.ToDateTime(bodega["bo_fecing"]);
+                    dateTimePicker2.Value = Convert.ToDateTime(bodega["pro_cad"]);
+                    numericUpDown1.Value = Convert.ToDecimal(bodega["pro_can"]);
+                    numericUpDown2.Value = Convert.ToDecimal(bodega["pro_cos"]);
+                    numericUpDown3.Value = Convert.ToDecimal(bodega["pro_pre"]);
                 }
                 else
                 {
-                    MessageBox.Show("Cliente no encontrado.");
+                    MessageBox.Show("Bodega no encontrada.");
                 }
             }
             else
@@ -66,13 +70,6 @@ namespace Proyecto.Editar
                 MessageBox.Show("Ingrese un valor numérico válido para buscar.");
             }
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Mysql.CCliente objetoCliente = new Mysql.CCliente();
-            objetoCliente.modificarCliente(textBox1, textBox2, textBox3, textBox4, textBox5, textBox6, textBox7, richTextBox1, textBox8);
-        }
-
         private void button3_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -84,7 +81,7 @@ namespace Proyecto.Editar
             SendMessage(this.Handle, 0x112, 0xf012, 0);
         }
 
-        private void FormEditarCliente_Resize(object sender, EventArgs e)
+        private void FormEditarBodega_Resize(object sender, EventArgs e)
         {
             if (WindowState == FormWindowState.Maximized)
             {
@@ -95,5 +92,7 @@ namespace Proyecto.Editar
                 Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20)); // Aplica la región redondeada al restaurar
             }
         }
+
+        
     }
 }

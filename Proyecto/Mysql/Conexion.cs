@@ -10,7 +10,7 @@ namespace Proyecto.Mysql
         private static string servidor = "localhost";
         private static string bd = "Lafavorita";  // Asegúrate de que este es el nombre correcto de tu base de datos
         private static string usuario = "root";
-        private static string password = "mysqlanalisis2_";
+        private static string password = "200212";
         private static string puerto = "3306";
 
         private string cadenaConexion = $"server={servidor};port={puerto};user id={usuario};password={password};database={bd};";

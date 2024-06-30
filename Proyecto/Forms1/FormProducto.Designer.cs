@@ -32,6 +32,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormProducto));
             this.label3 = new System.Windows.Forms.Label();
             this.dataGridProducto = new System.Windows.Forms.DataGridView();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -44,9 +45,13 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.button6 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridProducto)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // label3
@@ -54,10 +59,9 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.Black;
-            this.label3.Location = new System.Drawing.Point(12, 116);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Location = new System.Drawing.Point(9, 74);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(63, 20);
+            this.label3.Size = new System.Drawing.Size(49, 16);
             this.label3.TabIndex = 42;
             this.label3.Text = "Buscar";
             // 
@@ -89,8 +93,7 @@
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridProducto.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridProducto.EnableHeadersVisualStyles = false;
-            this.dataGridProducto.Location = new System.Drawing.Point(16, 172);
-            this.dataGridProducto.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dataGridProducto.Location = new System.Drawing.Point(14, 106);
             this.dataGridProducto.Name = "dataGridProducto";
             this.dataGridProducto.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
@@ -108,15 +111,14 @@
             dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.Blue;
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.White;
             this.dataGridProducto.RowsDefaultCellStyle = dataGridViewCellStyle4;
-            this.dataGridProducto.Size = new System.Drawing.Size(1019, 142);
+            this.dataGridProducto.Size = new System.Drawing.Size(764, 227);
             this.dataGridProducto.TabIndex = 41;
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(85, 111);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox1.Location = new System.Drawing.Point(64, 70);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(189, 22);
+            this.textBox1.Size = new System.Drawing.Size(143, 20);
             this.textBox1.TabIndex = 38;
             // 
             // button3
@@ -125,10 +127,9 @@
             this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button3.ForeColor = System.Drawing.Color.White;
             this.button3.Image = global::Proyecto.Properties.Resources.Reload_02__1_;
-            this.button3.Location = new System.Drawing.Point(652, 92);
-            this.button3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button3.Location = new System.Drawing.Point(489, 55);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(153, 55);
+            this.button3.Size = new System.Drawing.Size(115, 45);
             this.button3.TabIndex = 40;
             this.button3.Text = "Refrescar";
             this.button3.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -140,10 +141,9 @@
             this.button1.BackColor = System.Drawing.Color.DeepSkyBlue;
             this.button1.ForeColor = System.Drawing.Color.White;
             this.button1.Image = global::Proyecto.Properties.Resources.search__1_;
-            this.button1.Location = new System.Drawing.Point(284, 96);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Location = new System.Drawing.Point(213, 58);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(83, 52);
+            this.button1.Size = new System.Drawing.Size(62, 42);
             this.button1.TabIndex = 39;
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -154,10 +154,9 @@
             this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button5.ForeColor = System.Drawing.Color.White;
             this.button5.Image = global::Proyecto.Properties.Resources.Trash_01__1_;
-            this.button5.Location = new System.Drawing.Point(153, 321);
-            this.button5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button5.Location = new System.Drawing.Point(106, 3);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(144, 57);
+            this.button5.Size = new System.Drawing.Size(108, 46);
             this.button5.TabIndex = 37;
             this.button5.Text = "Eliminar";
             this.button5.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -166,14 +165,13 @@
             // 
             // button4
             // 
-            this.button4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(146)))), ((int)(((byte)(86)))));
+            this.button4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(119)))), ((int)(((byte)(182)))));
             this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button4.ForeColor = System.Drawing.Color.White;
             this.button4.Image = global::Proyecto.Properties.Resources.Save_as;
-            this.button4.Location = new System.Drawing.Point(16, 321);
-            this.button4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button4.Location = new System.Drawing.Point(3, 3);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(129, 57);
+            this.button4.Size = new System.Drawing.Size(97, 46);
             this.button4.TabIndex = 36;
             this.button4.Text = "Editar";
             this.button4.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -187,10 +185,10 @@
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.ForeColor = System.Drawing.Color.White;
             this.button2.Image = global::Proyecto.Properties.Resources.Add_01__2_;
-            this.button2.Location = new System.Drawing.Point(377, 92);
-            this.button2.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
+            this.button2.Location = new System.Drawing.Point(283, 55);
+            this.button2.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(268, 55);
+            this.button2.Size = new System.Drawing.Size(201, 45);
             this.button2.TabIndex = 35;
             this.button2.Text = "Nuevo Producto";
             this.button2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -207,19 +205,17 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.ForeColor = System.Drawing.Color.Black;
             this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1067, 52);
+            this.panel1.Size = new System.Drawing.Size(800, 43);
             this.panel1.TabIndex = 43;
             // 
             // panel2
             // 
             this.panel2.Controls.Add(this.label2);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel2.Location = new System.Drawing.Point(798, 0);
-            this.panel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel2.Location = new System.Drawing.Point(598, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(267, 50);
+            this.panel2.Size = new System.Drawing.Size(200, 41);
             this.panel2.TabIndex = 21;
             // 
             // label2
@@ -227,10 +223,9 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.Blue;
-            this.label2.Location = new System.Drawing.Point(4, 21);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(3, 17);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(70, 25);
+            this.label2.Size = new System.Drawing.Size(57, 20);
             this.label2.TabIndex = 21;
             this.label2.Text = "label2";
             // 
@@ -240,27 +235,60 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(3, 9);
+            this.label1.Location = new System.Drawing.Point(2, 7);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(356, 39);
+            this.label1.Size = new System.Drawing.Size(271, 31);
             this.label1.TabIndex = 20;
-            this.label1.Text = "Listado de proveedor";
+            this.label1.Text = "Listado de producto";
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.button4);
+            this.panel4.Controls.Add(this.button5);
+            this.panel4.Location = new System.Drawing.Point(9, 362);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(304, 100);
+            this.panel4.TabIndex = 65;
+            // 
+            // panel3
+            // 
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel3.Location = new System.Drawing.Point(0, 499);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(800, 100);
+            this.panel3.TabIndex = 64;
+            // 
+            // button6
+            // 
+            this.button6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(119)))), ((int)(((byte)(52)))));
+            this.button6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button6.ForeColor = System.Drawing.Color.White;
+            this.button6.Image = ((System.Drawing.Image)(resources.GetObject("button6.Image")));
+            this.button6.Location = new System.Drawing.Point(606, 55);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(115, 45);
+            this.button6.TabIndex = 66;
+            this.button6.Text = "Excel";
+            this.button6.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.button6.UseVisualStyleBackColor = false;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // FormProducto
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1067, 554);
+            this.ClientSize = new System.Drawing.Size(800, 599);
+            this.Controls.Add(this.button6);
+            this.Controls.Add(this.panel4);
+            this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button5);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.dataGridProducto);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button2);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "FormProducto";
             this.Text = "Producto";
             this.Load += new System.EventHandler(this.FormProducto_Load);
@@ -269,6 +297,7 @@
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.panel4.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -288,5 +317,8 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Button button6;
     }
 }

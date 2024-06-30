@@ -3,7 +3,10 @@ using System;
 using System.Data;
 using System.Drawing;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using Excel = Microsoft.Office.Interop.Excel;
+
 
 namespace Proyecto.Mysql
 {
@@ -68,33 +71,47 @@ namespace Proyecto.Mysql
             }
         }
 
-        public void guardarproductos(TextBox cod, TextBox producto, DateTimePicker cad , NumericUpDown costo, NumericUpDown precio, NumericUpDown can, TextBox numbod, PictureBox imgBox)
+        private void CalcularPrecio(NumericUpDown costo, NumericUpDown precio)
+        {
+            decimal costoProducto = costo.Value;
+            decimal precioProducto = costoProducto * 1.1m; // Calcular el precio con el 10% de incremento
+            precio.Value = precioProducto; // Actualizar el valor del precio
+        }
+
+        // Método para guardar el producto
+        public void guardarproductos(TextBox cod, TextBox producto, DateTimePicker cad, NumericUpDown costo, NumericUpDown precio, NumericUpDown can, TextBox numbod, PictureBox imgBox)
         {
             MySqlConnection conexion = null;
+            MySqlTransaction transaction = null;
             try
             {
-                string fechaFormateada = cad.Value.ToString("yyyy-MM-dd");
+                string fechaCaducidadFormateada = cad.Value.ToString("yyyy-MM-dd");
+                string fechaIngreso = DateTime.Now.ToString("yyyy-MM-dd");
 
                 Conexion objetoConexion = new Conexion();
                 conexion = objetoConexion.establecerConexion();
+                transaction = conexion.BeginTransaction();
 
                 // Verificar si ya existe el bo_id en la tabla bodega
                 string queryVerificarBodega = "SELECT COUNT(*) FROM bodega WHERE bo_id = @boId";
-                MySqlCommand commandVerificarBodega = new MySqlCommand(queryVerificarBodega, conexion);
+                MySqlCommand commandVerificarBodega = new MySqlCommand(queryVerificarBodega, conexion, transaction);
                 commandVerificarBodega.Parameters.AddWithValue("@boId", numbod.Text);
                 int countBodega = Convert.ToInt32(commandVerificarBodega.ExecuteScalar());
 
-                // Verificar si ya existe el pro_cod en la tabla producto
-                string queryVerificarProducto = "SELECT COUNT(*) FROM producto WHERE pro_cod = @proCod";
-                MySqlCommand commandVerificarProducto = new MySqlCommand(queryVerificarProducto, conexion);
-                commandVerificarProducto.Parameters.AddWithValue("@proCod", cod.Text);
-                int countProducto = Convert.ToInt32(commandVerificarProducto.ExecuteScalar());
-
-                if (countBodega > 0 || countProducto > 0)
+                if (countBodega > 0)
                 {
-                    MessageBox.Show("Ya existe un registro con el mismo número de bodega o código de producto.");
+                    MessageBox.Show("Ya existe un registro con el mismo número de bodega.");
                     return; // Salir del método sin guardar
                 }
+
+                // Obtener el valor máximo actual de pro_cod en la tabla producto
+                string queryMaxProCod = "SELECT IFNULL(MAX(pro_cod), 0) FROM producto";
+                MySqlCommand commandMaxProCod = new MySqlCommand(queryMaxProCod, conexion, transaction);
+                int maxProCod = Convert.ToInt32(commandMaxProCod.ExecuteScalar());
+                int newProCod = maxProCod + 1;
+
+                // Calcular el precio sumando el costo más el 10% del costo
+                CalcularPrecio(costo, precio); // Asegurarse de que el precio esté actualizado
 
                 // Obtener la imagen del PictureBox y convertirla a byte[]
                 byte[] imgBytes = null;
@@ -108,29 +125,38 @@ namespace Proyecto.Mysql
                 }
 
                 // Insertar el producto en la tabla producto
-                string queryProducto = "INSERT INTO producto(pro_nom, pro_cad, pro_cos, pro_pre, pro_can, pro_img, bo_id) VALUES (@proNom, @proCad, @proCos, @proPre, @proCan, @proImg, @boId)";
-                MySqlCommand myCommandProducto = new MySqlCommand(queryProducto, conexion);
+                string queryProducto = "INSERT INTO producto(pro_cod, pro_nom, pro_cad, pro_cos, pro_pre, pro_can, pro_img, bo_id) VALUES (@proCod, @proNom, @proCad, @proCos, @proPre, @proCan, @proImg, @boId)";
+                MySqlCommand myCommandProducto = new MySqlCommand(queryProducto, conexion, transaction);
+                myCommandProducto.Parameters.AddWithValue("@proCod", newProCod);
                 myCommandProducto.Parameters.AddWithValue("@proNom", producto.Text);
-                myCommandProducto.Parameters.AddWithValue("@proCad", fechaFormateada);
-                myCommandProducto.Parameters.AddWithValue("@proCos", costo.Value);
-                myCommandProducto.Parameters.AddWithValue("@proPre", precio.Value);
+                myCommandProducto.Parameters.AddWithValue("@proCad", fechaCaducidadFormateada);
+                myCommandProducto.Parameters.AddWithValue("@proCos", costo.Value); // Guardar el costo original
+                myCommandProducto.Parameters.AddWithValue("@proPre", precio.Value); // Guardar el precio calculado
                 myCommandProducto.Parameters.AddWithValue("@proCan", can.Value);
                 myCommandProducto.Parameters.AddWithValue("@proImg", imgBytes);
                 myCommandProducto.Parameters.AddWithValue("@boId", numbod.Text);
                 myCommandProducto.ExecuteNonQuery();
 
-                // Insertar la bodega en la tabla bodega
-                string queryBodega = "INSERT INTO bodega(bo_id, bo_lugar) VALUES (@boId, @boLugar)";
-                MySqlCommand myCommandBodega = new MySqlCommand(queryBodega, conexion);
+                // Insertar la bodega en la tabla bodega con fecha de ingreso
+                string queryBodega = "INSERT INTO bodega(bo_id, bo_fecing) VALUES (@boId, @boFecing)";
+                MySqlCommand myCommandBodega = new MySqlCommand(queryBodega, conexion, transaction);
                 myCommandBodega.Parameters.AddWithValue("@boId", numbod.Text);
-                myCommandBodega.Parameters.AddWithValue("@boLugar", "Baracoa");
+                myCommandBodega.Parameters.AddWithValue("@boFecing", fechaIngreso);
                 myCommandBodega.ExecuteNonQuery();
+
+                // Confirmar la transacción
+                transaction.Commit();
 
                 MessageBox.Show("Se guardó el producto en la base de datos correctamente.");
             }
             catch (Exception ex)
             {
                 MessageBox.Show("No se pudo guardar el registro: " + ex.Message);
+                // Revertir la transacción si ocurre un error
+                if (transaction != null)
+                {
+                    transaction.Rollback();
+                }
             }
             finally
             {
@@ -354,6 +380,88 @@ namespace Proyecto.Mysql
                 }
             }
         }
+        public void exportarExcel(DataGridView tabla)
+        {
+            Excel.Application excelApp = null;
+            Excel.Workbook workbook = null;
+            Excel.Worksheet worksheet = null;
+
+            try
+            {
+                // Crear una instancia de Excel y abrir una nueva aplicación
+                excelApp = new Excel.Application();
+                excelApp.Visible = true; // Mostrar Excel
+
+                // Crear un nuevo libro de Excel
+                workbook = excelApp.Workbooks.Add();
+                worksheet = (Excel.Worksheet)workbook.Sheets[1]; // Obtener la primera hoja de trabajo
+                worksheet.Name = "Datos de Productos"; // Nombre de la hoja de trabajo
+
+                // Encabezados de las columnas
+                for (int i = 0; i < tabla.ColumnCount; i++)
+                {
+                    worksheet.Cells[1, i + 1] = tabla.Columns[i].HeaderText;
+                }
+
+                // Datos de las filas
+                for (int i = 0; i < tabla.Rows.Count; i++)
+                {
+                    for (int j = 0; j < tabla.Columns.Count; j++)
+                    {
+                        // Manejo seguro de valores nulos
+                        if (tabla.Rows[i].Cells[j].Value != null)
+                        {
+                            worksheet.Cells[i + 2, j + 1] = tabla.Rows[i].Cells[j].Value.ToString();
+                        }
+                        else
+                        {
+                            worksheet.Cells[i + 2, j + 1] = string.Empty; // Opcional: Puedes usar otro valor por defecto si es null
+                        }
+                    }
+                }
+
+                // Diseño de tabla sencillo
+                Excel.Range headerRange = worksheet.Range["A1", worksheet.Cells[1, tabla.ColumnCount]];
+                headerRange.Font.Bold = true;
+                headerRange.Interior.Color = Excel.XlRgbColor.rgbLightBlue;
+
+                Excel.Range tableRange = worksheet.Range[worksheet.Cells[1, 1], worksheet.Cells[tabla.Rows.Count + 1, tabla.Columns.Count]];
+                tableRange.Borders.LineStyle = Excel.XlLineStyle.xlContinuous;
+                tableRange.Borders.Weight = Excel.XlBorderWeight.xlThin;
+
+                // Ajustar el ancho de las columnas automáticamente
+                worksheet.Columns.AutoFit();
+
+                // Guardar el archivo Excel
+                workbook.SaveAs("DatosProductos.xlsx");
+
+                // Mostrar un mensaje opcional
+                // MessageBox.Show("Se exportaron los datos a Excel correctamente. Puedes encontrar el archivo en la carpeta del proyecto.");
+            }
+            catch (Exception ex)
+            {
+                // MessageBox.Show("Error al exportar a Excel: " + ex.Message);
+            }
+            finally
+            {
+                // Liberar recursos de Excel
+                if (worksheet != null)
+                {
+                    Marshal.ReleaseComObject(worksheet);
+                }
+                if (workbook != null)
+                {
+                    // No cerrar el libro, solo liberar recursos
+                    Marshal.ReleaseComObject(workbook);
+                }
+
+                // No cerrar la aplicación Excel aquí
+                // No se invoca excelApp.Quit() ni se libera el objeto excelApp
+            }
+        }
+
+
+
     }
 
 }

@@ -11,9 +11,9 @@ using System.Windows.Forms;
 
 namespace Proyecto.Ingresar
 {
-    public partial class FormIngresarCliente : Form
+    public partial class FormIngresarBodega : Form
     {
-        public FormIngresarCliente()
+        public FormIngresarBodega()
         {
             InitializeComponent();
             this.ControlBox = false;
@@ -22,14 +22,14 @@ namespace Proyecto.Ingresar
 
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static extern IntPtr CreateRoundRectRgn
-       (
-           int nLeftRect,     // x-coordinate of upper-left corner
-           int nTopRect,      // y-coordinate of upper-left corner
-           int nRightRect,    // x-coordinate of lower-right corner
-           int nBottomRect,   // y-coordinate of lower-right corner
-           int nWidthEllipse, // height of ellipse
-           int nHeightEllipse // width of ellipse
-       );
+      (
+          int nLeftRect,     // x-coordinate of upper-left corner
+          int nTopRect,      // y-coordinate of upper-left corner
+          int nRightRect,    // x-coordinate of lower-right corner
+          int nBottomRect,   // y-coordinate of lower-right corner
+          int nWidthEllipse, // height of ellipse
+          int nHeightEllipse // width of ellipse
+      );
 
         // Para arrastrar y mover el formulario usarlo para poder arrastrar de linea 35  a 41
         [DllImport("user32.dll", EntryPoint = "ReleaseCapture")]
@@ -38,12 +38,10 @@ namespace Proyecto.Ingresar
         [DllImport("user32.dll", EntryPoint = "SendMessage")]
         private extern static void SendMessage(IntPtr hWnd, int wMsg, int wParam, int lParam);
 
-
-
-        private void button1_Click_1(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-            Mysql.CCliente objetoCliente = new Mysql.CCliente();
-            objetoCliente.guardarcliente(textBox1, textBox2, textBox3, textBox4, textBox5, textBox6, textBox7, richTextBox1, textBox8);
+            Mysql.Cbodega objetoBodega = new Mysql.Cbodega();
+            objetoBodega.guardarBodega(textBox1, textBox2, dateTimePicker1, dateTimePicker2, numericUpDown1, numericUpDown2, numericUpDown3);
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -57,7 +55,7 @@ namespace Proyecto.Ingresar
             SendMessage(this.Handle, 0x112, 0xf012, 0);
         }
 
-        private void FormIngresarCliente_Resize(object sender, EventArgs e)
+        private void panel1_Resize(object sender, EventArgs e)
         {
             if (WindowState == FormWindowState.Maximized)
             {
