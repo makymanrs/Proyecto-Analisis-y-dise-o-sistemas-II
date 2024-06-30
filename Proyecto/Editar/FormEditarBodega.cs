@@ -93,6 +93,57 @@ namespace Proyecto.Editar
             }
         }
 
-        
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == Convert.ToChar(Keys.Enter))
+            {
+                textBox2.Focus();
+            }
+        }
+
+        private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == Convert.ToChar(Keys.Enter))
+            {
+                dateTimePicker1.Focus();
+            }
+        }
+
+        private void dateTimePicker1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == Convert.ToChar(Keys.Enter))
+            {
+                dateTimePicker2.Focus();
+            }
+        }
+
+        private void dateTimePicker2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == Convert.ToChar(Keys.Enter))
+            {
+                numericUpDown1.Focus();
+            }
+        }
+
+        private void numericUpDown1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == Convert.ToChar(Keys.Enter))
+            {
+                numericUpDown2.Focus();
+            }
+        }
+
+        private void numericUpDown2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == Convert.ToChar(Keys.Enter))
+            {
+                numericUpDown3.Focus();
+            }
+        }
+
+        private void FormEditarBodega_Load(object sender, EventArgs e)
+        {
+            numericUpDown3.Enabled = false;
+        }
     }
 }

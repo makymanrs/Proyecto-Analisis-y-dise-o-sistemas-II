@@ -66,5 +66,50 @@ namespace Proyecto.Ingresar
                 Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20)); // Aplica la región redondeada al restaurar
             }
         }
+
+        private void FormIngresarBodega_Load(object sender, EventArgs e)
+        {
+            numericUpDown3.Enabled = false;
+        }
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == Convert.ToChar(Keys.Enter))
+            {
+                textBox2.Focus();
+            }
+        }
+
+        private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == Convert.ToChar(Keys.Enter))
+            {
+                dateTimePicker1.Focus();
+            }
+        }
+
+        private void dateTimePicker1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == Convert.ToChar(Keys.Enter))
+            {
+                dateTimePicker2.Focus();
+            }
+        }
+
+        private void dateTimePicker2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == Convert.ToChar(Keys.Enter))
+            {
+                numericUpDown1.Focus();
+            }
+        }
+
+        private void numericUpDown2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == Convert.ToChar(Keys.Enter))
+            {
+                numericUpDown2.Focus();
+            }
+        }
     }
 }

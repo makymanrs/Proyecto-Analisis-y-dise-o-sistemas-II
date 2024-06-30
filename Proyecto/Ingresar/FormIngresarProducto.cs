@@ -107,7 +107,7 @@ namespace Proyecto.Ingresar
         {
             if (e.KeyChar == Convert.ToChar(Keys.Enter))
             {
-                numericUpDown2.Focus();
+                numericUpDown3.Focus();
             }
         }
 
@@ -125,6 +125,11 @@ namespace Proyecto.Ingresar
             {
                 textBox3.Focus();
             }
+        }
+
+        private void FormIngresarProducto_Load(object sender, EventArgs e)
+        {
+            numericUpDown2.Enabled = false;
         }
     }
 }
