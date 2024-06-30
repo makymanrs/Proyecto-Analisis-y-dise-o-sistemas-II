@@ -129,5 +129,7 @@ namespace Proyecto.Ingresar
                 textBox5.Focus();
             }
         }
+
+     
     }
 }
