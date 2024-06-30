@@ -58,6 +58,12 @@
     <Compile Include="Editar\FormEditarCliente.Designer.cs">
       <DependentUpon>FormEditarCliente.cs</DependentUpon>
     </Compile>
+    <Compile Include="Editar\FormEditarOrden.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editar\FormEditarOrden.Designer.cs">
+      <DependentUpon>FormEditarOrden.cs</DependentUpon>
+    </Compile>
     <Compile Include="Editar\FormEditarProducto.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -100,6 +106,12 @@
     <Compile Include="Forms1\FormFactura.Designer.cs">
       <DependentUpon>FormFactura.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms1\FormOrden.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms1\FormOrden.Designer.cs">
+      <DependentUpon>FormOrden.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms1\FormProducto.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -124,6 +136,12 @@
     <Compile Include="Ingresar\FormIngresarCliente.Designer.cs">
       <DependentUpon>FormIngresarCliente.cs</DependentUpon>
     </Compile>
+    <Compile Include="Ingresar\FormIngresarOrden.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ingresar\FormIngresarOrden.Designer.cs">
+      <DependentUpon>FormIngresarOrden.cs</DependentUpon>
+    </Compile>
     <Compile Include="Ingresar\FormIngresarProducto.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -139,6 +157,7 @@
     <Compile Include="Mysql\Cbodega.cs" />
     <Compile Include="Mysql\CCliente.cs" />
     <Compile Include="Mysql\Conexion.cs" />
+    <Compile Include="Mysql\Corden.cs" />
     <Compile Include="Mysql\Cproducto.cs" />
     <Compile Include="Mysql\Cproveedor.cs" />
     <Compile Include="Program.cs" />
@@ -167,6 +186,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms1\FormFactura.resx">
       <DependentUpon>FormFactura.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms1\FormOrden.resx">
+      <DependentUpon>FormOrden.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms1\FormProducto.resx">
       <DependentUpon>FormProducto.cs</DependentUpon>
