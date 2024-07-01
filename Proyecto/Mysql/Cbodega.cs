@@ -129,6 +129,9 @@ namespace Proyecto.Mysql
                 Conexion objetoConexion = new Conexion();
                 conexion = objetoConexion.establecerConexion();
 
+                // Calcular el precio antes de la actualización
+                CalcularPrecio(costo, precio);
+
                 // Actualizar la tabla de producto
                 string productoQuery = @"UPDATE producto 
                                  SET pro_nom = @proNom, 
@@ -167,6 +170,7 @@ namespace Proyecto.Mysql
                 }
             }
         }
+
 
         public DataRow buscarBodega(int id)
         {

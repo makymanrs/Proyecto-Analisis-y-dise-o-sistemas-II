@@ -3,6 +3,7 @@ using System;
 using System.Data;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using Excel = Microsoft.Office.Interop.Excel;
@@ -204,7 +205,6 @@ namespace Proyecto.Mysql
                 }
             }
         }
-
         public void modificarProducto(TextBox cod, TextBox producto, DateTimePicker cad, NumericUpDown costo, NumericUpDown precio, NumericUpDown can, TextBox numbod, PictureBox imgBox)
         {
             MySqlConnection conexion = null;
@@ -218,7 +218,7 @@ namespace Proyecto.Mysql
                 // Verificar si el producto existe antes de modificarlo
                 string queryVerificarProducto = "SELECT COUNT(*) FROM producto WHERE pro_cod = @proCod";
                 MySqlCommand commandVerificarProducto = new MySqlCommand(queryVerificarProducto, conexion);
-                commandVerificarProducto.Parameters.AddWithValue("@proCod", cod.Text); // Aquí cambia a cod.Text
+                commandVerificarProducto.Parameters.AddWithValue("@proCod", cod.Text);
                 int countProducto = Convert.ToInt32(commandVerificarProducto.ExecuteScalar());
 
                 if (countProducto == 0)
@@ -238,10 +238,13 @@ namespace Proyecto.Mysql
                     }
                 }
 
+                // Calcular el precio basado en el costo
+                CalcularPrecio(costo, precio); // Asegurarse de que el precio esté actualizado
+
                 // Actualizar el producto en la tabla producto
                 string queryActualizarProducto = "UPDATE producto SET pro_nom = @proNom, pro_cad = @proCad, pro_cos = @proCos, pro_pre = @proPre, pro_can = @proCan, pro_img = @proImg, bo_id = @boId WHERE pro_cod = @proCod";
                 MySqlCommand myCommandActualizarProducto = new MySqlCommand(queryActualizarProducto, conexion);
-                myCommandActualizarProducto.Parameters.AddWithValue("@proCod", cod.Text); // Aquí también cambia a cod.Text
+                myCommandActualizarProducto.Parameters.AddWithValue("@proCod", cod.Text);
                 myCommandActualizarProducto.Parameters.AddWithValue("@proNom", producto.Text);
                 myCommandActualizarProducto.Parameters.AddWithValue("@proCad", fechaFormateada);
                 myCommandActualizarProducto.Parameters.AddWithValue("@proCos", costo.Value);
@@ -265,6 +268,7 @@ namespace Proyecto.Mysql
                 }
             }
         }
+
         public void eliminarProductos(TextBox cod, DataGridView tablaproductos)
         {
             MySqlConnection conexion = null;
@@ -397,21 +401,26 @@ namespace Proyecto.Mysql
                 worksheet = (Excel.Worksheet)workbook.Sheets[1]; // Obtener la primera hoja de trabajo
                 worksheet.Name = "Datos de Productos"; // Nombre de la hoja de trabajo
 
+                // Obtener las columnas que no sean pro_img o Imagen
+                var columnasAExportar = tabla.Columns.Cast<DataGridViewColumn>()
+                                                     .Where(col => col.Name != "pro_img" && col.Name != "Imagen")
+                                                     .ToList();
+
                 // Encabezados de las columnas
-                for (int i = 0; i < tabla.ColumnCount; i++)
+                for (int i = 0; i < columnasAExportar.Count; i++)
                 {
-                    worksheet.Cells[1, i + 1] = tabla.Columns[i].HeaderText;
+                    worksheet.Cells[1, i + 1] = columnasAExportar[i].HeaderText;
                 }
 
                 // Datos de las filas
                 for (int i = 0; i < tabla.Rows.Count; i++)
                 {
-                    for (int j = 0; j < tabla.Columns.Count; j++)
+                    for (int j = 0; j < columnasAExportar.Count; j++)
                     {
                         // Manejo seguro de valores nulos
-                        if (tabla.Rows[i].Cells[j].Value != null)
+                        if (tabla.Rows[i].Cells[columnasAExportar[j].Index].Value != null)
                         {
-                            worksheet.Cells[i + 2, j + 1] = tabla.Rows[i].Cells[j].Value.ToString();
+                            worksheet.Cells[i + 2, j + 1] = tabla.Rows[i].Cells[columnasAExportar[j].Index].Value.ToString();
                         }
                         else
                         {
@@ -421,11 +430,11 @@ namespace Proyecto.Mysql
                 }
 
                 // Diseño de tabla sencillo
-                Excel.Range headerRange = worksheet.Range["A1", worksheet.Cells[1, tabla.ColumnCount]];
+                Excel.Range headerRange = worksheet.Range["A1", worksheet.Cells[1, columnasAExportar.Count]];
                 headerRange.Font.Bold = true;
                 headerRange.Interior.Color = Excel.XlRgbColor.rgbLightBlue;
 
-                Excel.Range tableRange = worksheet.Range[worksheet.Cells[1, 1], worksheet.Cells[tabla.Rows.Count + 1, tabla.Columns.Count]];
+                Excel.Range tableRange = worksheet.Range[worksheet.Cells[1, 1], worksheet.Cells[tabla.Rows.Count + 1, columnasAExportar.Count]];
                 tableRange.Borders.LineStyle = Excel.XlLineStyle.xlContinuous;
                 tableRange.Borders.Weight = Excel.XlBorderWeight.xlThin;
 
@@ -459,6 +468,7 @@ namespace Proyecto.Mysql
                 // No se invoca excelApp.Quit() ni se libera el objeto excelApp
             }
         }
+
 
 
 
