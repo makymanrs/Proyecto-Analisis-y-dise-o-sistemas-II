@@ -97,7 +97,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(40, 265);
+            this.label5.Location = new System.Drawing.Point(183, 255);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(120, 19);
             this.label5.TabIndex = 24;
@@ -184,7 +184,7 @@
             // 
             // numericUpDown2
             // 
-            this.numericUpDown2.Location = new System.Drawing.Point(44, 300);
+            this.numericUpDown2.Location = new System.Drawing.Point(187, 288);
             this.numericUpDown2.Name = "numericUpDown2";
             this.numericUpDown2.Size = new System.Drawing.Size(81, 20);
             this.numericUpDown2.TabIndex = 32;
@@ -194,7 +194,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(194, 265);
+            this.label8.Location = new System.Drawing.Point(40, 255);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(78, 19);
             this.label8.TabIndex = 33;
@@ -202,7 +202,7 @@
             // 
             // numericUpDown3
             // 
-            this.numericUpDown3.Location = new System.Drawing.Point(198, 300);
+            this.numericUpDown3.Location = new System.Drawing.Point(46, 288);
             this.numericUpDown3.Name = "numericUpDown3";
             this.numericUpDown3.Size = new System.Drawing.Size(81, 20);
             this.numericUpDown3.TabIndex = 34;
