@@ -468,10 +468,6 @@ namespace Proyecto.Mysql
                 // No se invoca excelApp.Quit() ni se libera el objeto excelApp
             }
         }
-
-
-
-
     }
 
 }
