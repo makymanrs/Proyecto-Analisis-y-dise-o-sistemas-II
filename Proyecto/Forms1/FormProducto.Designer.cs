@@ -64,6 +64,7 @@
             this.label3.Size = new System.Drawing.Size(49, 16);
             this.label3.TabIndex = 42;
             this.label3.Text = "Buscar";
+            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // dataGridProducto
             // 
@@ -113,6 +114,7 @@
             this.dataGridProducto.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridProducto.Size = new System.Drawing.Size(764, 227);
             this.dataGridProducto.TabIndex = 41;
+            this.dataGridProducto.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridProducto_CellContentClick);
             // 
             // textBox1
             // 
@@ -120,6 +122,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(143, 20);
             this.textBox1.TabIndex = 38;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // button3
             // 
@@ -208,6 +211,7 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(800, 43);
             this.panel1.TabIndex = 43;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // panel2
             // 
@@ -217,6 +221,7 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(200, 41);
             this.panel2.TabIndex = 21;
+            this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
             // label2
             // 
@@ -250,6 +255,7 @@
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(304, 100);
             this.panel4.TabIndex = 65;
+            this.panel4.Paint += new System.Windows.Forms.PaintEventHandler(this.panel4_Paint);
             // 
             // panel3
             // 
@@ -258,6 +264,7 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(800, 100);
             this.panel3.TabIndex = 64;
+            this.panel3.Paint += new System.Windows.Forms.PaintEventHandler(this.panel3_Paint);
             // 
             // button6
             // 

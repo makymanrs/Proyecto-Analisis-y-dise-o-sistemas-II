@@ -202,6 +202,9 @@
     <EmbeddedResource Include="Ingresar\FormIngresarCliente.resx">
       <DependentUpon>FormIngresarCliente.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Ingresar\FormIngresarOrden.resx">
+      <DependentUpon>FormIngresarOrden.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Ingresar\FormIngresarProducto.resx">
       <DependentUpon>FormIngresarProducto.cs</DependentUpon>
     </EmbeddedResource>
