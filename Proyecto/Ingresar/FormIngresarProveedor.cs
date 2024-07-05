@@ -129,5 +129,13 @@ namespace Proyecto.Ingresar
                 textBox5.Focus();
             }
         }
+
+        private void textBox5_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == Convert.ToChar(Keys.Enter))
+            {
+                button1.Focus();
+            }
+        }
     }
 }

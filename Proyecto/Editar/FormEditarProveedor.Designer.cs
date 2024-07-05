@@ -74,7 +74,6 @@
             this.label7.Size = new System.Drawing.Size(243, 16);
             this.label7.TabIndex = 28;
             this.label7.Text = "Ingrese los datos que quiera cambiar";
-            this.label7.Click += new System.EventHandler(this.label7_Click);
             // 
             // textBox5
             // 
@@ -82,7 +81,7 @@
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(270, 20);
             this.textBox5.TabIndex = 27;
-            this.textBox5.TextChanged += new System.EventHandler(this.textBox5_TextChanged);
+            this.textBox5.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox5_KeyPress);
             // 
             // label6
             // 
@@ -93,7 +92,6 @@
             this.label6.Size = new System.Drawing.Size(82, 19);
             this.label6.TabIndex = 26;
             this.label6.Text = "Dirección";
-            this.label6.Click += new System.EventHandler(this.label6_Click);
             // 
             // textBox4
             // 
@@ -101,7 +99,6 @@
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(270, 20);
             this.textBox4.TabIndex = 25;
-            this.textBox4.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
             this.textBox4.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox4_KeyPress);
             // 
             // label5
@@ -113,7 +110,6 @@
             this.label5.Size = new System.Drawing.Size(62, 19);
             this.label5.TabIndex = 24;
             this.label5.Text = "Correo";
-            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // label4
             // 
@@ -124,7 +120,6 @@
             this.label4.Size = new System.Drawing.Size(140, 19);
             this.label4.TabIndex = 22;
             this.label4.Text = "Sector Comercial";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // textBox3
             // 
@@ -132,7 +127,6 @@
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(103, 20);
             this.textBox3.TabIndex = 21;
-            this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
             this.textBox3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox3_KeyPress);
             // 
             // label3
@@ -144,7 +138,6 @@
             this.label3.Size = new System.Drawing.Size(75, 19);
             this.label3.TabIndex = 20;
             this.label3.Text = "Telefono";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // textBox2
             // 
@@ -152,7 +145,6 @@
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(270, 20);
             this.textBox2.TabIndex = 19;
-            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             this.textBox2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox2_KeyPress);
             // 
             // label2
@@ -163,16 +155,13 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(181, 19);
             this.label2.TabIndex = 18;
-            this.label2.Text = "Nombre del Proveedor";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
-            // 
+            this.label2.Text = "Nombre del Proveedor";          // 
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(52, 55);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(103, 20);
             this.textBox1.TabIndex = 16;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
             // label1
@@ -183,9 +172,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(107, 19);
             this.label1.TabIndex = 15;
-            this.label1.Text = "Id Proveedor";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
-            // 
+            this.label1.Text = "Id Proveedor";       // 
             // comboBox1
             // 
             this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -194,7 +181,6 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 21);
             this.comboBox1.TabIndex = 31;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             this.comboBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBox1_KeyPress);
             // 
             // panel1
@@ -245,9 +231,7 @@
             this.pictureBox1.Size = new System.Drawing.Size(211, 199);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 17;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
-            // 
+            this.pictureBox1.TabStop = false;            // 
             // FormEditarProveedor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);

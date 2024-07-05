@@ -173,17 +173,57 @@ namespace Proyecto.Forms1
             Mysql.Cfactura objetoFactura = new Mysql.Cfactura();
             objetoFactura.BuscarClientePorCodigo(textBox2, textBox3);
         }
+        private void FormFactura_Load(object sender, EventArgs e)
+        {
+            numericUpDown3.Enabled = false;
+            numericUpDown4.Enabled = false;
+            textBox1.Focus();
+        }
 
-        private void textBox4_TextChanged(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)
         {
             Mysql.Cfactura objetoFactura = new Mysql.Cfactura();
             objetoFactura.BuscarProductoPorCodigo(textBox4, textBox5, numericUpDown2);
         }
 
-        private void FormFactura_Load(object sender, EventArgs e)
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
-            numericUpDown3.Enabled = false;
-            numericUpDown4.Enabled = false;
+            if (e.KeyChar == Convert.ToChar(Keys.Enter))
+            {
+                textBox2.Focus();
+            }
+        }
+
+        private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == Convert.ToChar(Keys.Enter))
+            {
+                textBox4.Focus();
+            }
+        }
+
+        private void textBox4_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == Convert.ToChar(Keys.Enter))
+            {
+                button2.Focus();
+            }
+        }
+
+        private void button2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == Convert.ToChar(Keys.Enter))
+            {
+                numericUpDown1.Focus();
+            }
+        }
+
+        private void numericUpDown1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == Convert.ToChar(Keys.Enter))
+            {
+                button3.Focus();
+            }
         }
     }
 }

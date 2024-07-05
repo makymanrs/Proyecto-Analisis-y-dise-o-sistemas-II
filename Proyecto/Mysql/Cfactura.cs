@@ -80,7 +80,7 @@ namespace Proyecto.Mysql
                         }
                         else
                         {
-                            textBoxNombreProducto.Text = "";
+                            //textBoxNombreProducto.Text = "";
                             numericUpDownPrecio.Value = 0;
                             MessageBox.Show("No se encontró ningún producto con el código especificado.");
                         }
