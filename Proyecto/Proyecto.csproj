@@ -156,6 +156,8 @@
     </Compile>
     <Compile Include="Mysql\Cbodega.cs" />
     <Compile Include="Mysql\CCliente.cs" />
+    <Compile Include="Mysql\Cdetalle.cs" />
+    <Compile Include="Mysql\Cfactura.cs" />
     <Compile Include="Mysql\Conexion.cs" />
     <Compile Include="Mysql\Corden.cs" />
     <Compile Include="Mysql\Cproducto.cs" />
@@ -333,13 +335,16 @@
     <None Include="Resources\Bodegaimagen.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Logo.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\excel.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Subir3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Productoimagen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Ordencompras.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

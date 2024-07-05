@@ -79,7 +79,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::Proyecto.Properties.Resources.proveedores_2x;
+            this.pictureBox1.Image = global::Proyecto.Properties.Resources.Ordencompras;
             this.pictureBox1.Location = new System.Drawing.Point(534, 125);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(217, 198);

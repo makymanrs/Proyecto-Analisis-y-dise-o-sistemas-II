@@ -183,16 +183,6 @@ namespace Proyecto.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Logo {
-            get {
-                object obj = ResourceManager.GetObject("Logo", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap menos2 {
             get {
                 object obj = ResourceManager.GetObject("menos2", resourceCulture);
@@ -206,6 +196,16 @@ namespace Proyecto.Properties {
         internal static System.Drawing.Bitmap orden4 {
             get {
                 object obj = ResourceManager.GetObject("orden4", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Ordencompras {
+            get {
+                object obj = ResourceManager.GetObject("Ordencompras", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

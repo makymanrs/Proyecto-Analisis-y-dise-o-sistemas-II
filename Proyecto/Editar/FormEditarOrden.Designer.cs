@@ -227,7 +227,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::Proyecto.Properties.Resources.proveedores_2x;
+            this.pictureBox1.Image = global::Proyecto.Properties.Resources.impugnar_01;
             this.pictureBox1.Location = new System.Drawing.Point(533, 114);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(217, 198);

@@ -286,8 +286,8 @@ namespace Proyecto
                             button3.Text = "           Pagos";
                             button4.Text = "           Bodega";
                             button5.Text = "           Credito";
-                            button6.Text = "            Orden";
-                            button7.Text = "             Historial";
+                            button6.Text = "            Historial";
+                            button7.Text = "             Orden";
                             button8.Text = "             Proveedor";
                         }
                     }
