@@ -124,20 +124,5 @@ namespace Proyecto.Forms1
             objetoProveedor.mostrarProveedor(dataGridProveedor);
             ActualizarConteoRegistros(); // Actualizar el conteo de registros después de mostrar proveedores
         }
-
-        private void dataGridProveedor_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

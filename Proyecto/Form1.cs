@@ -199,6 +199,7 @@ namespace Proyecto
             {
                 Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20)); // Aplica la región redondeada al restaurar
             }
+            //CenterPictureBox();
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -210,8 +211,8 @@ namespace Proyecto
         {
             if (panelMenu.Width == 200)
             {
-                targetMenuWidth = 64;
-                targetLogoWidth = 64;
+                targetMenuWidth = 62;
+                targetLogoWidth = 62;
                 isExpanding = false;
             }
             else
@@ -359,11 +360,22 @@ namespace Proyecto
                 this.WindowState = FormWindowState.Normal;
                 Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20)); // Aplica la región redondeada al restaurar
             }
+            //CenterPictureBox();
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            
+        }
+        private void CenterPictureBox()
+        {
+            pictureBox1.Left = (this.ClientSize.Width - pictureBox1.Width) / 2;
+            pictureBox1.Top = (this.ClientSize.Height - pictureBox1.Height) / 2;
         }
     }
 }

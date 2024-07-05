@@ -130,6 +130,12 @@
     <Compile Include="Forms1\FormProveedor.Designer.cs">
       <DependentUpon>FormProveedor.cs</DependentUpon>
     </Compile>
+    <Compile Include="HistorialCredito\FormHistorialDetalles.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HistorialCredito\FormHistorialDetalles.Designer.cs">
+      <DependentUpon>FormHistorialDetalles.cs</DependentUpon>
+    </Compile>
     <Compile Include="Ingresar\FormIngresarBodega.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -209,6 +215,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms1\FormProveedor.resx">
       <DependentUpon>FormProveedor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HistorialCredito\FormHistorialDetalles.resx">
+      <DependentUpon>FormHistorialDetalles.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Ingresar\FormIngresarBodega.resx">
       <DependentUpon>FormIngresarBodega.cs</DependentUpon>
@@ -381,6 +390,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\pinche logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\detalle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Logoicono.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -31,21 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.panelMenu = new System.Windows.Forms.Panel();
-            this.panelLogo = new System.Windows.Forms.Panel();
-            this.panelTitleBar = new System.Windows.Forms.Panel();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.labelTittle = new System.Windows.Forms.Label();
-            this.panelDesktopPane = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.labelhr = new System.Windows.Forms.Label();
-            this.labelfch = new System.Windows.Forms.Label();
-            this.horafecha = new System.Windows.Forms.Timer(this.components);
-            this.button11 = new System.Windows.Forms.Button();
-            this.button9 = new System.Windows.Forms.Button();
-            this.button10 = new System.Windows.Forms.Button();
-            this.btnCloseChild = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
@@ -54,11 +39,29 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.panelLogo = new System.Windows.Forms.Panel();
             this.btnMenu = new System.Windows.Forms.Button();
+            this.panelTitleBar = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.button11 = new System.Windows.Forms.Button();
+            this.button9 = new System.Windows.Forms.Button();
+            this.button10 = new System.Windows.Forms.Button();
+            this.btnCloseChild = new System.Windows.Forms.Button();
+            this.labelTittle = new System.Windows.Forms.Label();
+            this.panelDesktopPane = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.labelhr = new System.Windows.Forms.Label();
+            this.labelfch = new System.Windows.Forms.Label();
+            this.horafecha = new System.Windows.Forms.Timer(this.components);
             this.panelMenu.SuspendLayout();
             this.panelLogo.SuspendLayout();
             this.panelTitleBar.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.panelDesktopPane.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.SuspendLayout();
@@ -81,171 +84,6 @@
             this.panelMenu.Name = "panelMenu";
             this.panelMenu.Size = new System.Drawing.Size(200, 638);
             this.panelMenu.TabIndex = 0;
-            // 
-            // panelLogo
-            // 
-            this.panelLogo.Controls.Add(this.btnMenu);
-            this.panelLogo.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelLogo.Location = new System.Drawing.Point(0, 0);
-            this.panelLogo.Name = "panelLogo";
-            this.panelLogo.Size = new System.Drawing.Size(200, 100);
-            this.panelLogo.TabIndex = 0;
-            // 
-            // panelTitleBar
-            // 
-            this.panelTitleBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(25)))), ((int)(((byte)(62)))));
-            this.panelTitleBar.Controls.Add(this.panel1);
-            this.panelTitleBar.Controls.Add(this.btnCloseChild);
-            this.panelTitleBar.Controls.Add(this.labelTittle);
-            this.panelTitleBar.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelTitleBar.Location = new System.Drawing.Point(200, 0);
-            this.panelTitleBar.Name = "panelTitleBar";
-            this.panelTitleBar.Size = new System.Drawing.Size(938, 100);
-            this.panelTitleBar.TabIndex = 1;
-            this.panelTitleBar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelTitleBar_MouseDown);
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.button11);
-            this.panel1.Controls.Add(this.button9);
-            this.panel1.Controls.Add(this.button10);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel1.Location = new System.Drawing.Point(738, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(200, 100);
-            this.panel1.TabIndex = 0;
-            // 
-            // labelTittle
-            // 
-            this.labelTittle.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.labelTittle.AutoSize = true;
-            this.labelTittle.Font = new System.Drawing.Font("Lucida Sans", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTittle.ForeColor = System.Drawing.Color.White;
-            this.labelTittle.Location = new System.Drawing.Point(425, 35);
-            this.labelTittle.Name = "labelTittle";
-            this.labelTittle.Size = new System.Drawing.Size(77, 23);
-            this.labelTittle.TabIndex = 2;
-            this.labelTittle.Text = "HOME";
-            // 
-            // panelDesktopPane
-            // 
-            this.panelDesktopPane.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelDesktopPane.Location = new System.Drawing.Point(200, 100);
-            this.panelDesktopPane.Name = "panelDesktopPane";
-            this.panelDesktopPane.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
-            this.panelDesktopPane.Size = new System.Drawing.Size(938, 538);
-            this.panelDesktopPane.TabIndex = 2;
-            // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.Color.Gray;
-            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Controls.Add(this.panel3);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(200, 538);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(938, 100);
-            this.panel2.TabIndex = 3;
-            // 
-            // panel3
-            // 
-            this.panel3.Controls.Add(this.label1);
-            this.panel3.Controls.Add(this.labelhr);
-            this.panel3.Controls.Add(this.labelfch);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel3.Location = new System.Drawing.Point(644, 0);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(292, 98);
-            this.panel3.TabIndex = 0;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(55, 12);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(80, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Hora y fecha";
-            // 
-            // labelhr
-            // 
-            this.labelhr.AutoSize = true;
-            this.labelhr.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelhr.ForeColor = System.Drawing.Color.Blue;
-            this.labelhr.Location = new System.Drawing.Point(142, 27);
-            this.labelhr.Name = "labelhr";
-            this.labelhr.Size = new System.Drawing.Size(60, 24);
-            this.labelhr.TabIndex = 0;
-            this.labelhr.Text = "label1";
-            // 
-            // labelfch
-            // 
-            this.labelfch.AutoSize = true;
-            this.labelfch.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelfch.ForeColor = System.Drawing.Color.Black;
-            this.labelfch.Location = new System.Drawing.Point(37, 54);
-            this.labelfch.Name = "labelfch";
-            this.labelfch.Size = new System.Drawing.Size(60, 24);
-            this.labelfch.TabIndex = 1;
-            this.labelfch.Text = "label2";
-            // 
-            // horafecha
-            // 
-            this.horafecha.Enabled = true;
-            this.horafecha.Tick += new System.EventHandler(this.horafecha_Tick);
-            // 
-            // button11
-            // 
-            this.button11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(74)))), ((int)(((byte)(130)))));
-            this.button11.FlatAppearance.BorderSize = 0;
-            this.button11.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button11.Image = global::Proyecto.Properties.Resources.cancelar5;
-            this.button11.Location = new System.Drawing.Point(154, 0);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(45, 25);
-            this.button11.TabIndex = 7;
-            this.button11.UseVisualStyleBackColor = false;
-            this.button11.Click += new System.EventHandler(this.button11_Click);
-            // 
-            // button9
-            // 
-            this.button9.BackColor = System.Drawing.Color.DeepSkyBlue;
-            this.button9.FlatAppearance.BorderSize = 0;
-            this.button9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button9.Image = global::Proyecto.Properties.Resources.menos2;
-            this.button9.Location = new System.Drawing.Point(64, 0);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(45, 25);
-            this.button9.TabIndex = 5;
-            this.button9.UseVisualStyleBackColor = false;
-            this.button9.Click += new System.EventHandler(this.button9_Click);
-            // 
-            // button10
-            // 
-            this.button10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(98)))), ((int)(((byte)(102)))), ((int)(((byte)(244)))));
-            this.button10.FlatAppearance.BorderSize = 0;
-            this.button10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button10.Image = global::Proyecto.Properties.Resources.pantalla_completax3;
-            this.button10.Location = new System.Drawing.Point(109, 0);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(45, 25);
-            this.button10.TabIndex = 6;
-            this.button10.UseVisualStyleBackColor = false;
-            this.button10.Click += new System.EventHandler(this.button10_Click);
-            // 
-            // btnCloseChild
-            // 
-            this.btnCloseChild.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnCloseChild.FlatAppearance.BorderSize = 0;
-            this.btnCloseChild.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCloseChild.Image = ((System.Drawing.Image)(resources.GetObject("btnCloseChild.Image")));
-            this.btnCloseChild.Location = new System.Drawing.Point(0, 0);
-            this.btnCloseChild.Name = "btnCloseChild";
-            this.btnCloseChild.Size = new System.Drawing.Size(75, 100);
-            this.btnCloseChild.TabIndex = 5;
-            this.btnCloseChild.UseVisualStyleBackColor = true;
-            this.btnCloseChild.Click += new System.EventHandler(this.btnCloseChild_Click);
             // 
             // button8
             // 
@@ -401,6 +239,15 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // panelLogo
+            // 
+            this.panelLogo.Controls.Add(this.btnMenu);
+            this.panelLogo.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelLogo.Location = new System.Drawing.Point(0, 0);
+            this.panelLogo.Name = "panelLogo";
+            this.panelLogo.Size = new System.Drawing.Size(200, 100);
+            this.panelLogo.TabIndex = 0;
+            // 
             // btnMenu
             // 
             this.btnMenu.FlatAppearance.BorderSize = 0;
@@ -415,6 +262,177 @@
             this.btnMenu.UseVisualStyleBackColor = true;
             this.btnMenu.Click += new System.EventHandler(this.button6_Click);
             // 
+            // panelTitleBar
+            // 
+            this.panelTitleBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(25)))), ((int)(((byte)(62)))));
+            this.panelTitleBar.Controls.Add(this.panel1);
+            this.panelTitleBar.Controls.Add(this.btnCloseChild);
+            this.panelTitleBar.Controls.Add(this.labelTittle);
+            this.panelTitleBar.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelTitleBar.Location = new System.Drawing.Point(200, 0);
+            this.panelTitleBar.Name = "panelTitleBar";
+            this.panelTitleBar.Size = new System.Drawing.Size(938, 100);
+            this.panelTitleBar.TabIndex = 1;
+            this.panelTitleBar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelTitleBar_MouseDown);
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.button11);
+            this.panel1.Controls.Add(this.button9);
+            this.panel1.Controls.Add(this.button10);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel1.Location = new System.Drawing.Point(738, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(200, 100);
+            this.panel1.TabIndex = 0;
+            // 
+            // button11
+            // 
+            this.button11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(74)))), ((int)(((byte)(130)))));
+            this.button11.FlatAppearance.BorderSize = 0;
+            this.button11.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button11.Image = global::Proyecto.Properties.Resources.close2;
+            this.button11.Location = new System.Drawing.Point(154, 0);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(45, 25);
+            this.button11.TabIndex = 7;
+            this.button11.UseVisualStyleBackColor = false;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
+            // 
+            // button9
+            // 
+            this.button9.BackColor = System.Drawing.Color.DeepSkyBlue;
+            this.button9.FlatAppearance.BorderSize = 0;
+            this.button9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button9.Image = global::Proyecto.Properties.Resources.menos2;
+            this.button9.Location = new System.Drawing.Point(64, 0);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(45, 25);
+            this.button9.TabIndex = 5;
+            this.button9.UseVisualStyleBackColor = false;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
+            // 
+            // button10
+            // 
+            this.button10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(98)))), ((int)(((byte)(102)))), ((int)(((byte)(244)))));
+            this.button10.FlatAppearance.BorderSize = 0;
+            this.button10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button10.Image = global::Proyecto.Properties.Resources.pantalla_completax3;
+            this.button10.Location = new System.Drawing.Point(109, 0);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(45, 25);
+            this.button10.TabIndex = 6;
+            this.button10.UseVisualStyleBackColor = false;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
+            // 
+            // btnCloseChild
+            // 
+            this.btnCloseChild.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnCloseChild.FlatAppearance.BorderSize = 0;
+            this.btnCloseChild.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCloseChild.Image = ((System.Drawing.Image)(resources.GetObject("btnCloseChild.Image")));
+            this.btnCloseChild.Location = new System.Drawing.Point(0, 0);
+            this.btnCloseChild.Name = "btnCloseChild";
+            this.btnCloseChild.Size = new System.Drawing.Size(75, 100);
+            this.btnCloseChild.TabIndex = 5;
+            this.btnCloseChild.UseVisualStyleBackColor = true;
+            this.btnCloseChild.Click += new System.EventHandler(this.btnCloseChild_Click);
+            // 
+            // labelTittle
+            // 
+            this.labelTittle.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.labelTittle.AutoSize = true;
+            this.labelTittle.Font = new System.Drawing.Font("Lucida Sans", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTittle.ForeColor = System.Drawing.Color.White;
+            this.labelTittle.Location = new System.Drawing.Point(425, 35);
+            this.labelTittle.Name = "labelTittle";
+            this.labelTittle.Size = new System.Drawing.Size(77, 23);
+            this.labelTittle.TabIndex = 2;
+            this.labelTittle.Text = "HOME";
+            // 
+            // panelDesktopPane
+            // 
+            this.panelDesktopPane.Controls.Add(this.pictureBox1);
+            this.panelDesktopPane.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelDesktopPane.Location = new System.Drawing.Point(200, 100);
+            this.panelDesktopPane.Name = "panelDesktopPane";
+            this.panelDesktopPane.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
+            this.panelDesktopPane.Size = new System.Drawing.Size(938, 538);
+            this.panelDesktopPane.TabIndex = 2;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox1.Image = global::Proyecto.Properties.Resources.pinche_logo;
+            this.pictureBox1.Location = new System.Drawing.Point(255, 45);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(427, 371);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.Gray;
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.panel3);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel2.Location = new System.Drawing.Point(200, 538);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(938, 100);
+            this.panel2.TabIndex = 3;
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.label1);
+            this.panel3.Controls.Add(this.labelhr);
+            this.panel3.Controls.Add(this.labelfch);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel3.Location = new System.Drawing.Point(644, 0);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(292, 98);
+            this.panel3.TabIndex = 0;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(55, 12);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(80, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Hora y fecha";
+            // 
+            // labelhr
+            // 
+            this.labelhr.AutoSize = true;
+            this.labelhr.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelhr.ForeColor = System.Drawing.Color.Blue;
+            this.labelhr.Location = new System.Drawing.Point(142, 27);
+            this.labelhr.Name = "labelhr";
+            this.labelhr.Size = new System.Drawing.Size(60, 24);
+            this.labelhr.TabIndex = 0;
+            this.labelhr.Text = "label1";
+            // 
+            // labelfch
+            // 
+            this.labelfch.AutoSize = true;
+            this.labelfch.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelfch.ForeColor = System.Drawing.Color.Black;
+            this.labelfch.Location = new System.Drawing.Point(37, 54);
+            this.labelfch.Name = "labelfch";
+            this.labelfch.Size = new System.Drawing.Size(60, 24);
+            this.labelfch.TabIndex = 1;
+            this.labelfch.Text = "label2";
+            // 
+            // horafecha
+            // 
+            this.horafecha.Enabled = true;
+            this.horafecha.Tick += new System.EventHandler(this.horafecha_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -425,6 +443,7 @@
             this.Controls.Add(this.panelTitleBar);
             this.Controls.Add(this.panelMenu);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
@@ -433,6 +452,8 @@
             this.panelTitleBar.ResumeLayout(false);
             this.panelTitleBar.PerformLayout();
             this.panel1.ResumeLayout(false);
+            this.panelDesktopPane.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
@@ -468,6 +489,7 @@
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.Button button9;
         private MySql.Data.MySqlClient.MySqlConnection mySqlConnection1;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 

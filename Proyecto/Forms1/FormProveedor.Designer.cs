@@ -71,7 +71,6 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(143, 20);
             this.textBox1.TabIndex = 28;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // panel1
             // 
@@ -155,7 +154,6 @@
             this.dataGridProveedor.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridProveedor.Size = new System.Drawing.Size(764, 227);
             this.dataGridProveedor.TabIndex = 33;
-            this.dataGridProveedor.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridProveedor_CellContentClick);
             // 
             // label3
             // 
@@ -167,7 +165,6 @@
             this.label3.Size = new System.Drawing.Size(55, 16);
             this.label3.TabIndex = 34;
             this.label3.Text = "Buscar";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // panel4
             // 

@@ -142,39 +142,17 @@ namespace Proyecto.Forms1
             }
         }
 
-        private void panel2_Paint(object sender, PaintEventArgs e)
-        {
+       
 
-        }
+        
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
+       
 
-        }
+       
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
+       
 
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dataGridProducto_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void panel4_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void panel3_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
+       
+      
     }
 }

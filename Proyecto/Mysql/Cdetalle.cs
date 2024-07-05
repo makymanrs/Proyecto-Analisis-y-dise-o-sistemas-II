@@ -83,5 +83,93 @@ namespace Proyecto.Mysql
                 }
             }
         }
+
+        public void BuscarFacturaPorId(DataGridView tablaFactura, TextBox idFactura)
+        {
+            MySqlConnection conexion = null;
+            try
+            {
+                Conexion objetoConexion = new Conexion();
+                conexion = objetoConexion.establecerConexion();
+
+                // Query para buscar facturas por su código y mostrar nombre completo del cliente concatenado
+                string query = "SELECT fac_cod as 'Código Factura', fac_fec as 'Fecha', " +
+                               "CONCAT(cli_pnom, ' ', IFNULL(cli_snom, ''), ' ', cli_pape, ' ', IFNULL(cli_sape, '')) AS 'Cliente', " +
+                               "fac_total as 'Total' " +
+                               "FROM factura " +
+                               "INNER JOIN cliente ON factura.cli_id = cliente.cli_cod " +  // Join con la tabla cliente para obtener el nombre completo
+                               "WHERE fac_cod = @idFactura";
+
+                MySqlCommand command = new MySqlCommand(query, conexion);
+                command.Parameters.AddWithValue("@idFactura", idFactura.Text.Trim());
+
+                // Adaptador para llenar los datos en un DataTable
+                MySqlDataAdapter adapter = new MySqlDataAdapter(command);
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+
+                // Limpiar el DataGridView antes de mostrar los resultados
+                tablaFactura.DataSource = null;
+                tablaFactura.Rows.Clear();
+
+                // Asignar el DataTable con los resultados al DataGridView
+                tablaFactura.DataSource = dt;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al buscar factura: " + ex.Message);
+            }
+            finally
+            {
+                if (conexion != null)
+                {
+                    conexion.Close();
+                }
+            }
+        }
+
+        public void eliminarFactura(TextBox codFactura)
+        {
+            MySqlConnection conexion = null;
+            try
+            {
+                Conexion objetoConexion = new Conexion();
+                conexion = objetoConexion.establecerConexion();
+
+                // Eliminar detalles de la factura de la tabla detalle_factura
+                string queryDetalle = "DELETE FROM detalle_factura WHERE fac_cod = @facCod";
+                MySqlCommand commandDetalle = new MySqlCommand(queryDetalle, conexion);
+                commandDetalle.Parameters.AddWithValue("@facCod", codFactura.Text);
+
+                int rowsAffectedDetalle = commandDetalle.ExecuteNonQuery();
+
+                // Eliminar la factura de la tabla factura
+                string queryFactura = "DELETE FROM factura WHERE fac_cod = @facCod";
+                MySqlCommand commandFactura = new MySqlCommand(queryFactura, conexion);
+                commandFactura.Parameters.AddWithValue("@facCod", codFactura.Text);
+
+                int rowsAffectedFactura = commandFactura.ExecuteNonQuery();
+
+                if (rowsAffectedFactura > 0)
+                {
+                    MessageBox.Show("Se eliminó la factura y sus detalles correctamente.");
+                }
+                else
+                {
+                    MessageBox.Show("No se encontró ninguna factura con ese código.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("No se pudo eliminar la factura y/o sus detalles. Error: " + ex.Message);
+            }
+            finally
+            {
+                if (conexion != null)
+                {
+                    conexion.Close();
+                }
+            }
+        }
     }
 }
