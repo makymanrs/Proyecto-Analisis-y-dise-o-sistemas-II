@@ -119,11 +119,11 @@
             // 
             this.labelTittle.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.labelTittle.AutoSize = true;
-            this.labelTittle.Font = new System.Drawing.Font("Lucida Sans", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTittle.Font = new System.Drawing.Font("Lucida Sans", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelTittle.ForeColor = System.Drawing.Color.White;
             this.labelTittle.Location = new System.Drawing.Point(425, 35);
             this.labelTittle.Name = "labelTittle";
-            this.labelTittle.Size = new System.Drawing.Size(76, 25);
+            this.labelTittle.Size = new System.Drawing.Size(77, 23);
             this.labelTittle.TabIndex = 2;
             this.labelTittle.Text = "HOME";
             // 
@@ -405,12 +405,12 @@
             // 
             this.btnMenu.FlatAppearance.BorderSize = 0;
             this.btnMenu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMenu.Image = global::Proyecto.Properties.Resources.Barras_2;
+            this.btnMenu.Image = global::Proyecto.Properties.Resources.menu;
             this.btnMenu.Location = new System.Drawing.Point(3, 35);
             this.btnMenu.Name = "btnMenu";
             this.btnMenu.Size = new System.Drawing.Size(117, 40);
             this.btnMenu.TabIndex = 0;
-            this.btnMenu.Text = "     Menu";
+            this.btnMenu.Text = "  Menu";
             this.btnMenu.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnMenu.UseVisualStyleBackColor = true;
             this.btnMenu.Click += new System.EventHandler(this.button6_Click);

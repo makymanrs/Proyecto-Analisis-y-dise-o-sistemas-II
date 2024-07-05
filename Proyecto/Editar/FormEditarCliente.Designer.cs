@@ -279,12 +279,18 @@
             // 
             // button2
             // 
-            this.button2.BackColor = System.Drawing.Color.DeepSkyBlue;
-            this.button2.Image = global::Proyecto.Properties.Resources.search__1_;
+            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(132)))), ((int)(((byte)(210)))));
+            this.button2.FlatAppearance.BorderSize = 0;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.ForeColor = System.Drawing.Color.White;
+            this.button2.Image = global::Proyecto.Properties.Resources.lupa1;
             this.button2.Location = new System.Drawing.Point(210, 41);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(60, 50);
+            this.button2.Size = new System.Drawing.Size(99, 38);
             this.button2.TabIndex = 42;
+            this.button2.Text = "Buscar";
+            this.button2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 

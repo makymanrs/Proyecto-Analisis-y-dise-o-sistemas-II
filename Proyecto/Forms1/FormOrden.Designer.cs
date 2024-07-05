@@ -113,11 +113,11 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.Black;
             this.label3.Location = new System.Drawing.Point(9, 74);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(49, 16);
+            this.label3.Size = new System.Drawing.Size(55, 16);
             this.label3.TabIndex = 72;
             this.label3.Text = "Buscar";
             // 
@@ -190,7 +190,7 @@
             this.button4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(119)))), ((int)(((byte)(182)))));
             this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button4.ForeColor = System.Drawing.Color.White;
-            this.button4.Image = global::Proyecto.Properties.Resources.Save_as;
+            this.button4.Image = global::Proyecto.Properties.Resources.nota;
             this.button4.Location = new System.Drawing.Point(3, 3);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(97, 46);
@@ -220,7 +220,7 @@
             this.button3.BackColor = System.Drawing.Color.Black;
             this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button3.ForeColor = System.Drawing.Color.White;
-            this.button3.Image = global::Proyecto.Properties.Resources.Reload_02__1_;
+            this.button3.Image = global::Proyecto.Properties.Resources.actualizar;
             this.button3.Location = new System.Drawing.Point(489, 55);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(115, 45);
@@ -232,9 +232,9 @@
             // 
             // button1
             // 
-            this.button1.BackColor = System.Drawing.Color.DeepSkyBlue;
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(149)))), ((int)(((byte)(149)))));
             this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Image = global::Proyecto.Properties.Resources.search__1_;
+            this.button1.Image = global::Proyecto.Properties.Resources.buscar1;
             this.button1.Location = new System.Drawing.Point(213, 58);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(62, 42);
@@ -248,7 +248,7 @@
             this.button2.FlatAppearance.BorderSize = 2;
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.Image = global::Proyecto.Properties.Resources.Add_01__2_;
+            this.button2.Image = global::Proyecto.Properties.Resources.agregar;
             this.button2.Location = new System.Drawing.Point(283, 55);
             this.button2.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.button2.Name = "button2";
