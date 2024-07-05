@@ -147,28 +147,53 @@ namespace Proyecto.Mysql
                 Conexion objetoConexion = new Conexion();
                 conexion = objetoConexion.establecerConexion();
 
-                string query = @"INSERT INTO detalle_factura (fac_cod, pro_cod, fac_can, fac_sub, fac_impu, fac_total)
-                     VALUES (@facCod, @proCod, @facCan, @facSub, @facImpu, @facTotal)";
+                string queryInsert = @"INSERT INTO detalle_factura (fac_cod, pro_cod, fac_can, fac_sub, fac_impu, fac_total)
+                               VALUES (@facCod, @proCod, @facCan, @facSub, @facImpu, @facTotal)";
 
-                foreach (DataGridViewRow row in dataGridView.Rows)
+                string queryUpdate = @"UPDATE producto 
+                               SET pro_can = pro_can - @facCan 
+                               WHERE pro_cod = @proCod";
+
+                using (MySqlTransaction transaction = conexion.BeginTransaction())
                 {
-                    int proCod = Convert.ToInt32(row.Cells["CodigoProducto"].Value);
-                    int facCan = Convert.ToInt32(row.Cells["Cantidad"].Value);
-                    // Obtener el subtotal desde el Label en lugar de DataGridView
-                    decimal facSub = subtotal;
-                    decimal facImpu = Convert.ToDecimal(row.Cells["Impuesto"].Value);
-                    decimal facTotal = Convert.ToDecimal(row.Cells["Total"].Value);
-
-                    using (MySqlCommand cmd = new MySqlCommand(query, conexion))
+                    try
                     {
-                        cmd.Parameters.AddWithValue("@facCod", facCod.Text);
-                        cmd.Parameters.AddWithValue("@proCod", proCod);
-                        cmd.Parameters.AddWithValue("@facCan", facCan);
-                        cmd.Parameters.AddWithValue("@facSub", facSub);
-                        cmd.Parameters.AddWithValue("@facImpu", facImpu);
-                        cmd.Parameters.AddWithValue("@facTotal", facTotal);
+                        foreach (DataGridViewRow row in dataGridView.Rows)
+                        {
+                            int proCod = Convert.ToInt32(row.Cells["CodigoProducto"].Value);
+                            int facCan = Convert.ToInt32(row.Cells["Cantidad"].Value);
+                            // Obtener el subtotal desde el Label en lugar de DataGridView
+                            decimal facSub = subtotal;
+                            decimal facImpu = Convert.ToDecimal(row.Cells["Impuesto"].Value);
+                            decimal facTotal = Convert.ToDecimal(row.Cells["Total"].Value);
 
-                        cmd.ExecuteNonQuery();
+                            using (MySqlCommand cmdInsert = new MySqlCommand(queryInsert, conexion, transaction))
+                            {
+                                cmdInsert.Parameters.AddWithValue("@facCod", facCod.Text);
+                                cmdInsert.Parameters.AddWithValue("@proCod", proCod);
+                                cmdInsert.Parameters.AddWithValue("@facCan", facCan);
+                                cmdInsert.Parameters.AddWithValue("@facSub", facSub);
+                                cmdInsert.Parameters.AddWithValue("@facImpu", facImpu);
+                                cmdInsert.Parameters.AddWithValue("@facTotal", facTotal);
+
+                                cmdInsert.ExecuteNonQuery();
+                            }
+
+                            using (MySqlCommand cmdUpdate = new MySqlCommand(queryUpdate, conexion, transaction))
+                            {
+                                cmdUpdate.Parameters.AddWithValue("@facCan", facCan);
+                                cmdUpdate.Parameters.AddWithValue("@proCod", proCod);
+
+                                cmdUpdate.ExecuteNonQuery();
+                            }
+                        }
+
+                        transaction.Commit();
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        throw; // Re-throw the exception to be caught by the outer catch block
                     }
                 }
             }
@@ -184,6 +209,7 @@ namespace Proyecto.Mysql
                 }
             }
         }
+
 
 
         private bool DetallesInsertadosParaFactura(MySqlConnection conexion, int facCod)

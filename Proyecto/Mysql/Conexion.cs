@@ -1,4 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
+using MySqlConnector;
 using System;
 using System.Data;
 using System.Windows.Forms;
@@ -15,22 +16,22 @@ namespace Proyecto.Mysql
 
         private string cadenaConexion = $"server={servidor};port={puerto};user id={usuario};password={password};database={bd};";
 
-        public MySqlConnection establecerConexion()
+        public MySql.Data.MySqlClient.MySqlConnection establecerConexion()
         {
-            MySqlConnection conexionBD = new MySqlConnection(cadenaConexion);
+            MySql.Data.MySqlClient.MySqlConnection conexionBD = new MySql.Data.MySqlClient.MySqlConnection(cadenaConexion);
             try
             {
                 conexionBD.Open();
                 // MessageBox.Show("Conexión establecida correctamente.");
             }
-            catch (MySqlException ex)
+            catch (MySql.Data.MySqlClient.MySqlException ex)
             {
                 MessageBox.Show("Error al establecer la conexión: " + ex.Message);
             }
             return conexionBD;
         }
 
-        public void cerrarConexion(MySqlConnection conexionBD)
+        public void cerrarConexion(MySql.Data.MySqlClient.MySqlConnection conexionBD)
         {
             if (conexionBD != null && conexionBD.State == ConnectionState.Open)
             {
