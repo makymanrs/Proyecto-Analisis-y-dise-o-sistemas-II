@@ -139,7 +139,7 @@ namespace Proyecto.Mysql
         }
 
         // Método para insertar detalles de la factura
-        public void InsertarDetalleFactura(TextBox facCod, DataGridView dataGridView, decimal subtotal)
+        public void InsertarDetalleFactura(TextBox facCod, DataGridView dataGridView,decimal subtotal)
         {
             MySqlConnection conexion = null;
             try
@@ -209,9 +209,6 @@ namespace Proyecto.Mysql
                 }
             }
         }
-
-
-
         private bool DetallesInsertadosParaFactura(MySqlConnection conexion, int facCod)
         {
             string query = "SELECT COUNT(*) FROM detalle_factura WHERE fac_cod = @facCod";

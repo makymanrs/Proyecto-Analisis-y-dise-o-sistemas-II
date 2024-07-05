@@ -59,7 +59,7 @@ namespace Proyecto.Forms1
 
             //label total a pagar
             labelTotalPagar.Text = "Total a Pagar: " + totalPagar.ToString("C"); // Mostrar el total en el label
-            label20.Text = "Total a Pagar..: " + totalPagar.ToString("C");
+            label20.Text = "Total a Pagar: " + totalPagar.ToString("C");
         }
 
         // Método para calcular el subtotal
@@ -78,7 +78,7 @@ namespace Proyecto.Forms1
             }
 
             //label subtotal
-            labelSub.Text = "Subtotal.........: " + subtotal.ToString("C"); // Mostrar el subtotal en el label
+            labelSub.Text = "Subtotal: " + subtotal.ToString("C"); // Mostrar el subtotal en el label
         }
 
         // Método para calcular el total del impuesto
