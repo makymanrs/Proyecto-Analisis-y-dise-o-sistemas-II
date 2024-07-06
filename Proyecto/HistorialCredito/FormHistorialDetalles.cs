@@ -19,6 +19,11 @@ namespace Proyecto.HistorialCredito
             this.Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
             Mysql.Cdetalle objetoFactura = new Mysql.Cdetalle();
             objetoFactura.MostrarDetalleFactura(dataGridFactura, textBox1, label2, label3, label4);
+            foreach (DataGridViewColumn column in dataGridFactura.Columns)
+            {
+                column.DefaultCellStyle.Padding = new Padding(0); // Ajusta según lo necesario
+            }
+            dataGridFactura.RowTemplate.Height = 40;
         }
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static extern IntPtr CreateRoundRectRgn

@@ -20,7 +20,7 @@ namespace Proyecto.Mysql
             {
                 Conexion objetoConexion = new Conexion();
                 conexion = objetoConexion.establecerConexion();
-                string query = "SELECT pro_cod as 'Codigo', pro_nom as 'Nombre', pro_cad as 'Caducidad', pro_cos as 'Costo', pro_pre as 'Precio', pro_can as 'Cantidad', bo_id as 'Bodega Id', pro_img FROM producto";
+                string query = "SELECT pro_cod as 'Codigo', pro_nom as 'Nombre', pro_cad as 'Caducidad', pro_cos as 'Costo', pro_pre as 'Precio', pro_can as 'Cantidad', pro_img FROM producto";
                 MySqlDataAdapter adapter = new MySqlDataAdapter(query, conexion);
                 DataTable dt = new DataTable();
                 adapter.Fill(dt);
