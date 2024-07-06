@@ -7,7 +7,7 @@ namespace Proyecto.Mysql
 {
     internal class Cdetalle
     {
-        public void MostrarDetalleFactura(DataGridView tablaDetalleFactura, TextBox fac_cod)
+        public void MostrarDetalleFactura(DataGridView tablaDetalleFactura, TextBox fac_cod, Label lblSubtotal, Label lblImpuesto, Label lblTotal)
         {
             MySqlConnection conexion = null;
             try
@@ -21,6 +21,7 @@ namespace Proyecto.Mysql
                                 p.pro_nom AS 'Nombre Producto',
                                 p.pro_pre AS 'Precio',
                                 df.fac_can AS 'Cantidad', 
+                                df.fac_sub AS 'Subtotal', 
                                 df.fac_impu AS 'Impuesto', 
                                 df.fac_total AS 'Total'
                          FROM detalle_factura df
@@ -35,6 +36,23 @@ namespace Proyecto.Mysql
                 adapter.Fill(dt);
 
                 tablaDetalleFactura.DataSource = dt;
+
+                // Calcular el subtotal, impuesto y total
+                decimal subtotal = 0;
+                decimal impuesto = 0;
+                decimal total = 0;
+
+                foreach (DataRow row in dt.Rows)
+                {
+                    subtotal += Convert.ToDecimal(row["Subtotal"]);
+                    impuesto += Convert.ToDecimal(row["Impuesto"]);
+                    total += Convert.ToDecimal(row["Total"]);
+                }
+
+                // Actualizar los labels con los valores calculados
+                lblSubtotal.Text = subtotal.ToString("C");
+                lblImpuesto.Text = impuesto.ToString("C");
+                lblTotal.Text = total.ToString("C");
             }
             catch (Exception ex)
             {
@@ -170,6 +188,7 @@ namespace Proyecto.Mysql
                     conexion.Close();
                 }
             }
+
         }
     }
 }

@@ -1,11 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using Proyecto.Forms1;
 using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Proyecto.Mysql
@@ -63,8 +58,8 @@ namespace Proyecto.Mysql
                 Conexion objetoConexion = new Conexion();
                 conexion = objetoConexion.establecerConexion();
 
-                string query = @"SELECT pro_nom AS NombreProducto, pro_pre AS Precio
-                                 FROM producto
+                string query = @"SELECT pro_nom, pro_pre 
+                                 FROM producto 
                                  WHERE pro_cod = @CodigoProducto";
 
                 using (MySqlCommand cmd = new MySqlCommand(query, conexion))
@@ -75,12 +70,12 @@ namespace Proyecto.Mysql
                     {
                         if (reader.Read())
                         {
-                            textBoxNombreProducto.Text = reader["NombreProducto"].ToString();
-                            numericUpDownPrecio.Value = Convert.ToDecimal(reader["Precio"]);
+                            textBoxNombreProducto.Text = reader["pro_nom"].ToString();
+                            numericUpDownPrecio.Value = Convert.ToDecimal(reader["pro_pre"]);
                         }
                         else
                         {
-                            //textBoxNombreProducto.Text = "";
+                            textBoxNombreProducto.Text = "";
                             numericUpDownPrecio.Value = 0;
                             MessageBox.Show("No se encontró ningún producto con el código especificado.");
                         }
@@ -99,7 +94,8 @@ namespace Proyecto.Mysql
                 }
             }
         }
-        public void InsertarFactura(DateTimePicker facFec, TextBox cliId, Label facTotal)
+
+        public void InsertarFactura(DateTimePicker dateTimePicker, TextBox textBoxClienteCodigo, Label labelTotalPagar)
         {
             MySqlConnection conexion = null;
             try
@@ -107,22 +103,16 @@ namespace Proyecto.Mysql
                 Conexion objetoConexion = new Conexion();
                 conexion = objetoConexion.establecerConexion();
 
-                string query = @"INSERT INTO factura (fac_fec, cli_id, fac_total)
-                         VALUES (@facFec, @cliId, @facTotal);
-                         SELECT LAST_INSERT_ID();"; // Obtener el último ID insertado
+                string query = "INSERT INTO factura (fac_fec, cli_id, fac_total) VALUES (@Fecha, @ClienteId, @TotalPagar)";
 
                 using (MySqlCommand cmd = new MySqlCommand(query, conexion))
                 {
-                    cmd.Parameters.AddWithValue("@facFec", facFec.Value);
-                    cmd.Parameters.AddWithValue("@cliId", cliId.Text.Trim());
-                    decimal facTotalValue = decimal.Parse(facTotal.Text.Replace("Total a Pagar: ", "").Trim(), System.Globalization.NumberStyles.Currency);
-                    cmd.Parameters.AddWithValue("@facTotal", facTotalValue);
+                    cmd.Parameters.AddWithValue("@Fecha", dateTimePicker.Value);
+                    cmd.Parameters.AddWithValue("@ClienteId", textBoxClienteCodigo.Text);
+                    cmd.Parameters.AddWithValue("@TotalPagar", decimal.Parse(labelTotalPagar.Text.Replace("Total a Pagar: ", "").Trim(), System.Globalization.NumberStyles.Currency));
 
-                    // Obtener el último ID insertado en la factura
-                    int facCod = Convert.ToInt32(cmd.ExecuteScalar());
-
-                    // Insertar detalle de la factura usando el último ID de factura obtenido
-                    //    InsertarDetalleFactura(facCod, FormFactura.dataGridFactura);
+                    cmd.ExecuteNonQuery();
+                    MessageBox.Show("Factura registrada exitosamente.");
                 }
             }
             catch (Exception ex)
@@ -138,8 +128,7 @@ namespace Proyecto.Mysql
             }
         }
 
-        // Método para insertar detalles de la factura
-        public void InsertarDetalleFactura(TextBox facCod, DataGridView dataGridView,decimal subtotal)
+        public void InsertarDetalleFactura(TextBox textBoxFacturaCodigo, DataGridView dataGridFactura)
         {
             MySqlConnection conexion = null;
             try
@@ -147,59 +136,30 @@ namespace Proyecto.Mysql
                 Conexion objetoConexion = new Conexion();
                 conexion = objetoConexion.establecerConexion();
 
-                string queryInsert = @"INSERT INTO detalle_factura (fac_cod, pro_cod, fac_can, fac_sub, fac_impu, fac_total)
-                               VALUES (@facCod, @proCod, @facCan, @facSub, @facImpu, @facTotal)";
+                string query = "INSERT INTO detalle_factura (fac_cod, pro_cod, fac_can, fac_sub, fac_impu, fac_total) VALUES (@FacturaCodigo, @ProductoCodigo, @Cantidad, @Subtotal, @Impuesto, @Total)";
 
-                string queryUpdate = @"UPDATE producto 
-                               SET pro_can = pro_can - @facCan 
-                               WHERE pro_cod = @proCod";
-
-                using (MySqlTransaction transaction = conexion.BeginTransaction())
+                using (MySqlCommand cmd = new MySqlCommand(query, conexion))
                 {
-                    try
+                    foreach (DataGridViewRow row in dataGridFactura.Rows)
                     {
-                        foreach (DataGridViewRow row in dataGridView.Rows)
+                        if (row.Cells["codigoProducto"].Value != null && row.Cells["cantidad"].Value != null && row.Cells["Subtotal"].Value != null && row.Cells["impuesto"].Value != null && row.Cells["total"].Value != null)
                         {
-                            int proCod = Convert.ToInt32(row.Cells["CodigoProducto"].Value);
-                            int facCan = Convert.ToInt32(row.Cells["Cantidad"].Value);
-                            // Obtener el subtotal desde el Label en lugar de DataGridView
-                            decimal facSub = subtotal;
-                            decimal facImpu = Convert.ToDecimal(row.Cells["Impuesto"].Value);
-                            decimal facTotal = Convert.ToDecimal(row.Cells["Total"].Value);
+                            cmd.Parameters.Clear();
+                            cmd.Parameters.AddWithValue("@FacturaCodigo", textBoxFacturaCodigo.Text);
+                            cmd.Parameters.AddWithValue("@ProductoCodigo", row.Cells["codigoProducto"].Value);
+                            cmd.Parameters.AddWithValue("@Cantidad", row.Cells["cantidad"].Value);
+                            cmd.Parameters.AddWithValue("@Subtotal", row.Cells["Subtotal"].Value);
+                            cmd.Parameters.AddWithValue("@Impuesto", row.Cells["impuesto"].Value);
+                            cmd.Parameters.AddWithValue("@Total", row.Cells["total"].Value);
 
-                            using (MySqlCommand cmdInsert = new MySqlCommand(queryInsert, conexion, transaction))
-                            {
-                                cmdInsert.Parameters.AddWithValue("@facCod", facCod.Text);
-                                cmdInsert.Parameters.AddWithValue("@proCod", proCod);
-                                cmdInsert.Parameters.AddWithValue("@facCan", facCan);
-                                cmdInsert.Parameters.AddWithValue("@facSub", facSub);
-                                cmdInsert.Parameters.AddWithValue("@facImpu", facImpu);
-                                cmdInsert.Parameters.AddWithValue("@facTotal", facTotal);
-
-                                cmdInsert.ExecuteNonQuery();
-                            }
-
-                            using (MySqlCommand cmdUpdate = new MySqlCommand(queryUpdate, conexion, transaction))
-                            {
-                                cmdUpdate.Parameters.AddWithValue("@facCan", facCan);
-                                cmdUpdate.Parameters.AddWithValue("@proCod", proCod);
-
-                                cmdUpdate.ExecuteNonQuery();
-                            }
+                            cmd.ExecuteNonQuery();
                         }
-
-                        transaction.Commit();
-                    }
-                    catch (Exception ex)
-                    {
-                        transaction.Rollback();
-                        throw; // Re-throw the exception to be caught by the outer catch block
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al insertar detalle de la factura: " + ex.Message);
+                MessageBox.Show("Error al insertar los detalles de la factura: " + ex.Message);
             }
             finally
             {
@@ -209,18 +169,5 @@ namespace Proyecto.Mysql
                 }
             }
         }
-        private bool DetallesInsertadosParaFactura(MySqlConnection conexion, int facCod)
-        {
-            string query = "SELECT COUNT(*) FROM detalle_factura WHERE fac_cod = @facCod";
-            MySqlCommand cmd = new MySqlCommand(query, conexion);
-            cmd.Parameters.AddWithValue("@facCod", facCod);
-
-            int count = Convert.ToInt32(cmd.ExecuteScalar());
-            return count > 0; // Devuelve true si ya hay detalles insertados para esta factura
-        }
-
-
     }
-
 }
-

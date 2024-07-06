@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Proyecto.Forms1
@@ -37,7 +30,7 @@ namespace Proyecto.Forms1
             numericUpDown4.Value = total;
 
             // Agregar una nueva fila al DataGridView
-            dataGridFactura.Rows.Add(codigoProducto, nombreProducto, cantidad, precio, impuesto, total);
+            dataGridFactura.Rows.Add(codigoProducto, nombreProducto, cantidad, precio, subtotal, impuesto, total);
 
             // Actualizar el total a pagar, el subtotal y el total del impuesto
             ActualizarTotalPagar();
@@ -69,11 +62,9 @@ namespace Proyecto.Forms1
 
             foreach (DataGridViewRow row in dataGridFactura.Rows)
             {
-                if (row.Cells["cantidad"].Value != null && row.Cells["precio"].Value != null)
+                if (row.Cells["Subtotal"].Value != null)
                 {
-                    int cantidad = Convert.ToInt32(row.Cells["cantidad"].Value);
-                    decimal precio = Convert.ToDecimal(row.Cells["precio"].Value);
-                    subtotal += cantidad * precio;
+                    subtotal += Convert.ToDecimal(row.Cells["Subtotal"].Value);
                 }
             }
 
@@ -97,6 +88,7 @@ namespace Proyecto.Forms1
             //label impuesto
             labelImp.Text = "Total Impuesto: " + totalImpuesto.ToString("C"); // Mostrar el total del impuesto en el label
         }
+
         private void ConfigurarDataGridView()
         {
             // Agregar columnas al DataGridView manualmente
@@ -104,6 +96,7 @@ namespace Proyecto.Forms1
             dataGridFactura.Columns.Add("nombreProducto", "Nombre de Producto");
             dataGridFactura.Columns.Add("cantidad", "Cantidad");
             dataGridFactura.Columns.Add("precio", "Precio");
+            dataGridFactura.Columns.Add("Subtotal", "Subtotal");
             dataGridFactura.Columns.Add("impuesto", "Impuesto");
             dataGridFactura.Columns.Add("total", "Total");
         }
@@ -165,7 +158,7 @@ namespace Proyecto.Forms1
             objetoFactura.InsertarFactura(dateTimePicker1, textBox2, label20);
 
             // Llamar al método para insertar el detalle de la factura
-            objetoFactura.InsertarDetalleFactura(textBox1, dataGridFactura, subtotal);
+            objetoFactura.InsertarDetalleFactura(textBox1, dataGridFactura);
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
@@ -173,6 +166,7 @@ namespace Proyecto.Forms1
             Mysql.Cfactura objetoFactura = new Mysql.Cfactura();
             objetoFactura.BuscarClientePorCodigo(textBox2, textBox3);
         }
+
         private void FormFactura_Load(object sender, EventArgs e)
         {
             numericUpDown3.Enabled = false;
