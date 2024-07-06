@@ -151,14 +151,11 @@ namespace Proyecto.Forms1
             }
             decimal subtotal = decimal.Parse(labelSub.Text.Replace("Subtotal: ", "").Trim(), System.Globalization.NumberStyles.Currency);
 
-            //Informacion de Cfactura
+            // Informacion de Cfactura
             Mysql.Cfactura objetoFactura = new Mysql.Cfactura();
 
             // Llamar al método para insertar la factura
-            objetoFactura.InsertarFactura(dateTimePicker1, textBox2, label20);
-
-            // Llamar al método para insertar el detalle de la factura
-            objetoFactura.InsertarDetalleFactura(textBox1, dataGridFactura);
+            objetoFactura.InsertarFactura(dateTimePicker1, textBox2, label20, dataGridFactura);
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)

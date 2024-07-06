@@ -95,7 +95,7 @@ namespace Proyecto.Mysql
             }
         }
 
-        public void InsertarFactura(DateTimePicker dateTimePicker, TextBox textBoxClienteCodigo, Label labelTotalPagar)
+        public void InsertarFactura(DateTimePicker dateTimePicker, TextBox textBoxClienteCodigo, Label labelTotalPagar, DataGridView dataGridFactura)
         {
             MySqlConnection conexion = null;
             try
@@ -103,6 +103,32 @@ namespace Proyecto.Mysql
                 Conexion objetoConexion = new Conexion();
                 conexion = objetoConexion.establecerConexion();
 
+                // Verificar el stock de los productos antes de insertar la factura
+                foreach (DataGridViewRow row in dataGridFactura.Rows)
+                {
+                    if (row.Cells["codigoProducto"].Value != null && row.Cells["cantidad"].Value != null)
+                    {
+                        string codigoProducto = row.Cells["codigoProducto"].Value.ToString();
+                        int cantidadSolicitada = Convert.ToInt32(row.Cells["cantidad"].Value);
+
+                        string stockQuery = "SELECT pro_can FROM producto WHERE pro_cod = @ProductoCodigo";
+
+                        using (MySqlCommand cmdStock = new MySqlCommand(stockQuery, conexion))
+                        {
+                            cmdStock.Parameters.AddWithValue("@ProductoCodigo", codigoProducto);
+
+                            int stockDisponible = Convert.ToInt32(cmdStock.ExecuteScalar());
+
+                            if (stockDisponible < cantidadSolicitada)
+                            {
+                                MessageBox.Show($"No hay suficiente stock para el producto con código {codigoProducto}. Stock disponible: {stockDisponible}");
+                                return; // Salir del método sin insertar la factura
+                            }
+                        }
+                    }
+                }
+
+                // Insertar la factura
                 string query = "INSERT INTO factura (fac_fec, cli_id, fac_total) VALUES (@Fecha, @ClienteId, @TotalPagar)";
 
                 using (MySqlCommand cmd = new MySqlCommand(query, conexion))
@@ -113,6 +139,12 @@ namespace Proyecto.Mysql
 
                     cmd.ExecuteNonQuery();
                     MessageBox.Show("Factura registrada exitosamente.");
+
+                    // Obtener el código de la factura recién insertada
+                    string facturaCodigo = cmd.LastInsertedId.ToString();
+
+                    // Insertar detalles de la factura
+                    InsertarDetalleFactura(facturaCodigo, dataGridFactura, conexion);
                 }
             }
             catch (Exception ex)
@@ -128,45 +160,46 @@ namespace Proyecto.Mysql
             }
         }
 
-        public void InsertarDetalleFactura(TextBox textBoxFacturaCodigo, DataGridView dataGridFactura)
+        public void InsertarDetalleFactura(string facturaCodigo, DataGridView dataGridFactura, MySqlConnection conexion)
         {
-            MySqlConnection conexion = null;
             try
             {
-                Conexion objetoConexion = new Conexion();
-                conexion = objetoConexion.establecerConexion();
+                string insertQuery = "INSERT INTO detalle_factura (fac_cod, pro_cod, fac_can, fac_sub, fac_impu, fac_total) VALUES (@FacturaCodigo, @ProductoCodigo, @Cantidad, @Subtotal, @Impuesto, @Total)";
+                string updateQuery = "UPDATE producto SET pro_can = pro_can - @Cantidad WHERE pro_cod = @ProductoCodigo";
 
-                string query = "INSERT INTO detalle_factura (fac_cod, pro_cod, fac_can, fac_sub, fac_impu, fac_total) VALUES (@FacturaCodigo, @ProductoCodigo, @Cantidad, @Subtotal, @Impuesto, @Total)";
-
-                using (MySqlCommand cmd = new MySqlCommand(query, conexion))
+                using (MySqlCommand cmdInsert = new MySqlCommand(insertQuery, conexion))
+                using (MySqlCommand cmdUpdate = new MySqlCommand(updateQuery, conexion))
                 {
                     foreach (DataGridViewRow row in dataGridFactura.Rows)
                     {
                         if (row.Cells["codigoProducto"].Value != null && row.Cells["cantidad"].Value != null && row.Cells["Subtotal"].Value != null && row.Cells["impuesto"].Value != null && row.Cells["total"].Value != null)
                         {
-                            cmd.Parameters.Clear();
-                            cmd.Parameters.AddWithValue("@FacturaCodigo", textBoxFacturaCodigo.Text);
-                            cmd.Parameters.AddWithValue("@ProductoCodigo", row.Cells["codigoProducto"].Value);
-                            cmd.Parameters.AddWithValue("@Cantidad", row.Cells["cantidad"].Value);
-                            cmd.Parameters.AddWithValue("@Subtotal", row.Cells["Subtotal"].Value);
-                            cmd.Parameters.AddWithValue("@Impuesto", row.Cells["impuesto"].Value);
-                            cmd.Parameters.AddWithValue("@Total", row.Cells["total"].Value);
+                            int cantidad = Convert.ToInt32(row.Cells["cantidad"].Value);
 
-                            cmd.ExecuteNonQuery();
+                            // Insertar detalle factura
+                            cmdInsert.Parameters.Clear();
+                            cmdInsert.Parameters.AddWithValue("@FacturaCodigo", facturaCodigo);
+                            cmdInsert.Parameters.AddWithValue("@ProductoCodigo", row.Cells["codigoProducto"].Value);
+                            cmdInsert.Parameters.AddWithValue("@Cantidad", cantidad);
+                            cmdInsert.Parameters.AddWithValue("@Subtotal", row.Cells["Subtotal"].Value);
+                            cmdInsert.Parameters.AddWithValue("@Impuesto", row.Cells["impuesto"].Value);
+                            cmdInsert.Parameters.AddWithValue("@Total", row.Cells["total"].Value);
+
+                            cmdInsert.ExecuteNonQuery();
+
+                            // Actualizar cantidad de producto
+                            cmdUpdate.Parameters.Clear();
+                            cmdUpdate.Parameters.AddWithValue("@ProductoCodigo", row.Cells["codigoProducto"].Value);
+                            cmdUpdate.Parameters.AddWithValue("@Cantidad", cantidad);
+
+                            cmdUpdate.ExecuteNonQuery();
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al insertar los detalles de la factura: " + ex.Message);
-            }
-            finally
-            {
-                if (conexion != null)
-                {
-                    conexion.Close();
-                }
+                MessageBox.Show("Error al insertar los detalles de la factura y actualizar las cantidades de productos: " + ex.Message);
             }
         }
     }
