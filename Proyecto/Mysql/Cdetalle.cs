@@ -102,7 +102,7 @@ namespace Proyecto.Mysql
             }
         }
 
-        public void BuscarFacturaPorId(DataGridView tablaFactura, TextBox idFactura)
+        public void BuscarFacturaPorFiltros(DataGridView tablaFactura, TextBox textBoxFiltro, ComboBox comboBoxFiltro)
         {
             MySqlConnection conexion = null;
             try
@@ -110,16 +110,47 @@ namespace Proyecto.Mysql
                 Conexion objetoConexion = new Conexion();
                 conexion = objetoConexion.establecerConexion();
 
-                // Query para buscar facturas por su código y mostrar nombre completo del cliente concatenado
+                // Construir la consulta base
                 string query = "SELECT fac_cod as 'Código Factura', fac_fec as 'Fecha', " +
                                "CONCAT(cli_pnom, ' ', IFNULL(cli_snom, ''), ' ', cli_pape, ' ', IFNULL(cli_sape, '')) AS 'Cliente', " +
                                "fac_total as 'Total' " +
                                "FROM factura " +
-                               "INNER JOIN cliente ON factura.cli_id = cliente.cli_cod " +  // Join con la tabla cliente para obtener el nombre completo
-                               "WHERE fac_cod = @idFactura";
+                               "INNER JOIN cliente ON factura.cli_id = cliente.cli_cod " +
+                               "WHERE 1=1";
+
+                // Mensaje de depuración para el filtro seleccionado
+             //   MessageBox.Show("Filtro seleccionado: " + comboBoxFiltro.SelectedItem.ToString());
+
+                // Determinar el filtro basado en la selección del ComboBox
+                if (comboBoxFiltro.SelectedItem.ToString() == "Nombre del cliente" && !string.IsNullOrWhiteSpace(textBoxFiltro.Text))
+                {
+                    query += " AND CONCAT(cli_pnom, ' ', IFNULL(cli_snom, ''), ' ', cli_pape, ' ', IFNULL(cli_sape, '')) LIKE @filtro";
+                }
+                else if (comboBoxFiltro.SelectedItem.ToString() == "Codigo Factura" && !string.IsNullOrWhiteSpace(textBoxFiltro.Text))
+                {
+                    query += " AND fac_cod = @filtro";
+                }
 
                 MySqlCommand command = new MySqlCommand(query, conexion);
-                command.Parameters.AddWithValue("@idFactura", idFactura.Text.Trim());
+
+                // Asignar valores a los parámetros
+                if (!string.IsNullOrWhiteSpace(textBoxFiltro.Text))
+                {
+                    if (comboBoxFiltro.SelectedItem.ToString() == "Nombre del cliente")
+                    {
+                        command.Parameters.AddWithValue("@filtro", "%" + textBoxFiltro.Text.Trim() + "%");
+                    }
+                    else if (comboBoxFiltro.SelectedItem.ToString() == "Codigo Factura")
+                    {
+                        command.Parameters.AddWithValue("@filtro", textBoxFiltro.Text.Trim());
+                    }
+
+                    // Mensaje de depuración para el valor del filtro
+             //       MessageBox.Show("Valor del filtro: " + textBoxFiltro.Text.Trim());
+                }
+
+                // Mensaje de depuración para la consulta SQL
+                //MessageBox.Show("Consulta SQL: " + command.CommandText);
 
                 // Adaptador para llenar los datos en un DataTable
                 MySqlDataAdapter adapter = new MySqlDataAdapter(command);
@@ -145,6 +176,8 @@ namespace Proyecto.Mysql
                 }
             }
         }
+
+
 
         public void eliminarFactura(TextBox codFactura)
         {

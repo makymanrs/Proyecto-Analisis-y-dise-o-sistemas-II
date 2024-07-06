@@ -62,19 +62,18 @@ namespace Proyecto.Forms1
               ActualizarConteoRegistros();
         }
 
-        private void button5_Click(object sender, EventArgs e)
+       public void listas()
         {
-            Mysql.Cdetalle objetoDetalle = new Mysql.Cdetalle();
-            objetoDetalle.eliminarFactura(textBox1);
-            Mysql.Cdetalle historialfactura = new Mysql.Cdetalle();
-            historialfactura.MostrarFactura(dataGridViewFactura);
-            ActualizarConteoRegistros();
+            comboBox1.Items.Add("Ninguno");
+            comboBox1.Items.Add("Codigo Factura");
+            comboBox1.Items.Add("Nombre del cliente");
+            comboBox1.SelectedIndex = 0;
         }
 
         private void button1_Click_1(object sender, EventArgs e)
         {
             Mysql.Cdetalle objetoDetalle = new Mysql.Cdetalle();
-            objetoDetalle.BuscarFacturaPorId(dataGridViewFactura, textBox1);
+            objetoDetalle.BuscarFacturaPorFiltros(dataGridViewFactura,textBox1 ,comboBox1);
             ActualizarConteoRegistros();
         }
 
@@ -85,6 +84,19 @@ namespace Proyecto.Forms1
             Mysql.Cdetalle historialfactura = new Mysql.Cdetalle();
             historialfactura.MostrarFactura(dataGridViewFactura);
             ActualizarConteoRegistros();
+        }
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Mysql.Cdetalle objetoDetalle = new Mysql.Cdetalle();
+            objetoDetalle.eliminarFactura(textBox1);
+            Mysql.Cdetalle historialfactura = new Mysql.Cdetalle();
+            historialfactura.MostrarFactura(dataGridViewFactura);
+            ActualizarConteoRegistros();
+        }
+
+        private void FormHistorial_Load(object sender, EventArgs e)
+        {
+            listas();
         }
     }
 }
