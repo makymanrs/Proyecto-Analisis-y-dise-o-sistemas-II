@@ -124,15 +124,20 @@ namespace Proyecto.Forms1
                         // Calcular el saldo después del pago
                         decimal saldo = totalAPagar - montoAPagar;
 
-                        // Mostrar el saldo en labelDev
-                        if (saldo >= 0)
+                        if (saldo > 0)
                         {
-                            labelDev.Text = "Devolución: " + saldo.ToString("C");
+                            // Si el monto a pagar en efectivo es menor que el total a pagar
+                            DialogResult result = MessageBox.Show("El monto a pagar es menor al total. ¿Desea guardar el crédito?", "Confirmación de Crédito", MessageBoxButtons.YesNo);
+                            if (result == DialogResult.Yes)
+                            {
+                                // Insertar la factura y guardar el crédito
+                                GuardarFacturaYCredito(montoAPagar, saldo);
+                            }
                         }
                         else
                         {
-                            decimal devolucion = Math.Abs(saldo);
-                            labelDev.Text = "Devolución: " + devolucion.ToString("C");
+                            // Si el monto a pagar en efectivo es igual o mayor al total a pagar
+                            GuardarFactura(montoAPagar, saldo);
                         }
                     }
                     else
@@ -149,13 +154,36 @@ namespace Proyecto.Forms1
             {
                 MessageBox.Show("Ingrese un monto válido en textBox9.");
             }
+        }
+
+        private void GuardarFactura(decimal montoAPagar, decimal saldo)
+        {
             decimal subtotal = decimal.Parse(labelSub.Text.Replace("Subtotal: ", "").Trim(), System.Globalization.NumberStyles.Currency);
 
-            // Informacion de Cfactura
+            // Información de Cfactura
             Mysql.Cfactura objetoFactura = new Mysql.Cfactura();
 
             // Llamar al método para insertar la factura
             objetoFactura.InsertarFactura(dateTimePicker1, textBox2, label20, dataGridFactura);
+
+            MessageBox.Show("Factura registrada exitosamente.");
+            // Aquí puedes agregar cualquier lógica adicional necesaria para manejar pagos sin crédito
+        }
+
+        private void GuardarFacturaYCredito(decimal montoAPagar, decimal saldo)
+        {
+            decimal subtotal = decimal.Parse(labelSub.Text.Replace("Subtotal: ", "").Trim(), System.Globalization.NumberStyles.Currency);
+
+            // Información de Cfactura
+            Mysql.Cfactura objetoFactura = new Mysql.Cfactura();
+
+            // Llamar al método para insertar la factura y obtener el código de factura recién insertado
+            string facturaCodigo = objetoFactura.InsertarFactura(dateTimePicker1, textBox2, label20, dataGridFactura);
+
+            // Insertar el crédito asociado a la factura
+            objetoFactura.InsertarCredito(facturaCodigo, saldo);
+
+            MessageBox.Show("Factura registrada con crédito exitosamente.");
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)

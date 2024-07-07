@@ -318,7 +318,7 @@ namespace Proyecto
 
         private void button5_Click(object sender, EventArgs e)
         {
-            //OpenChildForm(new Forms1.FormProducto(), sender);
+            OpenChildForm(new Forms1.FormCredito(), sender);
         }
 
         private void button6_Click_1(object sender, EventArgs e)

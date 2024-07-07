@@ -176,9 +176,6 @@ namespace Proyecto.Mysql
                 }
             }
         }
-
-
-
         public void eliminarFactura(TextBox codFactura)
         {
             MySqlConnection conexion = null;

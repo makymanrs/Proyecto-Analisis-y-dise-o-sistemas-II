@@ -95,9 +95,42 @@ namespace Proyecto.Mysql
             }
         }
 
-        public void InsertarFactura(DateTimePicker dateTimePicker, TextBox textBoxClienteCodigo, Label labelTotalPagar, DataGridView dataGridFactura)
+        public void InsertarCredito(string facturaCodigo, decimal saldo)
         {
             MySqlConnection conexion = null;
+            try
+            {
+                Conexion objetoConexion = new Conexion();
+                conexion = objetoConexion.establecerConexion();
+
+                string query = "INSERT INTO credito (fac_cod, cre_monto) VALUES (@FacturaCodigo, @MontoCredito)";
+
+                using (MySqlCommand cmd = new MySqlCommand(query, conexion))
+                {
+                    cmd.Parameters.AddWithValue("@FacturaCodigo", facturaCodigo);
+                    cmd.Parameters.AddWithValue("@MontoCredito", saldo);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al insertar el crédito: " + ex.Message);
+            }
+            finally
+            {
+                if (conexion != null)
+                {
+                    conexion.Close();
+                }
+            }
+        }
+
+        // Modificar el método InsertarFactura para devolver el código de la factura recién insertada
+        public string InsertarFactura(DateTimePicker dateTimePicker, TextBox textBoxClienteCodigo, Label labelTotalPagar, DataGridView dataGridFactura)
+        {
+            MySqlConnection conexion = null;
+            string facturaCodigo = string.Empty;
             try
             {
                 Conexion objetoConexion = new Conexion();
@@ -122,7 +155,7 @@ namespace Proyecto.Mysql
                             if (stockDisponible < cantidadSolicitada)
                             {
                                 MessageBox.Show($"No hay suficiente stock para el producto con código {codigoProducto}. Stock disponible: {stockDisponible}");
-                                return; // Salir del método sin insertar la factura
+                                return string.Empty; // Salir del método sin insertar la factura
                             }
                         }
                     }
@@ -138,10 +171,9 @@ namespace Proyecto.Mysql
                     cmd.Parameters.AddWithValue("@TotalPagar", decimal.Parse(labelTotalPagar.Text.Replace("Total a Pagar: ", "").Trim(), System.Globalization.NumberStyles.Currency));
 
                     cmd.ExecuteNonQuery();
-                    MessageBox.Show("Factura registrada exitosamente.");
 
                     // Obtener el código de la factura recién insertada
-                    string facturaCodigo = cmd.LastInsertedId.ToString();
+                    facturaCodigo = cmd.LastInsertedId.ToString();
 
                     // Insertar detalles de la factura
                     InsertarDetalleFactura(facturaCodigo, dataGridFactura, conexion);
@@ -158,6 +190,7 @@ namespace Proyecto.Mysql
                     conexion.Close();
                 }
             }
+            return facturaCodigo;
         }
 
         public void InsertarDetalleFactura(string facturaCodigo, DataGridView dataGridFactura, MySqlConnection conexion)

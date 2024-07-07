@@ -100,6 +100,12 @@
     <Compile Include="Forms1\FormCliente.Designer.cs">
       <DependentUpon>FormCliente.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms1\FormCredito.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms1\FormCredito.Designer.cs">
+      <DependentUpon>FormCredito.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms1\FormFactura.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -168,6 +174,7 @@
     </Compile>
     <Compile Include="Mysql\Cbodega.cs" />
     <Compile Include="Mysql\CCliente.cs" />
+    <Compile Include="Mysql\Ccredito.cs" />
     <Compile Include="Mysql\Cdetalle.cs" />
     <Compile Include="Mysql\Cfactura.cs" />
     <Compile Include="Mysql\Conexion.cs" />
@@ -200,6 +207,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms1\FormCliente.resx">
       <DependentUpon>FormCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms1\FormCredito.resx">
+      <DependentUpon>FormCredito.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms1\FormFactura.resx">
       <DependentUpon>FormFactura.cs</DependentUpon>
