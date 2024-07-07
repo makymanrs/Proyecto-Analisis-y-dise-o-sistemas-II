@@ -51,6 +51,61 @@ namespace Proyecto.Mysql
                 }
             }
         }
+        public DataRow buscarCredito(int id)
+        {
+            MySqlConnection conexion = null;
+            try
+            {
+                Conexion objetoConexion = new Conexion();
+                conexion = objetoConexion.establecerConexion();
+
+                string query = @"SELECT 
+                            cre.cre_cod,
+                            CONCAT(c.cli_pnom, ' ', IFNULL(c.cli_snom, ''), ' ', c.cli_pape, ' ', IFNULL(c.cli_sape, '')) AS 'Nombre Cliente',
+                            cre.cre_monto
+                         FROM 
+                            credito cre
+                         JOIN 
+                            factura f ON cre.fac_cod = f.fac_cod
+                         JOIN 
+                            cliente c ON f.cli_id = c.cli_cod
+                         WHERE 
+                            cre.cre_cod = @id";
+
+                MySqlCommand command = new MySqlCommand(query, conexion);
+                command.Parameters.AddWithValue("@id", id);
+
+                MySqlDataAdapter adapter = new MySqlDataAdapter(command);
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+
+                if (dt.Rows.Count > 0)
+                {
+                    return dt.Rows[0]; // Devuelve la primera fila encontrada
+                }
+                else
+                {
+                    return null; // No se encontraron resultados
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al buscar crédito: " + ex.Message);
+                return null;
+            }
+            finally
+            {
+                if (conexion != null)
+                {
+                    conexion.Close();
+                }
+            }
+        }
+
+
+
+
+
 
 
     }

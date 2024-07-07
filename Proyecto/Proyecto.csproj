@@ -136,6 +136,12 @@
     <Compile Include="Forms1\FormProveedor.Designer.cs">
       <DependentUpon>FormProveedor.cs</DependentUpon>
     </Compile>
+    <Compile Include="HistorialCredito\FormActualizarCredito.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HistorialCredito\FormActualizarCredito.Designer.cs">
+      <DependentUpon>FormActualizarCredito.cs</DependentUpon>
+    </Compile>
     <Compile Include="HistorialCredito\FormHistorialDetalles.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -225,6 +231,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms1\FormProveedor.resx">
       <DependentUpon>FormProveedor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HistorialCredito\FormActualizarCredito.resx">
+      <DependentUpon>FormActualizarCredito.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HistorialCredito\FormHistorialDetalles.resx">
       <DependentUpon>FormHistorialDetalles.cs</DependentUpon>
