@@ -102,11 +102,49 @@ namespace Proyecto.Mysql
             }
         }
 
+        public void actualizarCredito(TextBox cre_cod, decimal abono, DateTime fechaPagado)
+        {
+            MySqlConnection conexion = null;
+            try
+            {
+                Conexion objetoConexion = new Conexion();
+                conexion = objetoConexion.establecerConexion();
 
+                // Obtener el monto actual
+                string querySelect = "SELECT cre_monto FROM credito WHERE cre_cod = @cre_cod";
+                MySqlCommand commandSelect = new MySqlCommand(querySelect, conexion);
+                commandSelect.Parameters.AddWithValue("@cre_cod", cre_cod.Text);
+                decimal montoActual = Convert.ToDecimal(commandSelect.ExecuteScalar());
 
+                // Calcular el nuevo monto
+                decimal nuevoMonto = montoActual - abono;
 
+                // Actualizar el crédito
+                string queryUpdate = @"UPDATE credito 
+                               SET cre_monto = @nuevoMonto, 
+                                   cre_fecpagado = @fechaPagado,
+                                   cre_pagado = @pagado
+                               WHERE cre_cod = @cre_cod";
+                MySqlCommand commandUpdate = new MySqlCommand(queryUpdate, conexion);
+                commandUpdate.Parameters.AddWithValue("@nuevoMonto", nuevoMonto);
+                commandUpdate.Parameters.AddWithValue("@fechaPagado", fechaPagado);
+                commandUpdate.Parameters.AddWithValue("@pagado", nuevoMonto <= 0);
+                commandUpdate.Parameters.AddWithValue("@cre_cod", cre_cod.Text);
 
-
+                commandUpdate.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al actualizar crédito: " + ex.Message);
+            }
+            finally
+            {
+                if (conexion != null)
+                {
+                    conexion.Close();
+                }
+            }
+        }
 
     }
 }

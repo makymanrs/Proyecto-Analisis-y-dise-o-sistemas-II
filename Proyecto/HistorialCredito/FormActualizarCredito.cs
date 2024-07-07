@@ -60,7 +60,17 @@ namespace Proyecto.HistorialCredito
 
         private void button2_Click(object sender, EventArgs e)
         {
+           
+                decimal abono = numericUpDown2.Value;
+                DateTime fechaPagado = dateTimePicker1.Value;
 
+                Mysql.Ccredito objetoCredito = new Mysql.Ccredito();
+                objetoCredito.actualizarCredito(textBox1, abono, fechaPagado);
+
+                // Actualizar el DataGridView después de la actualización
+                //ActualizarDataGridView();
+            
         }
+       
     }
 }

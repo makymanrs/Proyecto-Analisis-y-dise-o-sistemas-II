@@ -43,8 +43,8 @@ namespace Proyecto.Forms1
                 FormBG.Dispose();
             }
             //Actualizar el DataGridView y el conteo de registros
-            Mysql.CCliente objetoCliente = new Mysql.CCliente();
-            //objetoCliente.mostrarCliente(dataGridCliente);
+            Mysql.Ccredito objetoCredito = new Mysql.Ccredito();
+            objetoCredito.mostrarCredito(dataGridViewCredito);
             //ActualizarConteoRegistros();
         }
     }
