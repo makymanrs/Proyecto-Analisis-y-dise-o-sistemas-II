@@ -74,12 +74,13 @@ namespace Proyecto.Mysql
                 Conexion objetoConexion = new Conexion();
                 conexion = objetoConexion.establecerConexion();
 
-                // Consulta SQL para obtener los datos de la factura con alias para las columnas
+                // Consulta SQL para obtener los datos de la factura con alias para las columnas, ordenada por código de factura ascendente
                 string query = "SELECT fac_cod as 'Código Factura', fac_fec as 'Fecha', " +
                                "CONCAT(cli_pnom, ' ', cli_snom, ' ', cli_pape, ' ', cli_sape) as 'Cliente', " +
                                "fac_total as 'Total' " +
                                "FROM factura " +
-                               "INNER JOIN cliente ON factura.cli_id = cliente.cli_cod";
+                               "INNER JOIN cliente ON factura.cli_id = cliente.cli_cod " +
+                               "ORDER BY fac_cod ASC";
 
                 MySqlCommand cmd = new MySqlCommand(query, conexion);
 

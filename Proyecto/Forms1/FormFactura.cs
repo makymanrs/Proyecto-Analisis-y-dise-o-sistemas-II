@@ -244,5 +244,27 @@ namespace Proyecto.Forms1
                 button3.Focus();
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            // Verificar si hay una fila seleccionada
+            if (dataGridFactura.SelectedRows.Count > 0)
+            {
+                // Eliminar la fila seleccionada
+                foreach (DataGridViewRow row in dataGridFactura.SelectedRows)
+                {
+                    dataGridFactura.Rows.Remove(row);
+                }
+
+                // Actualizar los totales después de eliminar la fila
+                ActualizarTotalPagar();
+                ActualizarSubtotal();
+                ActualizarTotalImpuesto();
+            }
+            else
+            {
+                MessageBox.Show("Seleccione una fila para eliminar.");
+            }
+        }
     }
 }
