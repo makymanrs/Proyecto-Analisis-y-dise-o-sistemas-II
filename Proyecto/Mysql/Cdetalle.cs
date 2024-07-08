@@ -219,7 +219,31 @@ namespace Proyecto.Mysql
                     conexion.Close();
                 }
             }
-
+        }
+        public void selecciondarDetalle(DataGridView tablaDetalle, TextBox textboxdetalleoId)
+        {
+            try
+            {
+                // Obtener el índice de la columna seleccionada
+                int columnIndex = tablaDetalle.CurrentCell.ColumnIndex;
+                if (columnIndex == 0)
+                {
+                    textboxdetalleoId.Text = tablaDetalle.CurrentRow.Cells[0].Value.ToString();
+                }
+                else if (columnIndex == 2)
+                {
+                    textboxdetalleoId.Text = tablaDetalle.CurrentRow.Cells[2].Value.ToString();
+                }
+                else
+                {
+                    // Puedes manejar el caso cuando no es ninguna de las columnas deseadas
+                    MessageBox.Show("No se seleccionó una columna válida.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("No se logró seleccionar, error: " + ex.ToString());
+            }
         }
     }
 }

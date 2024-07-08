@@ -124,5 +124,11 @@ namespace Proyecto.Forms1
             objetoProveedor.mostrarProveedor(dataGridProveedor);
             ActualizarConteoRegistros(); // Actualizar el conteo de registros después de mostrar proveedores
         }
+
+        private void dataGridProveedor_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            Mysql.Cproveedor objetoProveedor = new Mysql.Cproveedor();
+            objetoProveedor.seleccionarProveedor(dataGridProveedor, textBox1);
+        }
     }
 }

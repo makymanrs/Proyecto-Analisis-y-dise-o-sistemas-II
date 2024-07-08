@@ -25,6 +25,7 @@ namespace Proyecto.Forms1
                 column.DefaultCellStyle.Padding = new Padding(0); // Ajusta según lo necesario
             }
             dataGridCliente.RowTemplate.Height = 40;
+            dataGridCliente.ReadOnly = true;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -122,6 +123,12 @@ namespace Proyecto.Forms1
             Mysql.CCliente objetoCliente = new Mysql.CCliente();
             objetoCliente.mostrarCliente(dataGridCliente);
             ActualizarConteoRegistros();
+        }
+
+        private void dataGridCliente_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            Mysql.CCliente objetoCliente = new Mysql.CCliente();
+            objetoCliente.seleccionarCliente(dataGridCliente, textBox1);
         }
     }
 }

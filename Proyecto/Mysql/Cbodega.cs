@@ -379,6 +379,18 @@ namespace Proyecto.Mysql
                 // No se invoca excelApp.Quit() ni se libera el objeto excelApp
             }
         }
+        public void seleccionarBodega(DataGridView tablaBodega, TextBox textBoxBodegaId)
+        {
+            try
+            {
+                // Asume que la columna del ID de bodega es la primera columna (índice 0)
+                textBoxBodegaId.Text = tablaBodega.CurrentRow.Cells[0].Value.ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("No se logró seleccionar, error: " + ex.ToString());
+            }
+        }
 
     }
 }

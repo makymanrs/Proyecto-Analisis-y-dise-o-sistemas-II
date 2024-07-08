@@ -246,6 +246,18 @@ namespace Proyecto.Mysql
                 }
             }
         }
-       
+        public void seleccionarProveedor(DataGridView tablaProveedor, TextBox textboxProveedorId)
+        {
+            try
+            {
+                // Asume que la columna del ID de bodega es la primera columna (índice 0)
+                textboxProveedorId.Text = tablaProveedor.CurrentRow.Cells[0].Value.ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("No se logró seleccionar, error: " + ex.ToString());
+            }
+        }
+
     }
 }

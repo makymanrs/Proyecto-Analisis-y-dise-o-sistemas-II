@@ -24,7 +24,9 @@ namespace Proyecto.HistorialCredito
                 column.DefaultCellStyle.Padding = new Padding(0); // Ajusta según lo necesario
             }
             dataGridFactura.RowTemplate.Height = 40;
+            dataGridFactura.ReadOnly= true;
         }
+
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static extern IntPtr CreateRoundRectRgn
       (

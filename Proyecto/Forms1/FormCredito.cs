@@ -22,6 +22,7 @@ namespace Proyecto.Forms1
                 column.DefaultCellStyle.Padding = new Padding(0); // Ajusta según lo necesario
             }
             dataGridViewCredito.RowTemplate.Height = 40;
+            dataGridViewCredito.ReadOnly = true;
             ActualizarConteoRegistros();
         }
         public void listas()
@@ -88,6 +89,12 @@ namespace Proyecto.Forms1
         private void FormCredito_Load(object sender, EventArgs e)
         {
             listas();
+        }
+
+        private void dataGridViewCredito_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            Mysql.Ccredito objetoCredito = new Mysql.Ccredito();
+            objetoCredito.seleccionarCredito(dataGridViewCredito, textBox1);
         }
     }
 }

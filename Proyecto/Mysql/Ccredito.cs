@@ -231,13 +231,36 @@ namespace Proyecto.Mysql
             }
         }
 
-
-
-
-
-
-
-
+        public void seleccionarCredito(DataGridView tablaCredito, TextBox textboxcreditoId)
+        {
+            try
+            {
+                // Obtener el índice de la columna seleccionada
+                int columnIndex = tablaCredito.CurrentCell.ColumnIndex;
+                if (columnIndex == 0)
+                {
+                    textboxcreditoId.Text = tablaCredito.CurrentRow.Cells[0].Value.ToString();
+                }
+              
+                else if (columnIndex == 1)
+                {
+                    textboxcreditoId.Text = tablaCredito.CurrentRow.Cells[1].Value.ToString();
+                }
+                else if (columnIndex == 2)
+                {
+                    textboxcreditoId.Text = tablaCredito.CurrentRow.Cells[2].Value.ToString();
+                }
+                else
+                {
+                    // Puedes manejar el caso cuando no es ninguna de las columnas deseadas
+                    MessageBox.Show("No se seleccionó una columna válida.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("No se logró seleccionar, error: " + ex.ToString());
+            }
+        }
 
     }
 }

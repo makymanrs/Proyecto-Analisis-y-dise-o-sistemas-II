@@ -271,6 +271,18 @@ namespace Proyecto.Mysql
                 }
             }
         }
+        public void seleccionarCliente(DataGridView tablacliente, TextBox textboxclienteId)
+        {
+            try
+            {
+                // Asume que la columna del ID de bodega es la primera columna (índice 0)
+                textboxclienteId.Text = tablacliente.CurrentRow.Cells[0].Value.ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("No se logró seleccionar, error: " + ex.ToString());
+            }
+        }
 
     }
 

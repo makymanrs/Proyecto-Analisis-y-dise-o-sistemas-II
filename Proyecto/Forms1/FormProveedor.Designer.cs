@@ -40,9 +40,9 @@
             this.dataGridProveedor = new System.Windows.Forms.DataGridView();
             this.label3 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.button5 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
@@ -120,7 +120,7 @@
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(0, 4, 0, 4);
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.DimGray;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridProveedor.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
@@ -149,11 +149,13 @@
             this.dataGridProveedor.RowHeadersWidth = 51;
             dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.Blue;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(203)))), ((int)(((byte)(120)))));
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.White;
             this.dataGridProveedor.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            this.dataGridProveedor.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridProveedor.Size = new System.Drawing.Size(764, 227);
             this.dataGridProveedor.TabIndex = 33;
+            this.dataGridProveedor.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridProveedor_CellDoubleClick);
             // 
             // label3
             // 
@@ -174,14 +176,6 @@
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(304, 100);
             this.panel4.TabIndex = 65;
-            // 
-            // panel3
-            // 
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel3.Location = new System.Drawing.Point(0, 499);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(800, 100);
-            this.panel3.TabIndex = 64;
             // 
             // button1
             // 
@@ -214,6 +208,14 @@
             this.button4.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.button4.UseVisualStyleBackColor = false;
             this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // panel3
+            // 
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel3.Location = new System.Drawing.Point(0, 499);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(800, 100);
+            this.panel3.TabIndex = 64;
             // 
             // button5
             // 

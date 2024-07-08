@@ -182,7 +182,7 @@
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(0, 4, 0, 4);
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.DimGray;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridBodega.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
@@ -210,11 +210,13 @@
             this.dataGridBodega.RowHeadersVisible = false;
             dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.Blue;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(203)))), ((int)(((byte)(120)))));
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.White;
             this.dataGridBodega.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            this.dataGridBodega.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridBodega.Size = new System.Drawing.Size(764, 227);
             this.dataGridBodega.TabIndex = 55;
+            this.dataGridBodega.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridBodega_CellDoubleClick);
             // 
             // button6
             // 

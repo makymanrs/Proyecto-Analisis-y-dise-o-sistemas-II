@@ -27,6 +27,7 @@ namespace Proyecto.Forms1
             }
             dataGridBodega.RowTemplate.Height = 40;
             ActualizarConteoRegistros();
+            dataGridBodega.ReadOnly = true;
         }
 
         private void ActualizarConteoRegistros()
@@ -132,6 +133,12 @@ namespace Proyecto.Forms1
             {
                 MessageBox.Show("Error al exportar a Excel: " + ex.Message);
             }
+        }
+
+        private void dataGridBodega_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            Mysql.Cbodega objetoBodega = new Mysql.Cbodega();
+            objetoBodega.seleccionarBodega(dataGridBodega, textBox1);
         }
     }
 }

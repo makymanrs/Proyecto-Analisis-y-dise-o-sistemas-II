@@ -26,6 +26,7 @@ namespace Proyecto.Forms1
                 column.DefaultCellStyle.Padding = new Padding(0); // Ajusta según lo necesario
             }
             dataGridProducto.RowTemplate.Height = 40;
+            dataGridProducto.ReadOnly=true;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -142,17 +143,10 @@ namespace Proyecto.Forms1
             }
         }
 
-       
-
-        
-
-       
-
-       
-
-       
-
-       
-      
+        private void dataGridProducto_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            Mysql.Cproducto objetoProducto = new Mysql.Cproducto();
+            objetoProducto.seleccionarProducto(dataGridProducto, textBox1);
+        }
     }
 }

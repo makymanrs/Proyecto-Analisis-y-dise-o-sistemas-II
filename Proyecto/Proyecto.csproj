@@ -422,5 +422,8 @@
   <ItemGroup>
     <None Include="Resources\quitar.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Creditopicture.jpeg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

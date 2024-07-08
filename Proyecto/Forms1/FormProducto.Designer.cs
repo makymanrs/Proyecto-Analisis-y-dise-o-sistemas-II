@@ -78,7 +78,7 @@
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(0, 4, 0, 4);
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.DimGray;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridProducto.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
@@ -107,11 +107,13 @@
             this.dataGridProducto.RowHeadersWidth = 51;
             dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.Blue;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(203)))), ((int)(((byte)(120)))));
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.White;
             this.dataGridProducto.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            this.dataGridProducto.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridProducto.Size = new System.Drawing.Size(764, 227);
             this.dataGridProducto.TabIndex = 41;
+            this.dataGridProducto.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridProducto_CellDoubleClick);
             // 
             // textBox1
             // 

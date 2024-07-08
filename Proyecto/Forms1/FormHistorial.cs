@@ -22,6 +22,7 @@ namespace Proyecto.Forms1
                 column.DefaultCellStyle.Padding = new Padding(0); // Ajusta según lo necesario
             }
             dataGridViewFactura.RowTemplate.Height = 40;
+            dataGridViewFactura.ReadOnly= true;
             ActualizarConteoRegistros();
         }
         private void ActualizarConteoRegistros()
@@ -97,6 +98,12 @@ namespace Proyecto.Forms1
         private void FormHistorial_Load(object sender, EventArgs e)
         {
             listas();
+        }
+
+        private void dataGridViewFactura_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            Mysql.Cdetalle objetoDetalle = new Mysql.Cdetalle();
+            objetoDetalle.selecciondarDetalle(dataGridViewFactura, textBox1);
         }
     }
 }

@@ -18,6 +18,7 @@ namespace Proyecto.HistorialCredito
         {
             InitializeComponent();
             this.Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
+            numericUpDown1.Enabled = false;
         }
 
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
@@ -37,9 +38,6 @@ namespace Proyecto.HistorialCredito
 
         [DllImport("user32.dll", EntryPoint = "SendMessage")]
         private extern static void SendMessage(IntPtr hWnd, int wMsg, int wParam, int lParam);
-
-
-
 
         private void button11_Click(object sender, EventArgs e)
         {
