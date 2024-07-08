@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -35,6 +36,7 @@ namespace Proyecto.Mysql
                 adapter.Fill(dt);
                 tablaBodega.DataSource = dt;
             }
+
             catch (Exception ex)
             {
                 MessageBox.Show("No se encontraron los datos de la base de datos, error: " + ex.ToString());
@@ -46,6 +48,8 @@ namespace Proyecto.Mysql
                     conexion.Close();
                 }
             }
+            tablaBodega.CellFormatting += new DataGridViewCellFormattingEventHandler(tablaBodega_CellFormatting);
+
         }
         public void guardarBodega(TextBox boid, TextBox nom, DateTimePicker fechaIngreso, DateTimePicker fechaCaducidad, NumericUpDown can, NumericUpDown costo, NumericUpDown precio)
         {
@@ -389,6 +393,18 @@ namespace Proyecto.Mysql
             catch (Exception ex)
             {
                 MessageBox.Show("No se logró seleccionar, error: " + ex.ToString());
+            }
+        }
+        private void tablaBodega_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            DataGridView dgv = sender as DataGridView;
+
+            if (dgv.Columns[e.ColumnIndex].Name == "Cantidad")
+            {
+                if (e.Value != null && e.Value.ToString() == "0")
+                {
+                    e.CellStyle.BackColor = Color.Red;
+                }
             }
         }
 

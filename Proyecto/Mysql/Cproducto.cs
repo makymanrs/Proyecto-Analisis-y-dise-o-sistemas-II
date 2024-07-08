@@ -58,6 +58,7 @@ namespace Proyecto.Mysql
                     };
                     tablaproductos.Columns.Add(imageColumn);
                 }
+                tablaproductos.CellFormatting += new DataGridViewCellFormattingEventHandler(tablaproductos_CellFormatting);
             }
             catch (Exception ex)
             {
@@ -481,7 +482,18 @@ namespace Proyecto.Mysql
             }
         }
 
+        private void tablaproductos_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            DataGridView dgv = sender as DataGridView;
 
+            if (dgv.Columns[e.ColumnIndex].Name == "Cantidad")
+            {
+                if (e.Value != null && e.Value.ToString() == "0")
+                {
+                    e.CellStyle.BackColor = Color.Red;
+                }
+            }
+        }
 
 
     }
