@@ -25,7 +25,7 @@ namespace Proyecto.Forms1
             {
                 column.DefaultCellStyle.Padding = new Padding(0); // Ajusta según lo necesario
             }
-            dataGridProducto.RowTemplate.Height = 40;
+            dataGridProducto.RowTemplate.Height = 80;
             dataGridProducto.ReadOnly=true;
         }
 
@@ -147,6 +147,31 @@ namespace Proyecto.Forms1
         {
             Mysql.Cproducto objetoProducto = new Mysql.Cproducto();
             objetoProducto.seleccionarProducto(dataGridProducto, textBox1);
+        }
+
+        private void dataGridProducto_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            DataGridView dataGridView = sender as DataGridView;
+            if (dataGridView != null)
+            {
+                DataGridViewRow row = dataGridView.Rows[e.RowIndex];
+                if (row.Selected)
+                {
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        cell.Style.Font = new Font(dataGridView.Font.FontFamily, 12, FontStyle.Bold); // Cambia el tamaño de letra a 12 y lo pone en negrita
+                        cell.Style.ForeColor = Color.Black;
+                    }
+                }
+                else
+                {
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        cell.Style.Font = new Font(dataGridView.Font.FontFamily, 10, FontStyle.Regular); // Restablece el tamaño de letra a 10 y quita la negrita
+                        cell.Style.ForeColor = Color.Black;
+                    }
+                }
+            }
         }
     }
 }

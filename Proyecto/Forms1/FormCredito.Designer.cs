@@ -52,7 +52,8 @@
             // 
             // dataGridViewCredito
             // 
-            this.dataGridViewCredito.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.dataGridViewCredito.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridViewCredito.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewCredito.BackgroundColor = System.Drawing.Color.White;
@@ -97,9 +98,10 @@
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.White;
             this.dataGridViewCredito.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridViewCredito.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewCredito.Size = new System.Drawing.Size(776, 240);
+            this.dataGridViewCredito.Size = new System.Drawing.Size(776, 377);
             this.dataGridViewCredito.TabIndex = 52;
             this.dataGridViewCredito.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewCredito_CellDoubleClick);
+            this.dataGridViewCredito.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dataGridViewCredito_RowPostPaint);
             // 
             // panel3
             // 
@@ -159,7 +161,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.Black;
-            this.label4.Location = new System.Drawing.Point(12, 68);
+            this.label4.Location = new System.Drawing.Point(9, 68);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(42, 16);
             this.label4.TabIndex = 89;
@@ -168,7 +170,7 @@
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(66, 68);
+            this.comboBox1.Location = new System.Drawing.Point(57, 68);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(130, 21);
             this.comboBox1.TabIndex = 88;
@@ -195,7 +197,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(202, 68);
+            this.label1.Location = new System.Drawing.Point(193, 69);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(55, 16);
             this.label1.TabIndex = 86;

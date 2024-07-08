@@ -149,20 +149,22 @@
             dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(203)))), ((int)(((byte)(120)))));
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
             this.dataGridCliente.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridCliente.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridCliente.Size = new System.Drawing.Size(764, 227);
+            this.dataGridCliente.Size = new System.Drawing.Size(764, 291);
             this.dataGridCliente.TabIndex = 42;
             this.dataGridCliente.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridCliente_CellDoubleClick);
+            this.dataGridCliente.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dataGridCliente_RowPostPaint);
             // 
             // panel4
             // 
             this.panel4.Controls.Add(this.button3);
             this.panel4.Controls.Add(this.button4);
-            this.panel4.Location = new System.Drawing.Point(9, 373);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel4.Location = new System.Drawing.Point(0, 423);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(304, 100);
+            this.panel4.Size = new System.Drawing.Size(800, 76);
             this.panel4.TabIndex = 65;
             // 
             // button3
@@ -172,7 +174,7 @@
             this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button3.ForeColor = System.Drawing.Color.White;
             this.button3.Image = global::Proyecto.Properties.Resources.nota;
-            this.button3.Location = new System.Drawing.Point(5, 11);
+            this.button3.Location = new System.Drawing.Point(14, 12);
             this.button3.Margin = new System.Windows.Forms.Padding(2);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(97, 46);
@@ -189,7 +191,7 @@
             this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button4.ForeColor = System.Drawing.Color.White;
             this.button4.Image = global::Proyecto.Properties.Resources.Trash_01__1_;
-            this.button4.Location = new System.Drawing.Point(106, 11);
+            this.button4.Location = new System.Drawing.Point(115, 12);
             this.button4.Margin = new System.Windows.Forms.Padding(2);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(97, 46);
@@ -212,7 +214,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(26, 87);
+            this.label1.Location = new System.Drawing.Point(12, 87);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(55, 16);
             this.label1.TabIndex = 66;

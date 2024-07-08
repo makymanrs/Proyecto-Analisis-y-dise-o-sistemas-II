@@ -153,9 +153,10 @@
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.White;
             this.dataGridProveedor.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridProveedor.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridProveedor.Size = new System.Drawing.Size(764, 227);
+            this.dataGridProveedor.Size = new System.Drawing.Size(764, 291);
             this.dataGridProveedor.TabIndex = 33;
             this.dataGridProveedor.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridProveedor_CellDoubleClick);
+            this.dataGridProveedor.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dataGridProveedor_RowPostPaint);
             // 
             // label3
             // 
@@ -172,9 +173,10 @@
             // 
             this.panel4.Controls.Add(this.button1);
             this.panel4.Controls.Add(this.button4);
-            this.panel4.Location = new System.Drawing.Point(9, 362);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel4.Location = new System.Drawing.Point(0, 426);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(304, 100);
+            this.panel4.Size = new System.Drawing.Size(800, 73);
             this.panel4.TabIndex = 65;
             // 
             // button1

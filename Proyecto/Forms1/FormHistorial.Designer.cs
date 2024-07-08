@@ -55,7 +55,8 @@
             // 
             // dataGridViewFactura
             // 
-            this.dataGridViewFactura.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.dataGridViewFactura.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridViewFactura.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewFactura.BackgroundColor = System.Drawing.Color.White;
@@ -100,9 +101,10 @@
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.White;
             this.dataGridViewFactura.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridViewFactura.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewFactura.Size = new System.Drawing.Size(776, 240);
+            this.dataGridViewFactura.Size = new System.Drawing.Size(776, 294);
             this.dataGridViewFactura.TabIndex = 51;
             this.dataGridViewFactura.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewFactura_CellDoubleClick);
+            this.dataGridViewFactura.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dataGridViewFactura_RowPostPaint);
             // 
             // panel3
             // 
@@ -116,9 +118,10 @@
             // 
             this.panel4.Controls.Add(this.button4);
             this.panel4.Controls.Add(this.button5);
-            this.panel4.Location = new System.Drawing.Point(9, 362);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel4.Location = new System.Drawing.Point(0, 422);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(304, 100);
+            this.panel4.Size = new System.Drawing.Size(800, 77);
             this.panel4.TabIndex = 76;
             // 
             // button4
@@ -160,7 +163,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(202, 73);
+            this.label1.Location = new System.Drawing.Point(202, 74);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(55, 16);
             this.label1.TabIndex = 79;
@@ -255,7 +258,7 @@
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(66, 73);
+            this.comboBox1.Location = new System.Drawing.Point(54, 73);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(130, 21);
             this.comboBox1.TabIndex = 82;
@@ -265,7 +268,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.Black;
-            this.label4.Location = new System.Drawing.Point(12, 73);
+            this.label4.Location = new System.Drawing.Point(6, 73);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(42, 16);
             this.label4.TabIndex = 83;

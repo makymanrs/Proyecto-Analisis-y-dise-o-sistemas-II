@@ -21,7 +21,7 @@ namespace Proyecto.Forms1
             ActualizarConteoRegistros(); // Actualizar el conteo de registros después de mostrar los datos
             dataGridProveedor.ReadOnly=true;
             
-            dataGridProveedor.RowTemplate.Height = 40;
+            dataGridProveedor.RowTemplate.Height = 50;
         }
 
         private void button3_Click_1(object sender, EventArgs e)
@@ -129,6 +129,31 @@ namespace Proyecto.Forms1
         {
             Mysql.Cproveedor objetoProveedor = new Mysql.Cproveedor();
             objetoProveedor.seleccionarProveedor(dataGridProveedor, textBox1);
+        }
+
+        private void dataGridProveedor_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            DataGridView dataGridView = sender as DataGridView;
+            if (dataGridView != null)
+            {
+                DataGridViewRow row = dataGridView.Rows[e.RowIndex];
+                if (row.Selected)
+                {
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        cell.Style.Font = new Font(dataGridView.Font.FontFamily, 12, FontStyle.Bold); // Cambia el tamaño de letra a 12 y lo pone en negrita
+                        cell.Style.ForeColor = Color.Black;
+                    }
+                }
+                else
+                {
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        cell.Style.Font = new Font(dataGridView.Font.FontFamily, 10, FontStyle.Regular); // Restablece el tamaño de letra a 10 y quita la negrita
+                        cell.Style.ForeColor = Color.Black;
+                    }
+                }
+            }
         }
     }
 }
