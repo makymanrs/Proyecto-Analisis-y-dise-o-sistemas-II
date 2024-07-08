@@ -474,7 +474,8 @@
             // 
             // dataGridFactura
             // 
-            this.dataGridFactura.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.dataGridFactura.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridFactura.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridFactura.BackgroundColor = System.Drawing.Color.White;
@@ -519,7 +520,7 @@
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.White;
             this.dataGridFactura.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridFactura.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridFactura.Size = new System.Drawing.Size(692, 130);
+            this.dataGridFactura.Size = new System.Drawing.Size(692, 186);
             this.dataGridFactura.TabIndex = 98;
             // 
             // pictureBox1

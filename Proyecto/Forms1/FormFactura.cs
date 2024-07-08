@@ -12,8 +12,14 @@ namespace Proyecto.Forms1
             ActualizarTotalPagar();
             ActualizarSubtotal();
             ActualizarTotalImpuesto();
+            foreach (DataGridViewColumn column in dataGridFactura.Columns)
+            {
+                column.DefaultCellStyle.Padding = new Padding(0); // Ajusta según lo necesario
+            }
+            dataGridFactura.RowTemplate.Height = 50;
+            dataGridFactura.ReadOnly = true;
         }
-
+        
         private void button3_Click(object sender, EventArgs e)
         {
             // Obtener los valores de los controles
@@ -107,7 +113,7 @@ namespace Proyecto.Forms1
             if (decimal.TryParse(textBox9.Text, out decimal montoAPagar))
             {
                 // Mostrar el contenido actual de labelTotalPagar para depuración
-                MessageBox.Show("Contenido de labelTotalPagar: " + labelTotalPagar.Text);
+                MessageBox.Show("Contenido a pagar: " + labelTotalPagar.Text);
 
                 // Obtener el texto actual en labelTotalPagar
                 string labelText = labelTotalPagar.Text;
@@ -138,6 +144,13 @@ namespace Proyecto.Forms1
                         {
                             // Si el monto a pagar en efectivo es igual o mayor al total a pagar
                             GuardarFactura(montoAPagar, saldo);
+
+                            // Si el saldo es negativo, significa que se pagó de más
+                            if (saldo < 0)
+                            {
+                                decimal devolucion = Math.Abs(saldo);
+                                labelDev.Text = "Devolución: " + devolucion.ToString("C");
+                            }
                         }
                     }
                     else
