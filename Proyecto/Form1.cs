@@ -49,6 +49,11 @@ namespace Proyecto
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
             this.Resize += new EventHandler(Form1_Resize); // Agrega el manejador de eventos para el cambio de tamaño
             btnMenu.Enabled = true;
+            this.Load += new EventHandler(Form1_Load);
+        }
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            this.MaximizedBounds = Screen.GetWorkingArea(this);
         }
 
         private void InitializeTimer()
@@ -57,6 +62,18 @@ namespace Proyecto
             animationTimer.Interval = 15; // Intervalo de 15 ms para una animación suave
             animationTimer.Tick += new EventHandler(AnimationTick);
         }
+        // para resolver problemas de la barra de tareas al maximizar
+        [DllImport("user32.dll")]
+        public static extern bool GetCursorPos(out Point lpPoint);
+
+        [DllImport("user32.dll")]
+        public static extern IntPtr WindowFromPoint(Point Point);
+
+        [DllImport("user32.dll")]
+        public static extern bool ScreenToClient(IntPtr hWnd, ref Point lpPoint);
+        private const int WM_NCLBUTTONDOWN = 0xA1;
+        private const int HTCAPTION = 0x2;
+
 
         //Son parar arrastrar y mover
         [DllImport("user32.dll", EntryPoint = "ReleaseCapture")]
@@ -211,8 +228,8 @@ namespace Proyecto
         {
             if (panelMenu.Width == 200)
             {
-                targetMenuWidth = 62;
-                targetLogoWidth = 62;
+                targetMenuWidth = 61;
+                targetLogoWidth = 61;
                 isExpanding = false;
             }
             else
@@ -376,6 +393,42 @@ namespace Proyecto
         {
             pictureBox1.Left = (this.ClientSize.Width - pictureBox1.Width) / 2;
             pictureBox1.Top = (this.ClientSize.Height - pictureBox1.Height) / 2;
+        }
+
+        private void Form1_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                Point cursorPos;
+                GetCursorPos(out cursorPos);
+
+                IntPtr hWnd = WindowFromPoint(cursorPos);
+                ScreenToClient(hWnd, ref cursorPos);
+
+                Rectangle iconRect = new Rectangle(0, 0, SystemInformation.SmallIconSize.Width, SystemInformation.SmallIconSize.Height);
+
+                if (iconRect.Contains(cursorPos))
+                {
+                    // Verifica el estado actual de la ventana
+                    if (this.WindowState == FormWindowState.Normal)
+                    {
+                        // Si está en estado normal, minimiza la ventana
+                        this.WindowState = FormWindowState.Minimized;
+                    }
+                    else if (this.WindowState == FormWindowState.Minimized)
+                    {
+                        // Si está minimizada, restaura (maximiza) la ventana
+                        this.Show();
+                        this.WindowState = FormWindowState.Normal;
+                    }
+                }
+                else
+                {
+                    // Si no se hizo clic en el icono de la barra de tareas, permite arrastrar la ventana
+                    ReleaseCapture();
+                    // SendMessage(this.Handle, WM_NCLBUTTONDOWN, (IntPtr)HTCAPTION, IntPtr.Zero);
+                }
+            }
         }
     }
 }
