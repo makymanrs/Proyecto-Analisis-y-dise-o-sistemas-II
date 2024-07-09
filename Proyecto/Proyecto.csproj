@@ -178,6 +178,18 @@
     <Compile Include="Ingresar\FormIngresarProveedor.Designer.cs">
       <DependentUpon>FormIngresarProveedor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login.Designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LoginRegistro.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoginRegistro.Designer.cs">
+      <DependentUpon>LoginRegistro.cs</DependentUpon>
+    </Compile>
     <Compile Include="Mysql\Cbodega.cs" />
     <Compile Include="Mysql\CCliente.cs" />
     <Compile Include="Mysql\Ccredito.cs" />
@@ -252,6 +264,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Ingresar\FormIngresarProveedor.resx">
       <DependentUpon>FormIngresarProveedor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login.resx">
+      <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoginRegistro.resx">
+      <DependentUpon>LoginRegistro.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -424,6 +442,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Creditopicture.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\usuario.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
