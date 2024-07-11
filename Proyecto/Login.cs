@@ -68,7 +68,12 @@ namespace Proyecto
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-
+              if(checkbox1.checked){
+                textbox2.PasswordChar = '\0';
+                }
+                else{
+                textbox.PasswordChar = '*';
+                }
         }
 
         private void FadeOutTimer_Tick(object sender, EventArgs e)
