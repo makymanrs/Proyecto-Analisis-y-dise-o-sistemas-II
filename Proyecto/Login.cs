@@ -118,5 +118,26 @@ namespace Proyecto
             Mysql.Cusuario cusuario = new Mysql.Cusuario();
             cusuario.inicioSesion(textBox1, textBox2,this);
         }
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == Convert.ToChar(Keys.Enter))
+            {
+                textBox2.Focus();
+            }
+        }
+
+        private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == Convert.ToChar(Keys.Enter))
+            {
+                button2.Focus();
+            }
+        }
+
+        private void Login_Load(object sender, EventArgs e)
+        {
+            textBox1.Focus();
+        }
     }
 }

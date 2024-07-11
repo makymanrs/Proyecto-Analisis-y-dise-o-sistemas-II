@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Proyecto.Mysql;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -49,7 +50,7 @@ namespace Proyecto
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
             this.Resize += new EventHandler(Form1_Resize); // Agrega el manejador de eventos para el cambio de tamaño
             btnMenu.Enabled = true;
-            this.Load += new EventHandler(Form1_Load);
+            this.Load += new EventHandler(Form1_Load);   
         }
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -305,8 +306,9 @@ namespace Proyecto
                             button4.Text = "           Bodega";
                             button5.Text = "           Credito";
                             button6.Text = "            Historial";
-                            button7.Text = "             Orden";
+                            //button7.Text = "             Orden";
                             button8.Text = "             Proveedor";
+                            button12.Text = "  Cerrar Sesión";
                         }
                     }
                 }

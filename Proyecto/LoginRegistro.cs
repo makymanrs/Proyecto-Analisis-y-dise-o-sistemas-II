@@ -120,7 +120,6 @@ namespace Proyecto
                 }
             }
         }
-
         private void ShowLoginForm()
         {
             if (loginForm != null)
@@ -147,6 +146,34 @@ namespace Proyecto
         {
             isRegistering = true;
             FadeOutForm();
+        }
+
+        private void LoginRegistro_Load(object sender, EventArgs e)
+        {
+            textBox1.Focus();
+        }
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == Convert.ToChar(Keys.Enter))
+            {
+                textBox2.Focus();
+            }
+        }
+        private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == Convert.ToChar(Keys.Enter))
+            {
+                textBox3.Focus();
+            }
+        }
+
+        private void textBox3_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == Convert.ToChar(Keys.Enter))
+            {
+                button2.Focus();
+            }
         }
     }
 }

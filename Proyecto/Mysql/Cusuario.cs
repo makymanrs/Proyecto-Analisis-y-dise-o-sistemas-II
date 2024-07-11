@@ -115,7 +115,6 @@ namespace Proyecto.Mysql
                 }
             }
         }
-
         private void MostrarForm1()
         {
             // Show Form1 after login
