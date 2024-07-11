@@ -6,24 +6,24 @@ namespace Proyecto
 {
     public partial class Login : Form
     {
-        private Timer fadeOutTimer;
-        private Timer fadeInTimer;
+        private Timer fadeOutTimerLoginRegistro;
+        private Timer fadeInTimerLoginRegistro;
         private Form loginRegisterForm;
+        private Form form1;
 
         public Login()
         {
             InitializeComponent();
             this.Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
 
-            // Initialize the fade out timer
-            fadeOutTimer = new Timer();
-            fadeOutTimer.Interval = 10; // Adjust this value to change the speed of the animation
-            fadeOutTimer.Tick += FadeOutTimer_Tick;
+            // Initialize the fade out and fade in timers for LoginRegistro
+            fadeOutTimerLoginRegistro = new Timer();
+            fadeOutTimerLoginRegistro.Interval = 10; // Adjust this value to change the speed of the animation
+            fadeOutTimerLoginRegistro.Tick += FadeOutTimerLoginRegistro_Tick;
 
-            // Initialize the fade in timer
-            fadeInTimer = new Timer();
-            fadeInTimer.Interval = 10; // Adjust this value to change the speed of the animation
-            fadeInTimer.Tick += FadeInTimer_Tick;
+            fadeInTimerLoginRegistro = new Timer();
+            fadeInTimerLoginRegistro.Interval = 10; // Adjust this value to change the speed of the animation
+            fadeInTimerLoginRegistro.Tick += FadeInTimerLoginRegistro_Tick;
         }
 
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
@@ -37,7 +37,6 @@ namespace Proyecto
             int nHeightEllipse // width of ellipse
         );
 
-        // Para arrastrar y mover el formulario usarlo para poder arrastrar de linea 35  a 41
         [DllImport("user32.dll", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
 
@@ -57,32 +56,51 @@ namespace Proyecto
 
         private void label3_Click(object sender, EventArgs e)
         {
-            // Crear una instancia del formulario LoginRegistro
+            // Create an instance of LoginRegistro form
             loginRegisterForm = new LoginRegistro();
-            loginRegisterForm.Opacity = 0; // Iniciar con opacidad cero
+            loginRegisterForm.Opacity = 0; // Start with zero opacity
+
+            // Show LoginRegistro form
             loginRegisterForm.Show();
 
-            // Iniciar la animación de desvanecimiento del formulario actual
-            fadeOutTimer.Start();
+            // Start fade out animation for current form (Login)
+            fadeOutTimerLoginRegistro.Start();
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        private void checkBox1_CheckedChanged_1(object sender, EventArgs e)
         {
-              
+            if (checkBox1.Checked)
+            {
+                textBox2.PasswordChar = '\0';
+            }
+            else
+            {
+                textBox2.PasswordChar = '*';
+            }
         }
 
-        private void FadeOutTimer_Tick(object sender, EventArgs e)
+        private void FadeOutTimerLoginRegistro_Tick(object sender, EventArgs e)
         {
             this.Opacity -= 0.05;
             if (this.Opacity <= 0)
             {
-                fadeOutTimer.Stop();
+                fadeOutTimerLoginRegistro.Stop();
                 this.Hide();
-                fadeInTimer.Start(); // Start fade in for the new form
+
+                // Show LoginRegistro after current form has completely hidden
+                if (loginRegisterForm == null || loginRegisterForm.IsDisposed)
+                {
+                    loginRegisterForm = new LoginRegistro();
+                    loginRegisterForm.Opacity = 0;
+                }
+                loginRegisterForm.Show();
+
+                // Start fade in animation for LoginRegistro
+                fadeInTimerLoginRegistro.Start();
             }
         }
 
-        private void FadeInTimer_Tick(object sender, EventArgs e)
+        private void FadeInTimerLoginRegistro_Tick(object sender, EventArgs e)
         {
             if (loginRegisterForm != null)
             {
@@ -90,9 +108,15 @@ namespace Proyecto
                 if (loginRegisterForm.Opacity >= 1)
                 {
                     loginRegisterForm.Opacity = 1;
-                    fadeInTimer.Stop();
+                    fadeInTimerLoginRegistro.Stop();
                 }
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Mysql.Cusuario cusuario = new Mysql.Cusuario();
+            cusuario.inicioSesion(textBox1, textBox2,this);
         }
     }
 }

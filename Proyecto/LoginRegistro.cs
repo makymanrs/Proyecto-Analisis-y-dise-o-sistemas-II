@@ -9,6 +9,8 @@ namespace Proyecto
         private Timer fadeOutTimer;
         private Timer fadeInTimer;
         private Form loginForm;
+        private bool isRegistering = false;
+        private Mysql.Cusuario cusuario;
 
         public LoginRegistro()
         {
@@ -16,12 +18,19 @@ namespace Proyecto
             this.Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
 
             fadeOutTimer = new Timer();
-            fadeOutTimer.Interval = 10; // Adjust this value to change the speed of the animation
+            fadeOutTimer.Interval = 10; // Ajusta este valor para cambiar la velocidad de la animación
             fadeOutTimer.Tick += FadeOutTimer_Tick;
 
             fadeInTimer = new Timer();
-            fadeInTimer.Interval = 10; // Adjust this value to change the speed of the animation
+            fadeInTimer.Interval = 10; // Ajusta este valor para cambiar la velocidad de la animación
             fadeInTimer.Tick += FadeInTimer_Tick;
+
+            // Inicializar el formulario de inicio de sesión
+            loginForm = new Login();
+            loginForm.Opacity = 0;
+
+            // Inicializar instancia de Cusuario
+            cusuario = new Mysql.Cusuario();
         }
 
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
@@ -54,20 +63,32 @@ namespace Proyecto
 
         private void label5_Click(object sender, EventArgs e)
         {
-            if (loginForm == null || loginForm.IsDisposed)
-            {
-                loginForm = new Login();
-                loginForm.Opacity = 0;
-            }
-
-            // Ocultar el formulario actual con animación de desvanecimiento
-            fadeOutTimer.Start();
+            isRegistering = false;
+            FadeOutForm();
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            textBox2.PasswordChar = checkBox1.Checked ? '\0' : '*';
-            textBox3.PasswordChar = checkBox1.Checked ? '\0' : '*';
+            if (checkBox1.Checked)
+            {
+                textBox2.PasswordChar = '\0';
+                textBox3.PasswordChar = '\0';
+            }
+            else
+            {
+                textBox2.PasswordChar = '*';
+                textBox3.PasswordChar = '*';
+            }
+        }
+
+        private void FadeOutForm()
+        {
+            fadeOutTimer.Start();
+        }
+
+        private void FadeInForm()
+        {
+            fadeInTimer.Start();
         }
 
         private void FadeOutTimer_Tick(object sender, EventArgs e)
@@ -76,8 +97,27 @@ namespace Proyecto
             if (this.Opacity <= 0)
             {
                 fadeOutTimer.Stop();
-                this.Hide();
-                ShowLoginForm();
+                if (isRegistering)
+                {
+                    // Ejecutar el registro después de que el formulario se haya ocultado
+                    if (cusuario.RegistrarUsuario(textBox1, textBox2, textBox3))
+                    {
+                        // Registro exitoso, mostrar el formulario de inicio de sesión
+                        this.Hide();
+                        ShowLoginForm();
+                    }
+                    else
+                    {
+                        // Registro fallido, volver a mostrar el formulario de registro
+                        this.Opacity = 1;
+                    }
+                }
+                else
+                {
+                    // No es un registro, mostrar el formulario de inicio de sesión
+                    this.Hide();
+                    ShowLoginForm();
+                }
             }
         }
 
@@ -86,7 +126,7 @@ namespace Proyecto
             if (loginForm != null)
             {
                 loginForm.Show();
-                fadeInTimer.Start();
+                FadeInForm();
             }
         }
 
@@ -101,6 +141,12 @@ namespace Proyecto
                     fadeInTimer.Stop();
                 }
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            isRegistering = true;
+            FadeOutForm();
         }
     }
 }

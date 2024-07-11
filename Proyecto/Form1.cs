@@ -430,5 +430,12 @@ namespace Proyecto
                 }
             }
         }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            Login login = new Login();
+            this.Hide();
+            login.Show();
+        }
     }
 }
