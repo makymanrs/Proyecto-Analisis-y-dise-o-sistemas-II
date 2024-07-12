@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Proyecto.Mysql;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -39,10 +40,17 @@ namespace Proyecto.Ingresar
         [DllImport("user32.dll", EntryPoint = "SendMessage")]
         private extern static void SendMessage(IntPtr hWnd, int wMsg, int wParam, int lParam);
 
+        public void proveedores()
+        {
+            comboBox1.Items.Add("No Requiere");
+            Cproducto objetoProducto = new Cproducto();
+            objetoProducto.cargarNombresProveedores(comboBox1);
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             Mysql.Cproducto objetoProducto = new Mysql.Cproducto();
-            objetoProducto.guardarproductos(textBox1, textBox2, dateTimePicker1, numericUpDown1, numericUpDown2, numericUpDown3,textBox3,pictureBox2);
+            objetoProducto.guardarproductos(textBox1, textBox2, dateTimePicker1, numericUpDown1, numericUpDown2, numericUpDown3,textBox3,comboBox1,pictureBox2);
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -130,6 +138,7 @@ namespace Proyecto.Ingresar
         private void FormIngresarProducto_Load(object sender, EventArgs e)
         {
             numericUpDown2.Enabled = false;
+            proveedores();
         }
     }
 }

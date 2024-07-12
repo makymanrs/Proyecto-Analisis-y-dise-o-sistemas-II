@@ -126,7 +126,7 @@
             dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(203)))), ((int)(((byte)(120)))));
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.WhiteSmoke;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
             this.dataGridFactura.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridFactura.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridFactura.Size = new System.Drawing.Size(729, 231);

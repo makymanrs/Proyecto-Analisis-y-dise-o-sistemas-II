@@ -16,7 +16,7 @@ namespace Proyecto.Forms1
             {
                 column.DefaultCellStyle.Padding = new Padding(0); // Ajusta según lo necesario
             }
-            dataGridFactura.RowTemplate.Height = 50;
+            dataGridFactura.RowTemplate.Height = 45;
             dataGridFactura.ReadOnly = true;
         }
         

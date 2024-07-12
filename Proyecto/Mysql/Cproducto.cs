@@ -5,6 +5,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Transactions;
 using System.Windows.Forms;
 using Excel = Microsoft.Office.Interop.Excel;
 
@@ -20,7 +21,22 @@ namespace Proyecto.Mysql
             {
                 Conexion objetoConexion = new Conexion();
                 conexion = objetoConexion.establecerConexion();
-                string query = "SELECT pro_cod as 'Codigo', pro_nom as 'Nombre', pro_cad as 'Caducidad', pro_cos as 'Costo', pro_pre as 'Precio', pro_can as 'Cantidad', pro_img FROM producto";
+
+                string query = @"
+            SELECT 
+                p.pro_cod as 'Codigo', 
+                p.pro_nom as 'Nombre', 
+                p.pro_cad as 'Caducidad', 
+                p.pro_cos as 'Costo', 
+                p.pro_pre as 'Precio', 
+                p.pro_can as 'Cantidad', 
+                pr.prove_nom as 'Proveedor', 
+                
+                p.pro_img 
+            FROM 
+                producto p
+                INNER JOIN proveedor pr ON p.prove_id = pr.prove_id";
+
                 MySqlDataAdapter adapter = new MySqlDataAdapter(query, conexion);
                 DataTable dt = new DataTable();
                 adapter.Fill(dt);
@@ -39,6 +55,8 @@ namespace Proyecto.Mysql
                         }
                     }
                 }
+
+                // Set the DataGridView DataSource to the DataTable
                 tablaproductos.DataSource = dt;
 
                 // Hide the original pro_img column
@@ -58,6 +76,8 @@ namespace Proyecto.Mysql
                     };
                     tablaproductos.Columns.Add(imageColumn);
                 }
+
+                // Handle cell formatting event for the DataGridView
                 tablaproductos.CellFormatting += new DataGridViewCellFormattingEventHandler(tablaproductos_CellFormatting);
             }
             catch (Exception ex)
@@ -72,6 +92,50 @@ namespace Proyecto.Mysql
                 }
             }
         }
+        public void cargarNombresProveedores(ComboBox comboBoxProveedores)
+        {
+            MySqlConnection conexion = null;
+            try
+            {
+                Conexion objetoConexion = new Conexion();
+                conexion = objetoConexion.establecerConexion();
+
+                string query = "SELECT prove_nom FROM proveedor";
+                MySqlCommand command = new MySqlCommand(query, conexion);
+
+                // Limpiar el ComboBox antes de cargar datos nuevos
+                comboBoxProveedores.Items.Clear();
+
+                // Abrir la conexión y ejecutar el comando
+               // conexion.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+                comboBoxProveedores.Items.Add("No requiere");
+                // Iterar a través de los resultados y agregar nombres al ComboBox
+                while (reader.Read())
+                {
+                    string nombreProveedor = reader.GetString("prove_nom");
+                    comboBoxProveedores.Items.Add(nombreProveedor);
+                }
+                
+                // Seleccionar el primer elemento por defecto si hay elementos cargados
+                if (comboBoxProveedores.Items.Count > 0)
+                {
+                    comboBoxProveedores.SelectedIndex = 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar nombres de proveedores: " + ex.Message);
+            }
+            finally
+            {
+                if (conexion != null && conexion.State == ConnectionState.Open)
+                {
+                    conexion.Close();
+                }
+            }
+        }
+
 
         private void CalcularPrecio(NumericUpDown costo, NumericUpDown precio)
         {
@@ -81,7 +145,7 @@ namespace Proyecto.Mysql
         }
 
         // Método para guardar el producto
-        public void guardarproductos(TextBox cod, TextBox producto, DateTimePicker cad, NumericUpDown costo, NumericUpDown precio, NumericUpDown can, TextBox numbod, PictureBox imgBox)
+        public void guardarproductos(TextBox cod, TextBox producto, DateTimePicker cad, NumericUpDown costo, NumericUpDown precio, NumericUpDown can, TextBox numbod, ComboBox comboBoxProveedores, PictureBox imgBox)
         {
             MySqlConnection conexion = null;
             MySqlTransaction transaction = null;
@@ -93,6 +157,12 @@ namespace Proyecto.Mysql
                 Conexion objetoConexion = new Conexion();
                 conexion = objetoConexion.establecerConexion();
                 transaction = conexion.BeginTransaction();
+
+                // Obtener el ID del proveedor seleccionado
+                string queryProveedor = "SELECT prove_id FROM proveedor WHERE prove_nom = @proveNom";
+                MySqlCommand commandProveedor = new MySqlCommand(queryProveedor, conexion, transaction);
+                commandProveedor.Parameters.AddWithValue("@proveNom", comboBoxProveedores.SelectedItem.ToString());
+                int proveId = Convert.ToInt32(commandProveedor.ExecuteScalar());
 
                 // Verificar si ya existe el bo_id en la tabla bodega
                 string queryVerificarBodega = "SELECT COUNT(*) FROM bodega WHERE bo_id = @boId";
@@ -127,7 +197,7 @@ namespace Proyecto.Mysql
                 }
 
                 // Insertar el producto en la tabla producto
-                string queryProducto = "INSERT INTO producto(pro_cod, pro_nom, pro_cad, pro_cos, pro_pre, pro_can, pro_img, bo_id) VALUES (@proCod, @proNom, @proCad, @proCos, @proPre, @proCan, @proImg, @boId)";
+                string queryProducto = "INSERT INTO producto(pro_cod, pro_nom, pro_cad, pro_cos, pro_pre, pro_can, pro_img, prove_id, bo_id) VALUES (@proCod, @proNom, @proCad, @proCos, @proPre, @proCan, @proImg, @proveId, @boId)";
                 MySqlCommand myCommandProducto = new MySqlCommand(queryProducto, conexion, transaction);
                 myCommandProducto.Parameters.AddWithValue("@proCod", newProCod);
                 myCommandProducto.Parameters.AddWithValue("@proNom", producto.Text);
@@ -136,6 +206,7 @@ namespace Proyecto.Mysql
                 myCommandProducto.Parameters.AddWithValue("@proPre", precio.Value); // Guardar el precio calculado
                 myCommandProducto.Parameters.AddWithValue("@proCan", can.Value);
                 myCommandProducto.Parameters.AddWithValue("@proImg", imgBytes);
+                myCommandProducto.Parameters.AddWithValue("@proveId", proveId);
                 myCommandProducto.Parameters.AddWithValue("@boId", numbod.Text);
                 myCommandProducto.ExecuteNonQuery();
 
@@ -176,7 +247,10 @@ namespace Proyecto.Mysql
                 Conexion objetoConexion = new Conexion();
                 conexion = objetoConexion.establecerConexion();
 
-                string query = "SELECT pro_cod, pro_nom, pro_cad, pro_cos, pro_pre, pro_can, bo_id, pro_img FROM producto WHERE pro_cod = @codigo";
+                string query = "SELECT p.pro_cod, p.pro_nom, p.pro_cad, p.pro_cos, p.pro_pre, p.pro_can, p.bo_id, p.pro_img, pr.prove_nom " +
+                               "FROM producto p " +
+                               "JOIN proveedor pr ON p.prove_id = pr.prove_id " +
+                               "WHERE p.pro_cod = @codigo";
                 MySqlCommand command = new MySqlCommand(query, conexion);
                 command.Parameters.AddWithValue("@codigo", codigo);
 
@@ -206,7 +280,7 @@ namespace Proyecto.Mysql
                 }
             }
         }
-        public void modificarProducto(TextBox cod, TextBox producto, DateTimePicker cad, NumericUpDown costo, NumericUpDown precio, NumericUpDown can, TextBox numbod, PictureBox imgBox)
+        public void modificarProducto(TextBox cod, TextBox producto, DateTimePicker cad, NumericUpDown costo, NumericUpDown precio, NumericUpDown can, TextBox numbod, ComboBox comboBoxProveedores, PictureBox imgBox)
         {
             MySqlConnection conexion = null;
             try
@@ -228,6 +302,12 @@ namespace Proyecto.Mysql
                     return; // Salir del método si el producto no existe
                 }
 
+                // Obtener el ID del proveedor seleccionado
+                string queryProveedor = "SELECT prove_id FROM proveedor WHERE prove_nom = @proveNom";
+                MySqlCommand commandProveedor = new MySqlCommand(queryProveedor, conexion);
+                commandProveedor.Parameters.AddWithValue("@proveNom", comboBoxProveedores.SelectedItem.ToString());
+                int proveId = Convert.ToInt32(commandProveedor.ExecuteScalar());
+
                 // Obtener la imagen del PictureBox y convertirla a byte[]
                 byte[] imgBytes = null;
                 if (imgBox.Image != null)
@@ -243,7 +323,7 @@ namespace Proyecto.Mysql
                 CalcularPrecio(costo, precio); // Asegurarse de que el precio esté actualizado
 
                 // Actualizar el producto en la tabla producto
-                string queryActualizarProducto = "UPDATE producto SET pro_nom = @proNom, pro_cad = @proCad, pro_cos = @proCos, pro_pre = @proPre, pro_can = @proCan, pro_img = @proImg, bo_id = @boId WHERE pro_cod = @proCod";
+                string queryActualizarProducto = "UPDATE producto SET pro_nom = @proNom, pro_cad = @proCad, pro_cos = @proCos, pro_pre = @proPre, pro_can = @proCan, pro_img = @proImg, prove_id = @proveId, bo_id = @boId WHERE pro_cod = @proCod";
                 MySqlCommand myCommandActualizarProducto = new MySqlCommand(queryActualizarProducto, conexion);
                 myCommandActualizarProducto.Parameters.AddWithValue("@proCod", cod.Text);
                 myCommandActualizarProducto.Parameters.AddWithValue("@proNom", producto.Text);
@@ -252,6 +332,7 @@ namespace Proyecto.Mysql
                 myCommandActualizarProducto.Parameters.AddWithValue("@proPre", precio.Value);
                 myCommandActualizarProducto.Parameters.AddWithValue("@proCan", can.Value);
                 myCommandActualizarProducto.Parameters.AddWithValue("@proImg", imgBytes);
+                myCommandActualizarProducto.Parameters.AddWithValue("@proveId", proveId);
                 myCommandActualizarProducto.Parameters.AddWithValue("@boId", numbod.Text);
                 myCommandActualizarProducto.ExecuteNonQuery();
 
@@ -336,9 +417,10 @@ namespace Proyecto.Mysql
                 conexion = objetoConexion.establecerConexion();
 
                 // Query para buscar productos por ID
-                string query = "SELECT pro_cod as 'Codigo', pro_nom as 'Nombre', pro_cad as 'Caducidad', pro_cos as 'Costo', pro_pre as 'Precio', pro_can as 'Cantidad', bo_id as 'Bodega Id', pro_img as 'Imagen' " +
-                               "FROM producto " +
-                               "WHERE pro_cod = @id";
+                string query = "SELECT p.pro_cod as 'Codigo', p.pro_nom as 'Nombre', p.pro_cad as 'Caducidad', p.pro_cos as 'Costo', p.pro_pre as 'Precio', p.pro_can as 'Cantidad', pr.prove_nom as 'Proveedor', p.pro_img as 'Imagen' " +
+                "FROM producto p " +
+                "JOIN proveedor pr ON p.prove_id = pr.prove_id " +
+                "WHERE p.pro_cod = @id";
 
                 MySqlCommand command = new MySqlCommand(query, conexion);
                 command.Parameters.AddWithValue("@id", id.Text.Trim());
@@ -494,8 +576,6 @@ namespace Proyecto.Mysql
                 }
             }
         }
-
-
     }
 
 }

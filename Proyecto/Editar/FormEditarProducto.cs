@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Proyecto.Mysql;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -41,7 +42,12 @@ namespace Proyecto.Editar
         [DllImport("user32.dll", EntryPoint = "SendMessage")]
         private extern static void SendMessage(IntPtr hWnd, int wMsg, int wParam, int lParam);
 
-
+        public void proveedores()
+        {
+            comboBox1.Items.Add("No Requiere");
+            Cproducto objetoProducto = new Cproducto();
+            objetoProducto.cargarNombresProveedores(comboBox1);
+        }
         private void button2_Click(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(textBox1.Text))
@@ -58,6 +64,7 @@ namespace Proyecto.Editar
                     numericUpDown1.Value = Convert.ToDecimal(producto["pro_cos"]);
                     numericUpDown2.Value = Convert.ToDecimal(producto["pro_pre"]);
                     numericUpDown3.Value = Convert.ToDecimal(producto["pro_can"]);
+                    comboBox1.Text = producto["prove_nom"].ToString();
                     textBox3.Text = producto["bo_id"].ToString();
 
                     // Mostrar la imagen del producto si existe
@@ -88,7 +95,7 @@ namespace Proyecto.Editar
         private void button1_Click(object sender, EventArgs e)
         {
             Mysql.Cproducto objetoProducto = new Mysql.Cproducto();
-            objetoProducto.modificarProducto(textBox1, textBox2, dateTimePicker1, numericUpDown1, numericUpDown2, numericUpDown3, textBox3, pictureBox2);
+            objetoProducto.modificarProducto(textBox1, textBox2, dateTimePicker1, numericUpDown1, numericUpDown2, numericUpDown3, textBox3, comboBox1, pictureBox2);
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -177,6 +184,7 @@ namespace Proyecto.Editar
         private void FormEditarProducto_Load(object sender, EventArgs e)
         {
             numericUpDown2.Enabled = false;
+            proveedores();
         }
     }
 }

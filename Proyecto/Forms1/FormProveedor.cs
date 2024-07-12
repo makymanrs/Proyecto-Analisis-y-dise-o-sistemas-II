@@ -141,7 +141,7 @@ namespace Proyecto.Forms1
                 {
                     foreach (DataGridViewCell cell in row.Cells)
                     {
-                        cell.Style.Font = new Font(dataGridView.Font.FontFamily, 12, FontStyle.Bold); // Cambia el tamaño de letra a 12 y lo pone en negrita
+                        cell.Style.Font = new Font(dataGridView.Font.FontFamily, 10, FontStyle.Bold); // Cambia el tamaño de letra a 12 y lo pone en negrita
                         cell.Style.ForeColor = Color.Black;
                     }
                 }
