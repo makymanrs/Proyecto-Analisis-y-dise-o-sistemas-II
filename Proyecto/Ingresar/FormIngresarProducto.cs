@@ -131,7 +131,8 @@ namespace Proyecto.Ingresar
         {
             if (e.KeyChar == Convert.ToChar(Keys.Enter))
             {
-                textBox3.Focus();
+                comboBox1.Focus();
+                comboBox1.DroppedDown = true;
             }
         }
 
@@ -139,6 +140,11 @@ namespace Proyecto.Ingresar
         {
             numericUpDown2.Enabled = false;
             proveedores();
+        }
+
+        private void comboBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            textBox3.Focus();
         }
     }
 }

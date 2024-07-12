@@ -165,5 +165,10 @@ namespace Proyecto.Forms1
                 }
             }
         }
+
+        private void FormBodega_Load(object sender, EventArgs e)
+        {
+            textBox1.Focus();
+        }
     }
 }

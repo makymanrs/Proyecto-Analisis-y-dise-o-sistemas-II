@@ -93,6 +93,10 @@ namespace Proyecto.HistorialCredito
                 //ActualizarDataGridView();
             
         }
-       
+
+        private void FormActualizarCredito_Load(object sender, EventArgs e)
+        {
+            textBox1.Focus();
+        }
     }
 }

@@ -21,6 +21,7 @@ namespace Proyecto.Editar
             InitializeComponent();
             this.ControlBox = false;
             this.Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
+            
         }
 
         // esquinas redondeadas obligatorio agregarlo las coordenadas
@@ -177,7 +178,8 @@ namespace Proyecto.Editar
         {
             if (e.KeyChar == Convert.ToChar(Keys.Enter))
             {
-                textBox3.Focus();
+                comboBox1.Focus();
+                comboBox1.DroppedDown = true;
             }
         }
 
@@ -185,6 +187,14 @@ namespace Proyecto.Editar
         {
             numericUpDown2.Enabled = false;
             proveedores();
+        }
+
+        private void comboBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == Convert.ToChar(Keys.Enter))
+            {
+                textBox3.Focus();
+            }
         }
     }
 }

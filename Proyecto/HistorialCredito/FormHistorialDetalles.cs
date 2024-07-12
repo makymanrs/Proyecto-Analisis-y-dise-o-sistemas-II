@@ -73,5 +73,10 @@ namespace Proyecto.HistorialCredito
                 Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20)); // Aplica la región redondeada al restaurar
             }
         }
+
+        private void FormHistorialDetalles_Load(object sender, EventArgs e)
+        {
+            textBox1.Focus();
+        }
     }
 }

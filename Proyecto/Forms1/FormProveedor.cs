@@ -71,6 +71,7 @@ namespace Proyecto.Forms1
             Mysql.Cproveedor objetoProveedor = new Mysql.Cproveedor();
             objetoProveedor.mostrarProveedor(dataGridProveedor);
             ActualizarConteoRegistros();
+            textBox1.Focus();
         }
 
         private void button1_Click(object sender, EventArgs e)

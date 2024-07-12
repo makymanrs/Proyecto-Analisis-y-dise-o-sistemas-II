@@ -231,6 +231,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormActualizarCredito";
             this.Text = "FormActualizarCredito";
+            this.Load += new System.EventHandler(this.FormActualizarCredito_Load);
             this.Resize += new System.EventHandler(this.FormActualizarCredito_Resize);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();

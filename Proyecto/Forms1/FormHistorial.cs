@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Proyecto.Forms1
 {
@@ -98,6 +99,8 @@ namespace Proyecto.Forms1
         private void FormHistorial_Load(object sender, EventArgs e)
         {
             listas();
+            comboBox1.Focus();
+            comboBox1.DroppedDown = true;
         }
 
         private void dataGridViewFactura_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -128,6 +131,14 @@ namespace Proyecto.Forms1
                         cell.Style.ForeColor = Color.Black;
                     }
                 }
+            }
+        }
+
+        private void comboBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == Convert.ToChar(Keys.Enter))
+            {
+                textBox1.Focus();
             }
         }
     }

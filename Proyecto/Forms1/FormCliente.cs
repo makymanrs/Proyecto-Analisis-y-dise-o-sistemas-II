@@ -155,5 +155,10 @@ namespace Proyecto.Forms1
                 }
             }
         }
+
+        private void FormCliente_Load_1(object sender, EventArgs e)
+        {
+            textBox1.Focus();
+        }
     }
 }

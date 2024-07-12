@@ -106,6 +106,11 @@ namespace Proyecto.Ingresar
 
         private void numericUpDown2_KeyPress(object sender, KeyPressEventArgs e)
         {
+           
+        }
+
+        private void numericUpDown1_KeyPress(object sender, KeyPressEventArgs e)
+        {
             if (e.KeyChar == Convert.ToChar(Keys.Enter))
             {
                 numericUpDown2.Focus();

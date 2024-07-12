@@ -125,6 +125,7 @@ namespace Proyecto.Forms1
             Mysql.Cproducto objetoProducto = new Mysql.Cproducto();
             objetoProducto.mostrarproductos(dataGridProducto);
             ActualizarConteoRegistros();
+            textBox1.Focus();
         }
 
         private void button6_Click(object sender, EventArgs e)

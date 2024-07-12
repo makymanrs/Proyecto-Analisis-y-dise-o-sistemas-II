@@ -80,7 +80,7 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label7.Location = new System.Drawing.Point(453, 106);
+            this.label7.Location = new System.Drawing.Point(501, 111);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(243, 16);
             this.label7.TabIndex = 44;
@@ -90,7 +90,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(30, 336);
+            this.label9.Location = new System.Drawing.Point(30, 320);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(87, 19);
             this.label9.TabIndex = 62;
@@ -142,7 +142,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(365, 381);
+            this.label6.Location = new System.Drawing.Point(210, 320);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(65, 19);
             this.label6.TabIndex = 55;
@@ -170,7 +170,7 @@
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(34, 375);
+            this.textBox3.Location = new System.Drawing.Point(34, 349);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(103, 20);
             this.textBox3.TabIndex = 52;
@@ -247,7 +247,7 @@
             // pictureBox2
             // 
             this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox2.Location = new System.Drawing.Point(188, 304);
+            this.pictureBox2.Location = new System.Drawing.Point(179, 349);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(116, 89);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -256,13 +256,15 @@
             // 
             // button3
             // 
-            this.button3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(100)))), ((int)(((byte)(134)))));
+            this.button3.BackColor = System.Drawing.Color.IndianRed;
+            this.button3.FlatAppearance.BorderSize = 0;
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button3.ForeColor = System.Drawing.Color.White;
-            this.button3.Image = global::Proyecto.Properties.Resources.Subir3;
-            this.button3.Location = new System.Drawing.Point(199, 401);
+            this.button3.Image = global::Proyecto.Properties.Resources.upload;
+            this.button3.Location = new System.Drawing.Point(310, 400);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(95, 38);
+            this.button3.Size = new System.Drawing.Size(103, 38);
             this.button3.TabIndex = 61;
             this.button3.Text = "Subir";
             this.button3.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -289,7 +291,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::Proyecto.Properties.Resources.impugnar_01;
-            this.pictureBox1.Location = new System.Drawing.Point(471, 135);
+            this.pictureBox1.Location = new System.Drawing.Point(519, 140);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(211, 199);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -313,6 +315,7 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(133, 21);
             this.comboBox1.TabIndex = 70;
+            this.comboBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBox1_KeyPress);
             // 
             // FormEditarProducto
             // 
