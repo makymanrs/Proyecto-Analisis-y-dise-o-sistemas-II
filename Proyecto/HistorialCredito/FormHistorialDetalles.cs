@@ -18,7 +18,7 @@ namespace Proyecto.HistorialCredito
             InitializeComponent();
             this.Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
             Mysql.Cdetalle objetoFactura = new Mysql.Cdetalle();
-            objetoFactura.MostrarDetalleFactura(dataGridFactura, textBox1, label2, label3, label4);
+            objetoFactura.MostrarDetalleFactura(dataGridFactura, textBox1, label2, label3, label4,label5);
             foreach (DataGridViewColumn column in dataGridFactura.Columns)
             {
                 column.DefaultCellStyle.Padding = new Padding(0); // Ajusta según lo necesario
@@ -48,7 +48,7 @@ namespace Proyecto.HistorialCredito
         private void button1_Click(object sender, EventArgs e)
         {
             Mysql.Cdetalle objetoFactura = new Mysql.Cdetalle();
-            objetoFactura.MostrarDetalleFactura(dataGridFactura, textBox1, label2, label3, label4);
+            objetoFactura.MostrarDetalleFactura(dataGridFactura, textBox1, label2, label3, label4,label8);
         }
 
         private void button11_Click(object sender, EventArgs e)

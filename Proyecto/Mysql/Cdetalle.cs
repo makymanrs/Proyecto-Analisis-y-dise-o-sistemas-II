@@ -7,7 +7,7 @@ namespace Proyecto.Mysql
 {
     internal class Cdetalle
     {
-        public void MostrarDetalleFactura(DataGridView tablaDetalleFactura, TextBox fac_cod, Label lblSubtotal, Label lblImpuesto, Label lblTotal)
+        public void MostrarDetalleFactura(DataGridView tablaDetalleFactura, TextBox fac_cod, Label lblSubtotal, Label lblImpuesto, Label lblTotal, Label lblNombreCliente)
         {
             MySqlConnection conexion = null;
             try
@@ -16,7 +16,7 @@ namespace Proyecto.Mysql
                 conexion = objetoConexion.establecerConexion();
 
                 // Consulta SQL para obtener el detalle de la factura junto con el nombre del producto
-                string query = @"SELECT  
+                string queryDetalle = @"SELECT  
                                 df.pro_cod AS 'Código Producto', 
                                 p.pro_nom AS 'Nombre Producto',
                                 p.pro_pre AS 'Precio',
@@ -28,21 +28,21 @@ namespace Proyecto.Mysql
                          JOIN producto p ON df.pro_cod = p.pro_cod
                          WHERE df.fac_cod = @fac_cod";
 
-                MySqlCommand cmd = new MySqlCommand(query, conexion);
-                cmd.Parameters.AddWithValue("@fac_cod", fac_cod.Text);
+                MySqlCommand cmdDetalle = new MySqlCommand(queryDetalle, conexion);
+                cmdDetalle.Parameters.AddWithValue("@fac_cod", fac_cod.Text);
 
-                MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                adapter.Fill(dt);
+                MySqlDataAdapter adapter = new MySqlDataAdapter(cmdDetalle);
+                DataTable dtDetalle = new DataTable();
+                adapter.Fill(dtDetalle);
 
-                tablaDetalleFactura.DataSource = dt;
+                tablaDetalleFactura.DataSource = dtDetalle;
 
                 // Calcular el subtotal, impuesto y total
                 decimal subtotal = 0;
                 decimal impuesto = 0;
                 decimal total = 0;
 
-                foreach (DataRow row in dt.Rows)
+                foreach (DataRow row in dtDetalle.Rows)
                 {
                     subtotal += Convert.ToDecimal(row["Subtotal"]);
                     impuesto += Convert.ToDecimal(row["Impuesto"]);
@@ -53,6 +53,24 @@ namespace Proyecto.Mysql
                 lblSubtotal.Text = subtotal.ToString("C");
                 lblImpuesto.Text = impuesto.ToString("C");
                 lblTotal.Text = total.ToString("C");
+
+                // Consulta SQL para obtener el nombre del cliente basado en el código de factura
+                string queryCliente = @"SELECT c.cli_pnom, c.cli_snom, c.cli_pape, c.cli_sape
+                               FROM factura f
+                               JOIN cliente c ON f.cli_id = c.cli_cod
+                               WHERE f.fac_cod = @fac_cod";
+
+                MySqlCommand cmdCliente = new MySqlCommand(queryCliente, conexion);
+                cmdCliente.Parameters.AddWithValue("@fac_cod", fac_cod.Text);
+
+                MySqlDataReader reader = cmdCliente.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    string nombreCliente = $"{reader["cli_pnom"]} {reader["cli_snom"]} {reader["cli_pape"]} {reader["cli_sape"]}";
+                    lblNombreCliente.Text = nombreCliente;
+                }
+                reader.Close();
             }
             catch (Exception ex)
             {
@@ -66,6 +84,7 @@ namespace Proyecto.Mysql
                 }
             }
         }
+
         public void MostrarFactura(DataGridView tablaFactura)
         {
             MySqlConnection conexion = null;
