@@ -169,6 +169,11 @@
             // numericUpDown1
             // 
             this.numericUpDown1.Location = new System.Drawing.Point(268, 191);
+            this.numericUpDown1.Maximum = new decimal(new int[] {
+            1215752192,
+            23,
+            0,
+            0});
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(81, 20);
             this.numericUpDown1.TabIndex = 31;
@@ -177,6 +182,11 @@
             // numericUpDown2
             // 
             this.numericUpDown2.Location = new System.Drawing.Point(44, 266);
+            this.numericUpDown2.Maximum = new decimal(new int[] {
+            1215752192,
+            23,
+            0,
+            0});
             this.numericUpDown2.Name = "numericUpDown2";
             this.numericUpDown2.Size = new System.Drawing.Size(81, 20);
             this.numericUpDown2.TabIndex = 32;
@@ -195,6 +205,11 @@
             // numericUpDown3
             // 
             this.numericUpDown3.Location = new System.Drawing.Point(376, 191);
+            this.numericUpDown3.Maximum = new decimal(new int[] {
+            1215752192,
+            23,
+            0,
+            0});
             this.numericUpDown3.Name = "numericUpDown3";
             this.numericUpDown3.Size = new System.Drawing.Size(81, 20);
             this.numericUpDown3.TabIndex = 34;

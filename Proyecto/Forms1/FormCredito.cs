@@ -89,8 +89,8 @@ namespace Proyecto.Forms1
         private void FormCredito_Load(object sender, EventArgs e)
         {
             listas();
-            comboBox1.Focus();
-            comboBox1.DroppedDown = true;
+            textBox1.Focus();
+            //comboBox1.DroppedDown = true;
         }
 
         private void dataGridViewCredito_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

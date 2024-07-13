@@ -24,8 +24,8 @@ namespace Proyecto.Mysql
 
                 string query = @"
             SELECT 
-                p.pro_cod as 'Codigo', 
-                p.pro_nom as 'Nombre', 
+                p.pro_cod as 'Código Producto', 
+                p.pro_nom as 'Nombre Producto', 
                 p.pro_cad as 'Caducidad', 
                 p.pro_cos as 'Costo', 
                 p.pro_pre as 'Precio', 
@@ -109,7 +109,7 @@ namespace Proyecto.Mysql
                 // Abrir la conexión y ejecutar el comando
                // conexion.Open();
                 MySqlDataReader reader = command.ExecuteReader();
-                comboBoxProveedores.Items.Add("No requiere");
+               // comboBoxProveedores.Items.Add("No requiere");
                 // Iterar a través de los resultados y agregar nombres al ComboBox
                 while (reader.Read())
                 {
@@ -417,7 +417,7 @@ namespace Proyecto.Mysql
                 conexion = objetoConexion.establecerConexion();
 
                 // Query para buscar productos por ID
-                string query = "SELECT p.pro_cod as 'Codigo', p.pro_nom as 'Nombre', p.pro_cad as 'Caducidad', p.pro_cos as 'Costo', p.pro_pre as 'Precio', p.pro_can as 'Cantidad', pr.prove_nom as 'Proveedor', p.pro_img as 'Imagen' " +
+                string query = "SELECT p.pro_cod as 'Codigo', p.pro_nom as 'Nombre Producto', p.pro_cad as 'Caducidad', p.pro_cos as 'Costo', p.pro_pre as 'Precio', p.pro_can as 'Cantidad', pr.prove_nom as 'Proveedor', p.pro_img as 'Imagen' " +
                 "FROM producto p " +
                 "JOIN proveedor pr ON p.prove_id = pr.prove_id " +
                 "WHERE p.pro_cod = @id";
@@ -553,11 +553,29 @@ namespace Proyecto.Mysql
         }
         public void seleccionarProducto(DataGridView tablaProducto, TextBox textboxproductoId)
         {
+            int columnIndex = tablaProducto.CurrentCell.ColumnIndex;
             try
             {
+                if(columnIndex==0){
+                    textboxproductoId.Text = tablaProducto.CurrentRow.Cells[0].Value.ToString();
+                }
                 // Asume que la columna del ID de bodega es la primera columna (índice 0)
-                textboxproductoId.Text = tablaProducto.CurrentRow.Cells[0].Value.ToString();
+               
+                else if (columnIndex == 1)
+                {
+                    textboxproductoId.Text = tablaProducto.CurrentRow.Cells[1].Value.ToString();
+                }
+                else if (columnIndex == 6)
+                {
+                    textboxproductoId.Text = tablaProducto.CurrentRow.Cells[6].Value.ToString();
+                }
+                else
+                {
+                    // Puedes manejar el caso cuando no es ninguna de las columnas deseadas
+                    MessageBox.Show("No se seleccionó una columna válida.");
+                }
             }
+            
             catch (Exception ex)
             {
                 MessageBox.Show("No se logró seleccionar, error: " + ex.ToString());
@@ -574,8 +592,100 @@ namespace Proyecto.Mysql
                 {
                     e.CellStyle.BackColor = Color.Red;
                 }
+
+            }
+        }
+        public void BuscarProductoPorFiltros(DataGridView datagridviewProducto, TextBox textBoxFiltro, ComboBox comboBoxFiltro)
+        {
+            MySqlConnection conexion = null;
+            try
+            {
+                Conexion objetoConexion = new Conexion();
+                conexion = objetoConexion.establecerConexion();
+
+                // Construir la consulta base
+                string query = "SELECT producto.pro_cod as 'Código Producto', producto.pro_nom as 'Nombre Producto', producto.pro_cad as 'Caducidad', " +
+                               "producto.pro_cos as 'Costo', producto.pro_pre as 'Precio', producto.pro_can as 'Cantidad', " +
+                               "proveedor.prove_nom as 'Proveedor', producto.pro_img as 'Imagen' " +
+                               "FROM producto " +
+                               "INNER JOIN proveedor ON producto.prove_id = proveedor.prove_id " +
+                               "WHERE 1=1";
+
+                // Determinar el filtro basado en la selección del ComboBox
+                if (comboBoxFiltro.SelectedItem != null)
+                {
+                    string filtro = textBoxFiltro.Text.Trim();
+                    if (comboBoxFiltro.SelectedItem.ToString() == "Nombre del producto" && !string.IsNullOrWhiteSpace(filtro))
+                    {
+                        query += " AND producto.pro_nom LIKE @filtro";
+                    }
+                    else if (comboBoxFiltro.SelectedItem.ToString() == "Código del producto" && !string.IsNullOrWhiteSpace(filtro))
+                    {
+                        query += " AND producto.pro_cod = @filtro";
+                    }
+                    else if (comboBoxFiltro.SelectedItem.ToString() == "Nombre del proveedor" && !string.IsNullOrWhiteSpace(filtro))
+                    {
+                        query += " AND proveedor.prove_nom LIKE @filtro";
+                    }
+                }
+
+                MySqlCommand command = new MySqlCommand(query, conexion);
+
+                // Asignar valores a los parámetros
+                if (!string.IsNullOrWhiteSpace(textBoxFiltro.Text))
+                {
+                    string filtro = textBoxFiltro.Text.Trim();
+                    if (comboBoxFiltro.SelectedItem.ToString() == "Nombre del producto" || comboBoxFiltro.SelectedItem.ToString() == "Nombre del proveedor")
+                    {
+                        command.Parameters.AddWithValue("@filtro", "%" + filtro + "%");
+                    }
+                    else if (comboBoxFiltro.SelectedItem.ToString() == "Código del producto")
+                    {
+                        command.Parameters.AddWithValue("@filtro", filtro);
+                    }
+                }
+
+                // Adaptador para llenar los datos en un DataTable
+                MySqlDataAdapter adapter = new MySqlDataAdapter(command);
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+
+                // Limpiar el DataGridView antes de mostrar los resultados
+                datagridviewProducto.DataSource = null;
+                datagridviewProducto.Rows.Clear();
+
+                // Asignar el DataTable con los resultados al DataGridView
+                datagridviewProducto.DataSource = dt;
+
+                // Ajustar el DataGridView para manejar la columna de imagen
+                if (datagridviewProducto.Columns.Contains("Imagen"))
+                {
+                    datagridviewProducto.Columns["Imagen"].Visible = true;
+                }
+                else
+                {
+                    // Configurar la columna de Imagen si no existe
+                    DataGridViewImageColumn imageColumn = new DataGridViewImageColumn
+                    {
+                        Name = "Imagen",
+                        HeaderText = "Imagen",
+                        ImageLayout = DataGridViewImageCellLayout.Zoom,
+                        Visible = true
+                    };
+                    datagridviewProducto.Columns.Add(imageColumn);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al buscar producto: " + ex.Message);
+            }
+            finally
+            {
+                if (conexion != null)
+                {
+                    conexion.Close();
+                }
             }
         }
     }
-
 }

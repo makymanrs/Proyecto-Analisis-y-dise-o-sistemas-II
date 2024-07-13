@@ -28,11 +28,20 @@ namespace Proyecto.Forms1
             dataGridProducto.RowTemplate.Height = 80;
             dataGridProducto.ReadOnly=true;
         }
+        public void listas()
+        {
+            comboBox1.Items.Add("Ninguno");
+            comboBox1.Items.Add("Código del producto");
+            comboBox1.Items.Add("Nombre del producto");
+            comboBox1.Items.Add("Nombre del proveedor");
+            comboBox1.SelectedIndex = 0;
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {
             Mysql.Cproducto objetoProducto = new Mysql.Cproducto();
-            objetoProducto.buscarProductoPorId(dataGridProducto, textBox1);
+            objetoProducto.BuscarProductoPorFiltros(dataGridProducto, textBox1,comboBox1);
+            ActualizarConteoRegistros();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -70,6 +79,7 @@ namespace Proyecto.Forms1
             Mysql.Cproducto objetoProducto = new Mysql.Cproducto();
             objetoProducto.mostrarproductos(dataGridProducto);
             ActualizarConteoRegistros();
+            textBox1.Text = "";
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -125,7 +135,9 @@ namespace Proyecto.Forms1
             Mysql.Cproducto objetoProducto = new Mysql.Cproducto();
             objetoProducto.mostrarproductos(dataGridProducto);
             ActualizarConteoRegistros();
+            listas();
             textBox1.Focus();
+          //  comboBox1.DroppedDown = true;
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -172,6 +184,13 @@ namespace Proyecto.Forms1
                         cell.Style.ForeColor = Color.Black;
                     }
                 }
+            }
+        }
+        private void comboBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == Convert.ToChar(Keys.Enter))
+            {
+                textBox1.Focus();
             }
         }
     }

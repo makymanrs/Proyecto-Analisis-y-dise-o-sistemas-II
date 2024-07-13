@@ -99,8 +99,8 @@ namespace Proyecto.Forms1
         private void FormHistorial_Load(object sender, EventArgs e)
         {
             listas();
-            comboBox1.Focus();
-            comboBox1.DroppedDown = true;
+            textBox1.Focus();
+            //comboBox1.DroppedDown = true;
         }
 
         private void dataGridViewFactura_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

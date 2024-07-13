@@ -41,10 +41,15 @@ namespace Proyecto.Ingresar
         public void listas()
         {
             comboBox1.Items.Add("Ninguno");
+            comboBox1.Items.Add("Alimentos");
+            comboBox1.Items.Add("Bebidas");
             comboBox1.Items.Add("Alimentos y bebidas");
             comboBox1.Items.Add("Dulces");
             comboBox1.Items.Add("Cuidado del hogar");
             comboBox1.Items.Add("Cuidado Personal");
+            comboBox1.Items.Add("Bandejas y vasos");
+            comboBox1.Items.Add("Todos");
+
         }
 
         private void FormIngresarProveedor_Load(object sender, EventArgs e)

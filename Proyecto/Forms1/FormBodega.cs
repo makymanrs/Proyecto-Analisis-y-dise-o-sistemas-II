@@ -29,7 +29,13 @@ namespace Proyecto.Forms1
             ActualizarConteoRegistros();
             dataGridBodega.ReadOnly = true;
         }
-
+        public void listas()
+        {
+            comboBox1.Items.Add("Ninguno");
+            comboBox1.Items.Add("Bodega ID");
+            comboBox1.Items.Add("Nombre del producto");
+            comboBox1.SelectedIndex = 0;  
+        }
         private void ActualizarConteoRegistros()
         {
             int totalRegistros = dataGridBodega.RowCount;
@@ -44,7 +50,8 @@ namespace Proyecto.Forms1
         private void button1_Click(object sender, EventArgs e)
         {
             Mysql.Cbodega objetoBodega = new Mysql.Cbodega();
-            objetoBodega.buscarBodegaPorId(dataGridBodega, textBox1);
+            objetoBodega.buscarBodegaPorFiltros(dataGridBodega, textBox1,comboBox1);
+            ActualizarConteoRegistros();
         }
         private void button2_Click(object sender, EventArgs e)
         {
@@ -79,6 +86,7 @@ namespace Proyecto.Forms1
         {
             Mysql.Cbodega objetoBodega = new Mysql.Cbodega();
             objetoBodega.mostrarBodegas(dataGridBodega);
+            textBox1.Text = "";
             ActualizarConteoRegistros();
         }
 
@@ -168,7 +176,17 @@ namespace Proyecto.Forms1
 
         private void FormBodega_Load(object sender, EventArgs e)
         {
+            listas();
             textBox1.Focus();
+           // comboBox1.DroppedDown = true;
+        }
+
+        private void comboBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == Convert.ToChar(Keys.Enter))
+            {
+                textBox1.Focus();
+            }
         }
     }
 }

@@ -385,10 +385,25 @@ namespace Proyecto.Mysql
         }
         public void seleccionarBodega(DataGridView tablaBodega, TextBox textBoxBodegaId)
         {
+            int columnIndex = tablaBodega.CurrentCell.ColumnIndex;
             try
             {
+                if (columnIndex == 0)
+                {
+                    textBoxBodegaId.Text = tablaBodega.CurrentRow.Cells[0].Value.ToString();
+                }
                 // Asume que la columna del ID de bodega es la primera columna (índice 0)
-                textBoxBodegaId.Text = tablaBodega.CurrentRow.Cells[0].Value.ToString();
+
+                else if (columnIndex == 1)
+                {
+                    textBoxBodegaId.Text = tablaBodega.CurrentRow.Cells[1].Value.ToString();
+                }
+                
+                else
+                {
+                    // Puedes manejar el caso cuando no es ninguna de las columnas deseadas
+                    MessageBox.Show("No se seleccionó una columna válida.");
+                }
             }
             catch (Exception ex)
             {
@@ -407,7 +422,76 @@ namespace Proyecto.Mysql
                 }
             }
         }
+        public void buscarBodegaPorFiltros(DataGridView tablaBodega, TextBox textBoxFiltro, ComboBox comboBoxFiltro)
+        {
+            MySqlConnection conexion = null;
+            try
+            {
+                Conexion objetoConexion = new Conexion();
+                conexion = objetoConexion.establecerConexion();
 
+                // Construir la consulta base
+                string query = @"SELECT b.bo_id as 'Bodega Id', p.pro_nom as 'Producto', b.bo_fecing as 'Fecha de Ingreso', 
+                         p.pro_cad as 'Fecha de Caducidad', p.pro_can as 'Cantidad', 
+                         p.pro_cos as 'Costo', p.pro_pre as 'Precio' 
+                         FROM bodega b 
+                         INNER JOIN producto p ON b.bo_id = p.bo_id 
+                         WHERE 1=1";
+
+                // Determinar el filtro basado en la selección del ComboBox
+                if (comboBoxFiltro.SelectedItem != null)
+                {
+                    string filtro = textBoxFiltro.Text.Trim();
+                    if (comboBoxFiltro.SelectedItem.ToString() == "Nombre del producto" && !string.IsNullOrWhiteSpace(filtro))
+                    {
+                        query += " AND p.pro_nom LIKE @filtro";
+                    }
+                    else if (comboBoxFiltro.SelectedItem.ToString() == "Bodega ID" && !string.IsNullOrWhiteSpace(filtro))
+                    {
+                        query += " AND b.bo_id = @filtro";
+                    }
+                }
+
+                MySqlCommand command = new MySqlCommand(query, conexion);
+
+                // Asignar valores a los parámetros
+                if (!string.IsNullOrWhiteSpace(textBoxFiltro.Text))
+                {
+                    string filtro = textBoxFiltro.Text.Trim();
+                    if (comboBoxFiltro.SelectedItem.ToString() == "Nombre del producto")
+                    {
+                        command.Parameters.AddWithValue("@filtro", "%" + filtro + "%");
+                    }
+                    else if (comboBoxFiltro.SelectedItem.ToString() == "Bodega ID")
+                    {
+                        command.Parameters.AddWithValue("@filtro", filtro);
+                    }
+                }
+
+                // Adaptador para llenar los datos en un DataTable
+                MySqlDataAdapter adapter = new MySqlDataAdapter(command);
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+
+                // Limpiar el DataGridView antes de mostrar los resultados
+                tablaBodega.DataSource = null;
+                tablaBodega.Rows.Clear();
+
+                // Asignar el DataTable con los resultados al DataGridView
+                tablaBodega.DataSource = dt;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al buscar bodega: " + ex.Message);
+            }
+            finally
+            {
+                if (conexion != null)
+                {
+                    conexion.Close();
+                }
+            }
+        }
     }
 }
 

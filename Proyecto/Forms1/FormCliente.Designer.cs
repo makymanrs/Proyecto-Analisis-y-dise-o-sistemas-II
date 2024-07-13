@@ -54,10 +54,11 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(80, 83);
+            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox1.Location = new System.Drawing.Point(72, 84);
             this.textBox1.Margin = new System.Windows.Forms.Padding(2);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(143, 20);
+            this.textBox1.Size = new System.Drawing.Size(143, 22);
             this.textBox1.TabIndex = 1;
             // 
             // panel1
